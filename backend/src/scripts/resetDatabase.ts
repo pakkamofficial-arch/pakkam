@@ -49,24 +49,23 @@ const resetDatabase = async () => {
 
     console.log('Clearing all application data collections...');
 
-    const models = [
+    const models: { name: string; model: any }[] = [
       { name: 'users', model: User },
       { name: 'shops', model: Shop },
       { name: 'products', model: Product },
       { name: 'categories', model: Category },
       { name: 'orders', model: Order },
       { name: 'carts', model: Cart },
-      { name: 'deliveryPartners (DeliveryPerson)', model: DeliveryPerson },
-      { name: 'deliveryPartnerApplications', model: DeliveryPartnerApplication },
-      { name: 'notifications', model: Notification },
       { name: 'addresses', model: Address },
+      { name: 'monthlyGroceryLists', model: MonthlyGroceryList },
       { name: 'coupons', model: Coupon },
+      { name: 'deliveryPersons', model: DeliveryPerson },
+      { name: 'deliveryPartnerApplications', model: DeliveryPartnerApplication },
       { name: 'banners', model: Banner },
       { name: 'reviews', model: Review },
-      { name: 'wishlists', model: Wishlist },
-      { name: 'returnRequests', model: ReturnRequest },
       { name: 'supportTickets', model: SupportTicket },
-      { name: 'monthlyGroceryLists', model: MonthlyGroceryList },
+      { name: 'returnRequests', model: ReturnRequest },
+      { name: 'notifications', model: Notification },
       { name: 'wallets', model: Wallet },
       { name: 'walletTransactions', model: WalletTransaction },
       { name: 'priceHistories', model: PriceHistory },

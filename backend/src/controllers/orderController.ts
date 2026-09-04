@@ -541,7 +541,8 @@ export const getOrderById = async (req: AuthRequest, res: Response) => {
     }
 
     // Security check: Customer can only view own order
-    if (req.user?.role === 'CUSTOMER' && order.user._id.toString() !== req.user._id.toString()) {
+    const orderUserId = (order.user as any)?._id ? (order.user as any)._id.toString() : order.user?.toString();
+    if (req.user?.role === 'CUSTOMER' && orderUserId !== req.user._id.toString()) {
       return res.status(403).json({ success: false, message: 'Not authorized to view this order' });
     }
 
@@ -721,7 +722,8 @@ export const cancelOrder = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ success: false, message: 'Order not found' });
     }
 
-    if (req.user?.role === 'CUSTOMER' && order.user._id.toString() !== req.user._id.toString()) {
+    const cancelOrderUserId = (order.user as any)?._id ? (order.user as any)._id.toString() : order.user?.toString();
+    if (req.user?.role === 'CUSTOMER' && cancelOrderUserId !== req.user._id.toString()) {
       return res.status(403).json({ success: false, message: 'Not authorized to cancel this order' });
     }
 
@@ -761,7 +763,7 @@ export const cancelOrder = async (req: AuthRequest, res: Response) => {
     // Dispatch Customer & Admin Notifications
     try {
       await Notification.create({
-        user: order.user._id,
+        user: (order.user as any)?._id || order.user,
         recipientRole: 'CUSTOMER',
         type: 'ORDER_UPDATE',
         title: 'Order Cancelled 🚫',

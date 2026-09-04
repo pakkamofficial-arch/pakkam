@@ -65,8 +65,8 @@ export const validateAndLookupPincode = async (pincodeRaw: string): Promise<Pinc
     try {
       const response = await fetch(`https://api.postalpincode.in/pincode/${cleanPincode}`);
       if (response.ok) {
-        const data = await response.json();
-        if (data && data[0]?.Status === 'Success' && data[0]?.PostOffice?.length > 0) {
+        const data: any = await response.json();
+        if (data && Array.isArray(data) && data[0]?.Status === 'Success' && Array.isArray(data[0]?.PostOffice) && data[0].PostOffice.length > 0) {
           const po = data[0].PostOffice[0];
           locInfo = {
             city: po.District || po.Block || po.State || 'Local City',
