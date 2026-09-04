@@ -27,7 +27,12 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setError(res.data.message || 'Invalid admin credentials');
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Invalid admin credentials');
+      const serverMsg = err.response?.data?.message;
+      if (serverMsg === 'Server configuration error') {
+        setError('Server Configuration Error: ADMIN_EMAIL and ADMIN_PASSWORD environment variables must be configured on your backend deployment (e.g. Render Dashboard).');
+      } else {
+        setError(serverMsg || 'Invalid admin credentials');
+      }
     } finally {
       setLoading(false);
     }
