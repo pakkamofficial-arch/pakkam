@@ -39,14 +39,12 @@ if (
   process.env.ADMIN_EMAIL.trim() === '' ||
   process.env.ADMIN_PASSWORD.trim() === ''
 ) {
-  console.error('[CRITICAL SERVER ERROR] ADMIN_EMAIL and ADMIN_PASSWORD must be configured in backend environment variables (.env)!');
-  console.error('[CRITICAL SERVER ERROR] Refusing to start backend with unconfigured or insecure admin credentials.');
-  process.exit(1);
+  console.error('[CRITICAL SERVER ERROR] ADMIN_EMAIL and ADMIN_PASSWORD must be configured in environment variables!');
+  console.error('[CRITICAL SERVER ERROR] Admin authentication system will reject logins until credentials are set in environment variables.');
 }
 
 if (!process.env.JWT_SECRET || process.env.JWT_SECRET.trim() === '') {
-  console.error('[CRITICAL SERVER ERROR] JWT_SECRET must be configured in backend environment variables (.env)!');
-  process.exit(1);
+  console.error('[CRITICAL SERVER ERROR] JWT_SECRET must be configured in environment variables!');
 }
 
 const app = express();
@@ -77,33 +75,58 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'PAKKAM backend is healthy' });
 });
 
-// API Routes
+// API Routes (supporting both /api/admin and /admin for deployment flexibility)
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/pincode', pincodeRoutes);
+app.use('/pincode', pincodeRoutes);
 app.use('/api/shops', shopRoutes);
+app.use('/shops', shopRoutes);
 app.use('/api/products', productRoutes);
+app.use('/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/categories', categoryRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/cart', cartRoutes);
 app.use('/api/addresses', addressRoutes);
+app.use('/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/orders', orderRoutes);
 app.use('/api/monthly-grocery', monthlyGroceryRoutes);
+app.use('/monthly-grocery', monthlyGroceryRoutes);
 app.use('/api/coupons', couponRoutes);
+app.use('/coupons', couponRoutes);
 app.use('/api/delivery', deliveryBoyRoutes);
+app.use('/delivery', deliveryBoyRoutes);
 app.use('/api/delivery-applications', deliveryApplicationRoutes);
+app.use('/delivery-applications', deliveryApplicationRoutes);
 app.use('/api/admin/delivery-applications', deliveryApplicationRoutes);
+
 app.use('/api/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/wishlist', wishlistRoutes);
 app.use('/api/wallet', walletRoutes);
+app.use('/wallet', walletRoutes);
 app.use('/api/banners', bannerRoutes);
+app.use('/banners', bannerRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/reviews', reviewRoutes);
 app.use('/api/support', supportRoutes);
+app.use('/support', supportRoutes);
 app.use('/api/returns', returnRoutes);
+app.use('/returns', returnRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/notifications', notificationRoutes);
 app.use('/api/seller', sellerRoutes);
+app.use('/seller', sellerRoutes);
 app.use('/api/delivery-zones', deliveryZoneRoutes);
+app.use('/delivery-zones', deliveryZoneRoutes);
 app.use('/api/delivery-boys', deliveryBoyRoutes);
+app.use('/delivery-boys', deliveryBoyRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/payments', paymentRoutes);
 
 // Error Handler
 app.use(errorHandler);
