@@ -1,0 +1,121 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+export interface CartItem {
+  _id?: string;
+  product: any;
+  shop: any;
+  selectedUnit: string;
+  unitMultiplier: number;
+  quantity: number;
+  price: number;
+  discountPrice?: number;
+}
+
+interface CartState {
+  items: CartItem[];
+  subtotal: number;
+  deliveryFee: number;
+  freeDeliveryThreshold: number;
+  amountNeededForFreeDelivery: number;
+  coupon: any | null;
+  walletApplied: number;
+  tax: number;
+  loading: boolean;
+}
+
+const initialState: CartState = {
+  items: [],
+  subtotal: 0,
+  deliveryFee: 0,
+  freeDeliveryThreshold: 499,
+  amountNeededForFreeDelivery: 499,
+  coupon: null,
+  walletApplied: 0,
+  tax: 0,
+  loading: false,
+};
+
+const recalculateTotals = (state: CartState) => {
+  let sub = 0;
+  state.items.forEach((item) => {
+    const itemPrice = item.discountPrice || item.price || 0;
+    const mult = item.unitMultiplier || 1;
+    sub += itemPrice * mult * item.quantity;
+  });
+
+  state.subtotal = Math.round(sub);
+  state.deliveryFee = state.subtotal >= state.freeDeliveryThreshold ? 0 : (state.items.length > 0 ? 40 : 0);
+  state.amountNeededForFreeDelivery = Math.max(0, state.freeDeliveryThreshold - state.subtotal);
+};
+
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    setCartData: (
+      state,
+      action: PayloadAction<{
+        items: CartItem[];
+        subtotal: number;
+        deliveryFee: number;
+        freeDeliveryThreshold?: number;
+        amountNeededForFreeDelivery?: number;
+      }>
+    ) => {
+      state.items = action.payload.items;
+      state.subtotal = action.payload.subtotal;
+      state.deliveryFee = action.payload.deliveryFee;
+      if (action.payload.freeDeliveryThreshold !== undefined) {
+        state.freeDeliveryThreshold = action.payload.freeDeliveryThreshold;
+      }
+      recalculateTotals(state);
+    },
+    updateLocalItemQty: (state, action: PayloadAction<{ itemId: string; quantity: number }>) => {
+      const idx = state.items.findIndex((i) => i._id === action.payload.itemId);
+      if (idx > -1) {
+        if (action.payload.quantity <= 0) {
+          state.items.splice(idx, 1);
+        } else {
+          state.items[idx].quantity = action.payload.quantity;
+        }
+        recalculateTotals(state);
+      }
+    },
+    removeLocalItem: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter((i) => i._id !== action.payload);
+      recalculateTotals(state);
+    },
+    setCoupon: (state, action: PayloadAction<any>) => {
+      state.coupon = action.payload;
+    },
+    clearCoupon: (state) => {
+      state.coupon = null;
+    },
+    setWalletApplied: (state, action: PayloadAction<number>) => {
+      state.walletApplied = action.payload;
+    },
+    setCartLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    resetCart: (state) => {
+      state.items = [];
+      state.subtotal = 0;
+      state.deliveryFee = 0;
+      state.coupon = null;
+      state.walletApplied = 0;
+    },
+  },
+});
+
+export const {
+  setCartData,
+  updateLocalItemQty,
+  removeLocalItem,
+  setCoupon,
+  clearCoupon,
+  setWalletApplied,
+  setCartLoading,
+  resetCart,
+} = cartSlice.actions;
+
+export default cartSlice.reducer;
