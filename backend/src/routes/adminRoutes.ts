@@ -1,25 +1,39 @@
 import { Router } from 'express';
-import { getDashboardStats, getUsers, toggleUserStatus, getAppSettings, updateAppSetting } from '../controllers/adminController.js';
+import {
+  adminLogin,
+  getAdminMe,
+  getDashboardStats,
+  getUsers,
+  toggleUserStatus,
+  getAppSettings,
+  updateAppSetting,
+} from '../controllers/adminController.js';
 import { getAdminDeliveryBoys } from '../controllers/deliveryBoyController.js';
 import {
   getAdminNotifications,
   markAdminNotificationRead,
   markAllAdminNotificationsRead,
 } from '../controllers/adminNotificationController.js';
-import { protect, authorize } from '../middleware/auth.js';
+import { adminAuth } from '../middleware/adminAuth.js';
 
 const router = Router();
 
-router.get('/stats', protect, authorize('ADMIN'), getDashboardStats);
-router.get('/users', protect, authorize('ADMIN'), getUsers);
-router.put('/users/:id/toggle', protect, authorize('ADMIN'), toggleUserStatus);
-router.get('/settings', getAppSettings);
-router.put('/settings', protect, authorize('ADMIN'), updateAppSetting);
-router.get('/delivery-partners', protect, authorize('ADMIN'), getAdminDeliveryBoys);
+// Public Admin Auth
+router.post('/login', adminLogin);
 
-// Admin Notifications (Part 17 & 18)
-router.get('/notifications', protect, authorize('ADMIN'), getAdminNotifications);
-router.put('/notifications/read-all', protect, authorize('ADMIN'), markAllAdminNotificationsRead);
-router.put('/notifications/:id/read', protect, authorize('ADMIN'), markAdminNotificationRead);
+// Protected Admin Endpoints
+router.get('/me', adminAuth, getAdminMe);
+router.get('/stats', adminAuth, getDashboardStats);
+router.get('/dashboard', adminAuth, getDashboardStats);
+router.get('/users', adminAuth, getUsers);
+router.put('/users/:id/toggle', adminAuth, toggleUserStatus);
+router.get('/settings', adminAuth, getAppSettings);
+router.put('/settings', adminAuth, updateAppSetting);
+router.get('/delivery-partners', adminAuth, getAdminDeliveryBoys);
+
+// Admin Notifications
+router.get('/notifications', adminAuth, getAdminNotifications);
+router.put('/notifications/read-all', adminAuth, markAllAdminNotificationsRead);
+router.put('/notifications/:id/read', adminAuth, markAdminNotificationRead);
 
 export default router;

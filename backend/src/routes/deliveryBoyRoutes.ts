@@ -19,7 +19,8 @@ import {
   updateDeliveryOrderStatus,
   reportDeliveryIssue,
 } from '../controllers/deliveryPortalController.js';
-import { protect, adminOnly, authorize } from '../middleware/auth.js';
+import { protect, authorize } from '../middleware/auth.js';
+import { adminAuth } from '../middleware/adminAuth.js';
 
 const router = Router();
 
@@ -27,12 +28,12 @@ const router = Router();
 router.post('/auth/login', deliveryLogin);
 
 // Admin Delivery Boy CRUD & Recommendation
-router.get('/admin', protect, adminOnly, getAdminDeliveryBoys);
-router.post('/admin', protect, adminOnly, createAdminDeliveryBoy);
-router.put('/admin/:id', protect, adminOnly, updateAdminDeliveryBoy);
-router.delete('/admin/:id', protect, adminOnly, deleteAdminDeliveryBoy);
-router.get('/admin/orders/:orderId/recommended', protect, adminOnly, getRecommendedDeliveryBoys);
-router.post('/admin/orders/:orderId/assign', protect, adminOnly, assignDeliveryBoy);
+router.get('/admin', adminAuth, getAdminDeliveryBoys);
+router.post('/admin', adminAuth, createAdminDeliveryBoy);
+router.put('/admin/:id', adminAuth, updateAdminDeliveryBoy);
+router.delete('/admin/:id', adminAuth, deleteAdminDeliveryBoy);
+router.get('/admin/orders/:orderId/recommended', adminAuth, getRecommendedDeliveryBoys);
+router.post('/admin/orders/:orderId/assign', adminAuth, assignDeliveryBoy);
 
 // Delivery Boy Application Routes (/api/delivery/*)
 router.get('/orders/available', protect, authorize('DELIVERY', 'ADMIN'), getAvailableOrders);

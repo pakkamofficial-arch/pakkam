@@ -72,20 +72,10 @@ const seed = async () => {
       isActive: true,
     });
 
-    const adminUser = await User.create({
-      name: 'PAKKAM Admin',
-      email: 'admin@pakkam.test',
-      phone: '9876543213',
-      password: 'Password123!',
-      role: 'ADMIN',
-      isActive: true,
-    });
-
     console.log('[Seed] Demo accounts created:');
     console.log(' - Customer: customer@pakkam.test / Password123!');
     console.log(' - Seller: seller@pakkam.test / Password123!');
     console.log(' - Delivery: delivery@pakkam.test / Password123!');
-    console.log(' - Admin: admin@pakkam.test / Password123!');
 
     // 2. Create Default Address for Customer
     await Address.create({

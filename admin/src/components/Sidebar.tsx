@@ -116,8 +116,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, onLogout }) => {
       {/* User Footer */}
       <div style={{ padding: '16px', borderTop: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <div style={{ fontSize: '14px', fontWeight: '600', color: '#0f172a' }}>{user?.name || 'Admin User'}</div>
-          <div style={{ fontSize: '12px', color: '#64748b' }}>{user?.email || 'admin@pakkam.test'}</div>
+          <div style={{ fontSize: '14px', fontWeight: '600', color: '#0f172a' }}>{user?.name || 'Pakkam Admin'}</div>
+          <div style={{ fontSize: '12px', color: '#64748b' }}>{user?.email || 'Admin'}</div>
         </div>
         <button onClick={onLogout} title="Logout" style={{ background: 'none', color: '#ef4444', padding: '6px', borderRadius: '6px' }}>
           <LogOut size={18} />

@@ -6,7 +6,7 @@ import {
   acceptApplication,
   rejectApplication,
 } from '../controllers/deliveryApplicationController.js';
-import { protect, authorize } from '../middleware/auth.js';
+import { adminAuth } from '../middleware/adminAuth.js';
 
 const router = Router();
 
@@ -14,9 +14,9 @@ const router = Router();
 router.post('/apply', submitApplication);
 
 // Admin-protected routes
-router.get('/', protect, authorize('ADMIN'), getApplications);
-router.get('/:id', protect, authorize('ADMIN'), getApplicationById);
-router.patch('/:id/accept', protect, authorize('ADMIN'), acceptApplication);
-router.patch('/:id/reject', protect, authorize('ADMIN'), rejectApplication);
+router.get('/', adminAuth, getApplications);
+router.get('/:id', adminAuth, getApplicationById);
+router.patch('/:id/accept', adminAuth, acceptApplication);
+router.patch('/:id/reject', adminAuth, rejectApplication);
 
 export default router;

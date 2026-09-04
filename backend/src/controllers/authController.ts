@@ -178,13 +178,21 @@ export const register = async (req: Request, res: Response) => {
 
     const generatedReferralCode = 'PK' + Math.floor(100000 + Math.random() * 900000);
 
+    let assignedRole = 'CUSTOMER';
+    if (role && typeof role === 'string') {
+      const requestedRole = role.toUpperCase().trim();
+      if (['SELLER', 'DELIVERY'].includes(requestedRole)) {
+        assignedRole = requestedRole;
+      }
+    }
+
     const user = await User.create({
       name: rawName,
       phone: rawPhone,
       email: rawEmail,
       username: rawUsername,
       password,
-      role: role || 'CUSTOMER',
+      role: assignedRole,
       referralCode: generatedReferralCode,
       hasCompletedOnboarding: false,
     });

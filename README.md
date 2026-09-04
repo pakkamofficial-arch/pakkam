@@ -95,7 +95,7 @@ npm run dev
 | **Customer** | `customer@pakkam.test` | `Password123!` | Mobile Customer App |
 | **Seller** | `seller@pakkam.test` | `Password123!` | Mobile Seller Dashboard |
 | **Delivery** | `delivery@pakkam.test` | `Password123!` | Mobile Delivery Portal |
-| **Admin** | `admin@pakkam.test` | `Password123!` | Admin Web Panel |
+| **Admin** | Configured in backend `.env` (`ADMIN_EMAIL`) | Configured in backend `.env` (`ADMIN_PASSWORD`) | Admin Web Panel |
 
 ---
 

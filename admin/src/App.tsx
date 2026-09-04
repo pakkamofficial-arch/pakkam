@@ -28,15 +28,20 @@ export const App: React.FC = () => {
     const token = localStorage.getItem('admin_token');
     if (token) {
       try {
-        const res = await api.get('/auth/me');
-        if (res.data.success && res.data.role === 'ADMIN') {
+        const res = await api.get('/admin/me');
+        const role = res.data?.user?.role || res.data?.role;
+        if (res.data.success && (role === 'admin' || role === 'ADMIN')) {
           setUser(res.data.user || res.data);
         } else {
           localStorage.removeItem('admin_token');
+          setUser(null);
         }
       } catch (err) {
         localStorage.removeItem('admin_token');
+        setUser(null);
       }
+    } else {
+      setUser(null);
     }
     setLoading(false);
   };

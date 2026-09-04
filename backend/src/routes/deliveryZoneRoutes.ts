@@ -6,7 +6,7 @@ import {
   updateAdminDeliveryZone,
   deleteAdminDeliveryZone,
 } from '../controllers/deliveryZoneController.js';
-import { protect, adminOnly } from '../middleware/auth.js';
+import { adminAuth } from '../middleware/adminAuth.js';
 
 const router = Router();
 
@@ -14,9 +14,9 @@ const router = Router();
 router.get('/check-serviceable', checkPincodeServiceable);
 
 // Admin Delivery Zone Management
-router.get('/admin', protect, adminOnly, getAdminDeliveryZones);
-router.post('/admin', protect, adminOnly, createAdminDeliveryZone);
-router.put('/admin/:id', protect, adminOnly, updateAdminDeliveryZone);
-router.delete('/admin/:id', protect, adminOnly, deleteAdminDeliveryZone);
+router.get('/admin', adminAuth, getAdminDeliveryZones);
+router.post('/admin', adminAuth, createAdminDeliveryZone);
+router.put('/admin/:id', adminAuth, updateAdminDeliveryZone);
+router.delete('/admin/:id', adminAuth, deleteAdminDeliveryZone);
 
 export default router;

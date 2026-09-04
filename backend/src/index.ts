@@ -32,6 +32,23 @@ import deliveryApplicationRoutes from './routes/deliveryApplicationRoutes.js';
 
 dotenv.config();
 
+// Validate Admin Credentials Environment Variables
+if (
+  !process.env.ADMIN_EMAIL ||
+  !process.env.ADMIN_PASSWORD ||
+  process.env.ADMIN_EMAIL.trim() === '' ||
+  process.env.ADMIN_PASSWORD.trim() === ''
+) {
+  console.error('[CRITICAL SERVER ERROR] ADMIN_EMAIL and ADMIN_PASSWORD must be configured in backend environment variables (.env)!');
+  console.error('[CRITICAL SERVER ERROR] Refusing to start backend with unconfigured or insecure admin credentials.');
+  process.exit(1);
+}
+
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.trim() === '') {
+  console.error('[CRITICAL SERVER ERROR] JWT_SECRET must be configured in backend environment variables (.env)!');
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 

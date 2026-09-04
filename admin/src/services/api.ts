@@ -20,4 +20,8 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+export const adminLogin = (email: string, password: string) => {
+  return api.post('/admin/login', { email, password });
+};
+
 export default api;
