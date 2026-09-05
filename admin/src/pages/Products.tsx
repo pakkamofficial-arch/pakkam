@@ -41,22 +41,27 @@ export const Products: React.FC = () => {
   const handleUpdateProduct = async () => {
     if (!editingProduct) return;
     try {
-      const sellingPriceNum = Number(editingProduct.sellingPrice || editingProduct.price);
-      const res = await api.patch(`/products/${editingProduct._id}/price`, {
-        sellingPrice: sellingPriceNum,
-        marketPrice: editingProduct.marketPrice ? Number(editingProduct.marketPrice) : sellingPriceNum,
-        source: editingProduct.priceSource || 'Admin Updated',
-        reason: 'Admin price management',
+      const pPrice = Number(editingProduct.purchasePrice || 0);
+      const aCost = Number(editingProduct.additionalCost || 0);
+      const mrpNum = Number(editingProduct.MRP ?? editingProduct.marketPrice ?? 0);
+      const discPercent = Number(editingProduct.discountPercent || 0);
+      const targetMargin = Number(editingProduct.targetProfitMargin ?? 0.20);
+      const availQty = Number(editingProduct.availableQuantity ?? 100);
+
+      const res = await api.put(`/products/${editingProduct._id}`, {
+        name: editingProduct.name_en || editingProduct.name,
+        name_en: editingProduct.name_en || editingProduct.name,
+        name_ta: editingProduct.name_ta || '',
+        purchasePrice: pPrice,
+        additionalCost: aCost,
+        MRP: mrpNum,
+        marketPrice: mrpNum,
+        discountPercent: discPercent,
+        targetProfitMargin: targetMargin,
+        availableQuantity: availQty,
       });
+
       if (res.data.success) {
-        // Update basic details too
-        await api.put(`/products/${editingProduct._id}`, {
-          name: editingProduct.name_en || editingProduct.name,
-          name_en: editingProduct.name_en || editingProduct.name,
-          name_ta: editingProduct.name_ta || '',
-          availableQuantity: Number(editingProduct.availableQuantity || 1000),
-          stockStatus: Number(editingProduct.availableQuantity || 1000) > 0 ? 'IN_STOCK' : 'OUT_OF_STOCK',
-        });
         setEditingProduct(null);
         fetchProducts();
       }
@@ -95,7 +100,7 @@ export const Products: React.FC = () => {
                 <th>Product</th>
                 <th>Tamil Name (தமிழ்)</th>
                 <th>Category</th>
-                <th>Market Price</th>
+                <th>MRP Ceiling</th>
                 <th>Pakkam Selling Price</th>
                 <th>Unit</th>
                 <th>Stock Qty</th>
@@ -116,7 +121,7 @@ export const Products: React.FC = () => {
                   </td>
                   <td style={{ fontWeight: '600', color: '#16a34a' }}>{prod.name_ta || '-'}</td>
                   <td>{prod.category?.name || 'Category'}</td>
-                  <td style={{ color: '#64748b', fontWeight: '600' }}>₹{prod.marketPrice || prod.sellingPrice || prod.price}</td>
+                  <td style={{ color: '#64748b', fontWeight: '600' }}>₹{prod.MRP || prod.marketPrice || prod.sellingPrice || prod.price}</td>
                   <td style={{ color: '#16a34a', fontWeight: '700' }}>₹{prod.sellingPrice || prod.price}</td>
                   <td>
                     <span className="badge badge-blue">{prod.unit}</span>
@@ -142,66 +147,133 @@ export const Products: React.FC = () => {
         )}
       </div>
 
-      {/* Edit Modal with Market Price, Selling Price & Stock Fields */}
-      {editingProduct && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div className="card" style={{ width: '460px', backgroundColor: '#fff' }}>
-            <h4 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '16px' }}>Edit Price & Stock: {editingProduct.name}</h4>
-            
-            <div style={{ marginBottom: '12px' }}>
-              <label style={{ fontSize: '12px', fontWeight: '600', color: '#64748b' }}>English Name</label>
-              <input
-                type="text"
-                value={editingProduct.name_en || editingProduct.name || ''}
-                onChange={(e) => setEditingProduct({ ...editingProduct, name_en: e.target.value, name: e.target.value })}
-              />
-            </div>
+      {/* Edit Modal with Source Inputs & Live Calculated Profit Indicators */}
+      {editingProduct && (() => {
+        const pCost = Number(editingProduct.purchasePrice || 0);
+        const aCost = Number(editingProduct.additionalCost || 0);
+        const landedCost = pCost + aCost;
+        const mrp = Number(editingProduct.MRP ?? editingProduct.marketPrice ?? 0);
+        const discPercent = Number(editingProduct.discountPercent || 0);
+        const discAmount = (mrp * discPercent) / 100;
+        const finalPrice = Math.min(mrp > 0 ? mrp : Infinity, Math.max(0, mrp - discAmount));
+        const profitAmount = finalPrice - landedCost;
+        const profitMargin = finalPrice > 0 ? (profitAmount / finalPrice) * 100 : 0;
+        const targetMargin = Number(editingProduct.targetProfitMargin ?? 0.20);
+        const reqTargetPrice = (1 - targetMargin) > 0 ? landedCost / (1 - targetMargin) : landedCost;
 
-            <div style={{ marginBottom: '12px' }}>
-              <label style={{ fontSize: '12px', fontWeight: '600', color: '#16a34a' }}>Tamil Name (தமிழ் Name)</label>
-              <input
-                type="text"
-                placeholder="e.g. தக்காளி, வெங்காயம்"
-                value={editingProduct.name_ta || ''}
-                onChange={(e) => setEditingProduct({ ...editingProduct, name_ta: e.target.value })}
-              />
-            </div>
-
-            <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ flex: 1 }}>
-                <label style={{ fontSize: '12px', fontWeight: '600', color: '#64748b' }}>Market Ref Price (₹)</label>
-                <input
-                  type="number"
-                  value={editingProduct.marketPrice ?? editingProduct.price}
-                  onChange={(e) => setEditingProduct({ ...editingProduct, marketPrice: e.target.value })}
-                />
+        return (
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+            <div className="card" style={{ width: '520px', backgroundColor: '#fff', maxHeight: '90vh', overflowY: 'auto' }}>
+              <h4 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '16px' }}>Edit Product Pricing & Stock: {editingProduct.name}</h4>
+              
+              <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#64748b' }}>English Name</label>
+                  <input
+                    type="text"
+                    value={editingProduct.name_en || editingProduct.name || ''}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, name_en: e.target.value, name: e.target.value })}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#16a34a' }}>Tamil Name (தமிழ்)</label>
+                  <input
+                    type="text"
+                    value={editingProduct.name_ta || ''}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, name_ta: e.target.value })}
+                  />
+                </div>
               </div>
-              <div style={{ flex: 1 }}>
-                <label style={{ fontSize: '12px', fontWeight: '600', color: '#16a34a' }}>Pakkam Selling Price (₹)</label>
-                <input
-                  type="number"
-                  value={editingProduct.sellingPrice ?? editingProduct.price}
-                  onChange={(e) => setEditingProduct({ ...editingProduct, sellingPrice: e.target.value, price: e.target.value })}
-                />
+
+              {/* INPUT FIELDS SECTION */}
+              <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', marginBottom: '12px', border: '1px solid #e2e8f0' }}>
+                <div style={{ fontSize: '12px', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Source Input Values</div>
+
+                <div style={{ display: 'flex', gap: '12px', marginBottom: '8px' }}>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>Purchase Cost (₹)</label>
+                    <input
+                      type="number"
+                      value={editingProduct.purchasePrice ?? 0}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, purchasePrice: e.target.value })}
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>Additional Cost (₹)</label>
+                    <input
+                      type="number"
+                      value={editingProduct.additionalCost ?? 0}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, additionalCost: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '12px', marginBottom: '8px' }}>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>MRP Ceiling (₹)</label>
+                    <input
+                      type="number"
+                      value={editingProduct.MRP ?? editingProduct.marketPrice ?? 0}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, MRP: e.target.value, marketPrice: e.target.value })}
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>Discount (%)</label>
+                    <input
+                      type="number"
+                      value={editingProduct.discountPercent ?? 0}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, discountPercent: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>Target Margin (0.20 = 20%)</label>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={editingProduct.targetProfitMargin ?? 0.20}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, targetProfitMargin: e.target.value })}
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ fontSize: '11px', fontWeight: '600', color: '#64748b' }}>Stock Qty ({editingProduct.unitType || 'kg'})</label>
+                    <input
+                      type="number"
+                      value={editingProduct.availableQuantity ?? 100}
+                      onChange={(e) => setEditingProduct({ ...editingProduct, availableQuantity: e.target.value })}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div style={{ marginBottom: '16px' }}>
-              <label style={{ fontSize: '12px', fontWeight: '600', color: '#64748b' }}>Available Stock Quantity ({editingProduct.unitType || 'kg'})</label>
-              <input
-                type="number"
-                value={editingProduct.availableQuantity ?? 1000}
-                onChange={(e) => setEditingProduct({ ...editingProduct, availableQuantity: e.target.value })}
-              />
-            </div>
+              {/* CALCULATED PREVIEW SECTION */}
+              <div style={{ background: '#f0fdf4', padding: '12px', borderRadius: '8px', marginBottom: '16px', border: '1px solid #bbf7d0' }}>
+                <div style={{ fontSize: '12px', fontWeight: '700', color: '#166534', marginBottom: '8px' }}>Calculated Live Summary</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '12px' }}>
+                  <div>Landed Cost: <strong>₹{landedCost}</strong></div>
+                  <div>Final Customer Price: <strong style={{ color: '#16a34a' }}>₹{finalPrice.toFixed(2)}</strong></div>
+                  <div>Discount Amount: <strong>₹{discAmount.toFixed(2)}</strong></div>
+                  <div>Profit Amount: <strong>₹{profitAmount.toFixed(2)}</strong></div>
+                  <div>Achieved Profit Margin: <strong>{profitMargin.toFixed(1)}%</strong></div>
+                  <div>Target Price Req: <strong>₹{reqTargetPrice.toFixed(2)}</strong></div>
+                </div>
+                {reqTargetPrice > mrp && mrp > 0 && (
+                  <div style={{ fontSize: '11px', color: '#dc2626', marginTop: '6px', fontWeight: '600' }}>
+                    ⚠️ Note: Required price (₹{reqTargetPrice.toFixed(2)}) exceeds MRP ceiling (₹{mrp}). Customer price is capped at MRP.
+                  </div>
+                )}
+              </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
-              <button className="btn-secondary" onClick={() => setEditingProduct(null)}>Cancel</button>
-              <button className="btn-primary" onClick={handleUpdateProduct}>Save Changes</button>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+                <button className="btn-secondary" onClick={() => setEditingProduct(null)}>Cancel</button>
+                <button className="btn-primary" onClick={handleUpdateProduct}>Save Changes</button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 };

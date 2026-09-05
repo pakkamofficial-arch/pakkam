@@ -14,6 +14,7 @@ import { MapPin, ChevronDown, Search, Mic, ArrowRight, Star } from 'lucide-react
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import {
+  setProducts,
   setCategories,
   setFreshTodayProducts,
   setPopularProducts,
@@ -28,7 +29,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { defaultAddress } = useSelector((state: RootState) => state.address);
-  const { categories, freshTodayProducts, popularProducts } = useSelector(
+  const { products, categories, freshTodayProducts, popularProducts } = useSelector(
     (state: RootState) => state.products
   );
   const { shops } = useSelector((state: RootState) => state.shops);
@@ -47,10 +48,24 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       if (catRes.data.success) dispatch(setCategories(catRes.data.categories));
 
       const freshRes = await client.get('/products?isFreshToday=true&limit=10');
-      if (freshRes.data.success) dispatch(setFreshTodayProducts(freshRes.data.products));
+      if (freshRes.data.success && freshRes.data.products && freshRes.data.products.length > 0) {
+        dispatch(setFreshTodayProducts(freshRes.data.products));
+      } else {
+        const fallbackProdRes = await client.get('/products?limit=10');
+        if (fallbackProdRes.data.success) {
+          dispatch(setFreshTodayProducts(fallbackProdRes.data.products));
+        }
+      }
+
+      const allProdRes = await client.get('/products?limit=50');
+      if (allProdRes.data.success) dispatch(setProducts(allProdRes.data.products));
 
       const popRes = await client.get('/products?isPopular=true&limit=10');
-      if (popRes.data.success) dispatch(setPopularProducts(popRes.data.products));
+      if (popRes.data.success && popRes.data.products && popRes.data.products.length > 0) {
+        dispatch(setPopularProducts(popRes.data.products));
+      } else if (allProdRes.data.success) {
+        dispatch(setPopularProducts(allProdRes.data.products.slice(0, 10)));
+      }
 
       const shopRes = await client.get('/shops');
       if (shopRes.data.success) dispatch(setShops(shopRes.data.shops));
@@ -107,14 +122,46 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     }
   };
 
-  // Category icons in circles per master prompt 2.3
-  const circleCategories = [
-    { id: 'cat-veg', name: 'Vegetables', icon: '🥬' },
-    { id: 'cat-fruit', name: 'Fruits', icon: '🍎' },
-    { id: 'cat-groc', name: 'Groceries', icon: '🌾' },
-    { id: 'cat-dairy', name: 'Dairy', icon: '🥛' },
-    { id: 'cat-snack', name: 'Snacks', icon: '🍿' },
-  ];
+  // Dynamic Category strip from categories Redux state or fallback list
+  const categoryIconMap: Record<string, string> = {
+    vegetables: '🥬',
+    fruits: '🍎',
+    groceries: '🌾',
+    grocery: '🌾',
+    dairy: '🥛',
+    spices: '🌶️',
+    snacks: '🍿',
+    beverages: '🧃',
+  };
+
+  const dynamicCategories = categories && categories.length > 0
+    ? categories.map((c: any) => ({
+        id: c._id || c.name,
+        name: c.name,
+        icon: c.icon || categoryIconMap[c.name.toLowerCase()] || '🛒',
+      }))
+    : [
+        { id: 'cat-veg', name: 'Vegetables', icon: '🥬' },
+        { id: 'cat-fruit', name: 'Fruits', icon: '🍎' },
+        { id: 'cat-groc', name: 'Groceries', icon: '🌾' },
+        { id: 'cat-dairy', name: 'Dairy', icon: '🥛' },
+        { id: 'cat-spices', name: 'Spices', icon: '🌶️' },
+        { id: 'cat-snack', name: 'Snacks', icon: '🍿' },
+      ];
+
+  // Helper to filter products by category name
+  const getProductsForCategory = (catName: string) => {
+    const cleanCat = catName.toLowerCase();
+    return products.filter((p: any) => {
+      const pCatName = (p.category?.name || p.category || '').toLowerCase();
+      if (cleanCat === 'groceries' || cleanCat === 'grocery') {
+        return pCatName.includes('groc');
+      }
+      return pCatName.includes(cleanCat);
+    });
+  };
+
+  const sectionCategoryNames = ['Vegetables', 'Fruits', 'Groceries', 'Spices', 'Dairy', 'Snacks'];
 
   const fallbackShops = [
     {
@@ -132,47 +179,6 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   ];
 
   const displayShops = shops.length > 0 ? shops : fallbackShops;
-
-  const realVeggies = [
-    {
-      _id: 'ft-1',
-      name: 'Tomato',
-      price: 150,
-      discountPrice: 150,
-      unit: 'kg',
-      availableUnits: ['250g', '500g', '1kg'],
-      images: ['https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400'],
-    },
-    {
-      _id: 'ft-2',
-      name: 'Onion',
-      price: 120,
-      discountPrice: 120,
-      unit: 'kg',
-      availableUnits: ['500g', '1kg', '2kg'],
-      images: ['https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=400'],
-    },
-    {
-      _id: 'ft-3',
-      name: 'Beans',
-      price: 150,
-      discountPrice: 150,
-      unit: 'kg',
-      availableUnits: ['250g', '500g', '1kg'],
-      images: ['https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400'],
-    },
-    {
-      _id: 'ft-4',
-      name: 'Brinjal',
-      price: 250,
-      discountPrice: 250,
-      unit: 'kg',
-      availableUnits: ['250g', '500g', '1kg'],
-      images: ['https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400'],
-    },
-  ];
-
-  const displayFresh = freshTodayProducts.length > 0 ? freshTodayProducts : realVeggies;
 
   return (
     <View style={styles.container}>
@@ -210,7 +216,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           )}
         </View>
 
-        {/* Search bar: "Search vegetables, groceries & shops" */}
+        {/* Search bar */}
         <TouchableOpacity
           style={styles.searchBar}
           activeOpacity={0.9}
@@ -221,13 +227,13 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Mic size={18} color={Colors.primary} strokeWidth={2} />
         </TouchableOpacity>
 
-        {/* Horizontal scroll of category icons in circles per master prompt 2.3 */}
+        {/* Dynamic Horizontal Top Category Strip */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.circleCategoriesRow}>
-          {circleCategories.map((cat) => (
+          {dynamicCategories.map((cat: any) => (
             <TouchableOpacity
-              key={cat.id}
+              key={cat.id || cat.name}
               style={styles.circleCatItem}
-              onPress={() => navigation.navigate('Categories', { categoryId: cat.id })}
+              onPress={() => navigation.navigate('Categories', { categoryName: cat.name, categoryId: cat.id })}
             >
               <View style={styles.circleIconBg}>
                 <Text style={styles.circleEmoji}>{cat.icon}</Text>
@@ -237,7 +243,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           ))}
         </ScrollView>
 
-        {/* "Nearby Shops" section title + "See all" link (right, green) */}
+        {/* "Nearby Shops" section */}
         <View style={styles.sectionHeaderBetween}>
           <Text style={styles.sectionTitle}>Nearby Shops</Text>
           <TouchableOpacity onPress={() => navigation.navigate('ShopDetail', { shopId: 'shop-muru' })}>
@@ -245,7 +251,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Horizontal scroll of shop image cards with name under each */}
+        {/* Horizontal scroll of shop cards */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.shopsHorizontalRail}>
           {displayShops.map((shop: any) => (
             <TouchableOpacity
@@ -260,12 +266,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           ))}
         </ScrollView>
 
-        {/* "Popular Near You" section */}
-        <View style={styles.sectionHeaderBetween}>
-          <Text style={styles.sectionTitle}>Popular Near You</Text>
-        </View>
-
-        {/* Home Delivery Promise Banner per requirement 9 & 71 */}
+        {/* Home Delivery Promise Banner */}
         <View style={styles.promiseBanner}>
           <Text style={styles.promiseTitle}>Fresh groceries at your doorstep</Text>
           <Text style={styles.promiseSub}>Order now and get your items delivered within 1–2 hours.</Text>
@@ -277,39 +278,56 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <View style={styles.promiseActionRow}>
             <TouchableOpacity
               style={styles.promisePrimaryBtn}
-              onPress={() => navigation.navigate('CategoriesTab')}
+              onPress={() => navigation.navigate('Categories', { categoryName: 'Vegetables' })}
             >
               <Text style={styles.promisePrimaryBtnText}>View Products</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.promiseSecondaryBtn}
-              onPress={() => navigation.navigate('CategoriesTab')}
+              onPress={() => navigation.navigate('Categories', { categoryName: 'Groceries' })}
             >
               <Text style={styles.promiseSecondaryBtnText}>Shop Nearby</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        <View style={styles.productsGrid}>
-          {displayFresh.slice(0, 4).map((prod: any) => (
-            <View key={prod._id} style={{ width: '48%' }}>
-              <ProductCard
-                product={prod}
-                onAddToCart={handleAddToCart}
-                onPressProduct={(p) => navigation.navigate('ProductDetail', { productId: p._id })}
-                onBuyNow={(p, unit) => {
-                  handleAddToCart(p, unit, 1);
-                  navigation.navigate('AddAddress', {
-                    intendedProduct: p,
-                    intendedUnit: unit,
-                    quantity: 1,
-                    source: 'buy_now',
-                  });
-                }}
-              />
+        {/* Category-Wise Product Sections with Horizontal Rails */}
+        {sectionCategoryNames.map((catName) => {
+          const catProducts = getProductsForCategory(catName);
+          if (catProducts.length === 0) return null;
+
+          return (
+            <View key={catName} style={{ marginBottom: Spacing.md }}>
+              <View style={styles.sectionHeaderBetween}>
+                <Text style={styles.sectionTitle}>{catName}</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Categories', { categoryName: catName })}>
+                  <Text style={styles.seeAllText}>See All ({catProducts.length})</Text>
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingLeft: Spacing.lg }}>
+                {catProducts.slice(0, 15).map((prod: any) => (
+                  <View key={prod._id} style={{ width: 170, marginRight: 12 }}>
+                    <ProductCard
+                      product={prod}
+                      onAddToCart={handleAddToCart}
+                      onPressProduct={(p) => navigation.navigate('ProductDetail', { productId: p._id })}
+                      onBuyNow={(p, unit) => {
+                        handleAddToCart(p, unit, 1);
+                        navigation.navigate('AddAddress', {
+                          intendedProduct: p,
+                          intendedUnit: unit,
+                          quantity: 1,
+                          source: 'buy_now',
+                        });
+                      }}
+                    />
+                  </View>
+                ))}
+              </ScrollView>
             </View>
-          ))}
-        </View>
+          );
+        })}
       </ScrollView>
 
       {/* Floating Cart Badge */}

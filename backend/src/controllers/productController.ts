@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import { Request, Response } from 'express';
 import { Product } from '../models/Product.js';
+import { Category } from '../models/Category.js';
 import { PriceHistory } from '../models/PriceHistory.js';
 import { AuthRequest } from '../middleware/auth.js';
 import { calculateEffectiveProductPrice, updateProductPriceWithHistory } from '../services/priceSyncService.js';
@@ -23,7 +25,25 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 
     if (category) {
-      query.category = category;
+      let catStr = String(category).trim();
+      if (catStr.toLowerCase() === 'grocery') catStr = 'Groceries';
+      if (mongoose.Types.ObjectId.isValid(catStr)) {
+        query.category = catStr;
+      } else {
+        const slug = catStr.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        const matchedCats = await Category.find({
+          $or: [
+            { name: { $regex: `^${catStr}`, $options: 'i' } },
+            { name: { $regex: catStr, $options: 'i' } },
+            { slug: slug },
+          ],
+        });
+        if (matchedCats && matchedCats.length > 0) {
+          query.category = { $in: matchedCats.map((c) => c._id) };
+        } else {
+          query.category = null;
+        }
+      }
     }
 
     if (shop) {
@@ -55,7 +75,12 @@ export const getProducts = async (req: Request, res: Response) => {
         price: priceInfo.basePrice,
         sellingPrice: priceInfo.sellingPrice,
         effectiveUnitPrice: priceInfo.effectiveUnitPrice,
+        mrp: pObj.MRP || pObj.marketPrice || priceInfo.marketPrice || priceInfo.sellingPrice,
         discountPrice: priceInfo.discountActive ? priceInfo.effectiveUnitPrice : undefined,
+        discountPercent: pObj.discountPercent || priceInfo.discountPercentage || 0,
+        stock: pObj.availableQuantity,
+        image: (pObj.images && pObj.images.length > 0) ? pObj.images[0] : '',
+        isAvailable: pObj.isAvailable !== undefined ? pObj.isAvailable : true,
         marketPrice: priceInfo.marketPrice,
         priceSource: priceInfo.priceSource,
         priceUpdatedAt: priceInfo.priceUpdatedAt,
@@ -96,7 +121,12 @@ export const getProductById = async (req: Request, res: Response) => {
         price: priceInfo.basePrice,
         sellingPrice: priceInfo.sellingPrice,
         effectiveUnitPrice: priceInfo.effectiveUnitPrice,
+        mrp: pObj.MRP || pObj.marketPrice || priceInfo.marketPrice || priceInfo.sellingPrice,
         discountPrice: priceInfo.discountActive ? priceInfo.effectiveUnitPrice : undefined,
+        discountPercent: pObj.discountPercent || priceInfo.discountPercentage || 0,
+        stock: pObj.availableQuantity,
+        image: (pObj.images && pObj.images.length > 0) ? pObj.images[0] : '',
+        isAvailable: pObj.isAvailable !== undefined ? pObj.isAvailable : true,
         marketPrice: priceInfo.marketPrice,
         priceSource: priceInfo.priceSource,
         priceUpdatedAt: priceInfo.priceUpdatedAt,
@@ -121,14 +151,14 @@ export const createProduct = async (req: AuthRequest, res: Response) => {
 
 export const updateProduct = async (req: AuthRequest, res: Response) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const product = await Product.findById(req.params.id);
 
     if (!product) {
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
+
+    Object.assign(product, req.body);
+    await product.save();
 
     res.json({ success: true, product });
   } catch (error: any) {

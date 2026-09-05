@@ -44,10 +44,10 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
         // Fetch related products from same category/shop
         fetchRelated(prod.category?._id || prod.category, prod.shop?._id || prod.shop);
       } else {
-        setFallbackProduct();
+        handleFetchError();
       }
     } catch (e) {
-      setFallbackProduct();
+      handleFetchError();
     } finally {
       setLoading(false);
     }
@@ -67,21 +67,8 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
     }
   };
 
-  const setFallbackProduct = () => {
-    setProduct({
-      _id: productId || 'p-fallback',
-      name: 'Country Tomato',
-      name_ta: 'நாட்டு தக்காளி',
-      price: 50,
-      discountPrice: 40,
-      unit: 'kg',
-      availableUnits: ['250g', '500g', '1kg', '2kg'],
-      availableQuantity: 25,
-      stockStatus: 'IN_STOCK',
-      description: 'Juicy, farm-fresh country tomatoes sourced directly from local Tamil Nadu farms. Great for sambar and rasam.',
-      images: ['https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600'],
-      shop: { name: 'Namma Fresh' },
-    });
+  const handleFetchError = () => {
+    console.warn('[ProductDetailScreen] Failed to load product ID:', productId);
   };
 
   const handleAddToCart = async (redirectToCheckout = false) => {
@@ -135,12 +122,13 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
     );
   }
 
-  const mrp = product.price || 50;
-  const sellingPrice = product.discountPrice || mrp;
+  const mrp = product.MRP || product.marketPrice || product.price || 50;
+  const sellingPrice = product.finalPrice || product.sellingPrice || product.discountPrice || mrp;
   const hasDiscount = sellingPrice < mrp;
   const savings = mrp - sellingPrice;
-  const discountPercent = hasDiscount ? Math.round((savings / mrp) * 100) : 0;
+  const discountPercent = product.discountPercent || (hasDiscount ? Math.round((savings / mrp) * 100) : 0);
   const stockQty = product.availableQuantity ?? 25;
+  const isOutOfStock = product.isAvailable === false || product.stockStatus === 'OUT_OF_STOCK' || stockQty <= 0;
 
   return (
     <View style={styles.container}>
@@ -213,7 +201,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
           {/* Vegetable Stock Status Indicator */}
           <View style={styles.stockBadgeRow}>
             <Text style={styles.stockLabelTitle}>Stock Availability:</Text>
-            {stockQty <= 0 ? (
+            {isOutOfStock ? (
               <Text style={[styles.stockPill, styles.stockOut]}>Out of Stock</Text>
             ) : stockQty <= 25 ? (
               <Text style={[styles.stockPill, styles.stockLow]}>Low Stock: {stockQty} {product.unitType || 'kg'}</Text>
@@ -256,7 +244,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
               title="Add to Cart"
               onPress={() => handleAddToCart(false)}
               style={{ flex: 1 }}
-              disabled={stockQty <= 0}
+              disabled={isOutOfStock}
             />
           </View>
 
@@ -318,13 +306,13 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
           title="Add to Cart"
           onPress={() => handleAddToCart(false)}
           style={{ flex: 1 }}
-          disabled={stockQty <= 0}
+          disabled={isOutOfStock}
         />
         <PrimaryButton
           title="Buy Now"
           onPress={() => handleAddToCart(true)}
           style={{ flex: 1 }}
-          disabled={stockQty <= 0}
+          disabled={isOutOfStock}
         />
       </View>
 

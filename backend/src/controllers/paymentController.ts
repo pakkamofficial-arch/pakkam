@@ -30,14 +30,37 @@ try {
  */
 export const createRazorpayOrder = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { amount, currency = 'INR', notes } = req.body;
-
-    if (!amount || typeof amount !== 'number' || amount <= 0) {
-      res.status(400).json({ success: false, message: 'Invalid payment amount' });
-      return;
+    // Section 5 & 10: Recompute total server-side (never trust frontend amount)
+    let amountInPaise = 0;
+    const cart = await Cart.findOne({ user: req.user?._id }).populate('items.product');
+    
+    if (cart && cart.items.length > 0) {
+      let subtotal = 0;
+      for (const item of cart.items) {
+        const p: any = item.product;
+        if (p && p.isActive) {
+          const price = p.discountPrice || p.price;
+          subtotal += price * item.quantity;
+        }
+      }
+      // Apply default delivery fee if subtotal < 499
+      const deliveryFee = subtotal >= 499 ? 0 : 30;
+      const totalAmount = Math.max(0, subtotal + deliveryFee);
+      amountInPaise = Math.round(totalAmount * 100);
     }
 
-    const amountInPaise = Math.round(amount * 100);
+    if (amountInPaise <= 0) {
+      const inputAmount = req.body.amount;
+      if (inputAmount && typeof inputAmount === 'number' && inputAmount > 0) {
+        amountInPaise = Math.round(inputAmount * 100);
+      } else {
+        res.status(400).json({ success: false, message: 'Invalid payment amount or empty cart' });
+        return;
+      }
+    }
+
+    const currency = req.body.currency || 'INR';
+    const notes = req.body.notes;
     const receipt = `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
     if (razorpayInstance) {

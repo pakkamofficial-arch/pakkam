@@ -15,12 +15,16 @@ export const SearchScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (query.trim().length > 1) {
-      handleSearch();
-    } else {
-      setProducts([]);
-      setShops([]);
-    }
+    const timer = setTimeout(() => {
+      if (query.trim().length > 1) {
+        handleSearch();
+      } else {
+        setProducts([]);
+        setShops([]);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [query]);
 
   const handleSearch = async () => {

@@ -206,6 +206,7 @@ export const Orders: React.FC = () => {
                 <th style={{ padding: '14px 16px' }}>Customer & Delivery Location</th>
                 <th style={{ padding: '14px 16px' }}>Payment</th>
                 <th style={{ padding: '14px 16px' }}>Total Amount</th>
+                <th style={{ padding: '14px 16px' }}>Net Profit</th>
                 <th style={{ padding: '14px 16px' }}>Status</th>
                 <th style={{ padding: '14px 16px' }}>Assigned Delivery Partner</th>
                 <th style={{ padding: '14px 16px' }}>Actions</th>
@@ -216,6 +217,7 @@ export const Orders: React.FC = () => {
                 const pin = order.deliveryAddress?.pincode || order.pincode || '625001';
                 const city = order.deliveryAddress?.city || 'Madurai';
                 const state = order.deliveryAddress?.state || 'Tamil Nadu';
+                const netProfit = order.netProfitBreakdown?.netOrderProfit;
 
                 return (
                   <tr key={order._id} style={{ borderBottom: '1px solid #f1f5f9' }}>
@@ -236,6 +238,18 @@ export const Orders: React.FC = () => {
                       </div>
                     </td>
                     <td style={{ padding: '14px 16px', fontWeight: '800', fontSize: '15px' }}>₹{order.total}</td>
+                    <td style={{ padding: '14px 16px' }}>
+                      {netProfit !== undefined ? (
+                        <div style={{ fontWeight: '800', fontSize: '14px', color: netProfit >= 0 ? '#15803d' : '#b91c1c' }}>
+                          ₹{netProfit}
+                          <div style={{ fontSize: '11px', color: '#64748b', fontWeight: '500' }}>
+                            ({((order.netProfitBreakdown?.profitMargin || 0) * 100).toFixed(1)}%)
+                          </div>
+                        </div>
+                      ) : (
+                        <span style={{ color: '#94a3b8' }}>—</span>
+                      )}
+                    </td>
                     <td style={{ padding: '14px 16px' }}>
                       <span
                         style={{
@@ -401,6 +415,42 @@ export const Orders: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Admin Net Profit & Expense Breakdown Section */}
+            {selectedOrder.netProfitBreakdown && (
+              <div style={{ backgroundColor: '#ecfdf5', padding: '16px', borderRadius: '10px', border: '1px solid #a7f3d0', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                  <h3 style={{ fontSize: '14px', fontWeight: '800', color: '#047857', margin: 0, textTransform: 'uppercase' }}>
+                    📊 Admin Net Order Profit Breakdown
+                  </h3>
+                  <span style={{ fontSize: '16px', fontWeight: '800', color: selectedOrder.netProfitBreakdown.netOrderProfit >= 0 ? '#047857' : '#b91c1c' }}>
+                    NET PROFIT: ₹{selectedOrder.netProfitBreakdown.netOrderProfit} ({(selectedOrder.netProfitBreakdown.profitMargin * 100).toFixed(1)}%)
+                  </span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px', fontSize: '12px', backgroundColor: '#ffffff', padding: '12px', borderRadius: '8px', border: '1px solid #d1fae5' }}>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Order Revenue:</span>
+                    <div style={{ fontWeight: '700', color: '#0f172a' }}>₹{selectedOrder.netProfitBreakdown.orderRevenue}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Product Landed Cost:</span>
+                    <div style={{ fontWeight: '700', color: '#dc2626' }}>- ₹{selectedOrder.netProfitBreakdown.productLandedCost}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Delivery/Petrol Cost:</span>
+                    <div style={{ fontWeight: '700', color: '#dc2626' }}>- ₹{selectedOrder.netProfitBreakdown.petrolCost}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Gateway Fee (~2%):</span>
+                    <div style={{ fontWeight: '700', color: '#dc2626' }}>- ₹{selectedOrder.netProfitBreakdown.paymentGatewayFee}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Packaging Est:</span>
+                    <div style={{ fontWeight: '700', color: '#dc2626' }}>- ₹{selectedOrder.netProfitBreakdown.packagingCost}</div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Order Items Table */}
             <div style={{ marginBottom: '24px' }}>

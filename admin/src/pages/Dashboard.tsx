@@ -32,6 +32,7 @@ export const Dashboard: React.FC = () => {
 
   const statCards = [
     { title: 'Total Revenue', value: `₹${stats?.totalRevenue || 0}`, icon: IndianRupee, color: '#16a34a', bg: '#f0fdf4' },
+    { title: 'Net Pakkam Profit', value: `₹${stats?.totalNetProfit || 0}`, icon: TrendingUp, color: '#059669', bg: '#ecfdf5' },
     { title: 'Total Orders', value: stats?.totalOrders || 0, icon: TrendingUp, color: '#2563eb', bg: '#eff6ff' },
     { title: 'Active Shops', value: `${stats?.activeShops || 0} / ${stats?.totalShops || 0}`, icon: Store, color: '#d97706', bg: '#fefce8' },
     { title: 'Total Products', value: stats?.totalProducts || 0, icon: ShoppingBag, color: '#9333ea', bg: '#faf5ff' },

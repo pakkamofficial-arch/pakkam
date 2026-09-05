@@ -88,7 +88,7 @@ export interface IOrder extends Document {
   whatsappConfirmationSent?: boolean;
   whatsappMessageId?: string;
   whatsappSentAt?: Date;
-  whatsappError?: string;
+  isStockRestored?: boolean;
   notes?: string;
   statusTimeline: IOrderTimeline[];
   createdAt: Date;
@@ -184,6 +184,7 @@ const OrderSchema: Schema = new Schema(
     whatsappMessageId: { type: String },
     whatsappSentAt: { type: Date },
     whatsappError: { type: String },
+    isStockRestored: { type: Boolean, default: false },
     notes: { type: String, default: '' },
     statusTimeline: [
       {

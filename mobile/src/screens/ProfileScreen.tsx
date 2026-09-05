@@ -169,10 +169,10 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
         <View style={styles.largeAvatarCircle}>
           <User size={48} color={Colors.textSecondary} strokeWidth={1.5} />
         </View>
-        <Text style={styles.userName}>{user.fullName || user.name}</Text>
-        <Text style={styles.userPhone}>Mobile: {user.mobileNumber || user.phone}</Text>
+        <Text style={styles.userName}>{(user as any).fullName || user.name}</Text>
+        <Text style={styles.userPhone}>Mobile: {(user as any).mobileNumber || user.phone}</Text>
         <Text style={styles.userEmail}>Email: {user.email && user.email.trim() ? user.email : 'Not added'}</Text>
-        <Text style={styles.userIdText}>User ID: {user.username || user.userId || 'N/A'}</Text>
+        <Text style={styles.userIdText}>User ID: {(user as any).username || (user as any).userId || (user as any)._id || 'N/A'}</Text>
 
         <TouchableOpacity
           style={styles.editProfilePill}

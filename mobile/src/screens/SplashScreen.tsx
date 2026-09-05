@@ -77,6 +77,7 @@ export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           style={styles.logoImage}
           resizeMode="contain"
         />
+        <Text style={styles.brandTitle}>PAKKAM</Text>
         <Text style={styles.tagline}>Your Nearby Everything</Text>
       </View>
     </View>
@@ -96,14 +97,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logoImage: {
-    width: 140,
-    height: 140,
-    marginBottom: 12,
+    width: 120,
+    height: 120,
+    marginBottom: 8,
+  },
+  brandTitle: {
+    fontSize: 28,
+    fontWeight: '900',
+    color: Colors.primary,
+    letterSpacing: 2,
+    marginTop: 4,
   },
   tagline: {
     fontSize: 14,
     color: Colors.textSecondary,
-    fontWeight: '500',
+    fontWeight: '600',
     marginTop: 4,
   },
 });

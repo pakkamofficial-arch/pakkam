@@ -70,6 +70,8 @@ export const getAdminMe = async (req: AdminAuthRequest, res: Response) => {
 };
 
 
+import { calculateOrderNetProfit } from '../services/orderProfitService.js';
+
 export const getDashboardStats = async (req: AuthRequest, res: Response) => {
   try {
     const totalUsers = await User.countDocuments({ role: 'CUSTOMER' });
@@ -84,6 +86,20 @@ export const getDashboardStats = async (req: AuthRequest, res: Response) => {
     ]);
 
     const totalRevenue = revenueResult[0]?.totalRevenue || 0;
+
+    // Net Profit Calculation across non-cancelled orders
+    const validOrders = await Order.find({ orderStatus: { $nin: ['CANCELED', 'CANCELLED'] } }).populate({
+      path: 'items.product',
+      select: '+purchasePrice +additionalCost +landedCost +costPrice discountAmount',
+    });
+
+    let totalNetProfit = 0;
+    for (const ord of validOrders) {
+      const breakdown = await calculateOrderNetProfit(ord);
+      totalNetProfit += breakdown.netOrderProfit;
+    }
+    totalNetProfit = Math.round(totalNetProfit * 100) / 100;
+
     const recentOrders = await Order.find().populate('user shop').sort({ createdAt: -1 }).limit(5);
 
     res.json({
@@ -95,6 +111,7 @@ export const getDashboardStats = async (req: AuthRequest, res: Response) => {
         totalProducts,
         totalOrders,
         totalRevenue,
+        totalNetProfit,
       },
       recentOrders,
     });

@@ -13,17 +13,129 @@ export interface PriceCalculationResult {
   discountPercentage: number;
 }
 
+export interface PricingCalculationResult {
+  purchasePrice: number;
+  additionalCost: number;
+  landedCost: number;
+  targetProfitMargin: number;
+  recommendedSellingPrice: number;
+  sellingPrice: number;
+  discountPercent: number;
+  discountAmount: number;
+  minimumSellingPrice: number;
+  finalPrice: number;
+  profitAmount: number;
+  profitMargin: number;
+}
+
 /**
- * Calculates effective price and active discount based on server time
+ * Step 1 Centralized Calculation Logic:
+ * Computes Landed Cost, Recommended Selling Price, Capped Discount, Final Price, Profit Amount & Realized Profit Margin.
  */
-export const calculateEffectiveProductPrice = (product: IProduct): PriceCalculationResult => {
-  const basePrice = product.sellingPrice || product.price || 0;
-  const marketPrice = product.marketPrice || basePrice;
+export const calculateProductPricing = (product: {
+  purchasePrice?: number;
+  additionalCost?: number;
+  targetProfitMargin?: number;
+  sellingPrice?: number;
+  price?: number;
+  mrp?: number;
+  MRP?: number;
+  marketPrice?: number;
+  discountPercent?: number;
+  discountAmount?: number;
+  discountEnabled?: boolean;
+  discountType?: string;
+  discountValue?: number;
+  minimumSellingPrice?: number;
+}): PricingCalculationResult => {
+  const purchasePrice = Math.max(0, Number(product.purchasePrice || 0));
+  const additionalCost = Math.max(0, Number(product.additionalCost || 0));
+  const landedCost = purchasePrice + additionalCost;
+
+  let targetMargin = Number(product.targetProfitMargin !== undefined ? product.targetProfitMargin : 0.20);
+  if (isNaN(targetMargin) || targetMargin < 0) targetMargin = 0;
+  if (targetMargin >= 1) targetMargin = 0.999;
+
+  const recommendedSellingPrice = (1 - targetMargin) > 0 ? (landedCost / (1 - targetMargin)) : landedCost;
+
+  let mrp = Math.max(0, Number(product.MRP ?? product.mrp ?? product.marketPrice ?? 0));
+  let discountPercent = Math.max(0, Math.min(100, Number(product.discountPercent || 0)));
+
+  if (!discountPercent && product.discountEnabled && product.discountValue && product.discountType === 'PERCENTAGE') {
+    discountPercent = Math.max(0, Math.min(100, Number(product.discountValue)));
+  }
+
+  let finalPrice = 0;
+  let discountAmount = 0;
+
+  if (mrp > 0) {
+    if (discountPercent > 0) {
+      discountAmount = (mrp * discountPercent) / 100;
+      finalPrice = mrp - discountAmount;
+    } else if (product.sellingPrice !== undefined || product.price !== undefined) {
+      const inputSelling = Number(product.sellingPrice ?? product.price ?? mrp);
+      finalPrice = Math.min(mrp, Math.max(0, inputSelling));
+      discountAmount = mrp - finalPrice;
+      discountPercent = mrp > 0 ? (discountAmount / mrp) * 100 : 0;
+    } else {
+      finalPrice = Math.min(mrp, recommendedSellingPrice);
+      discountAmount = mrp - finalPrice;
+      discountPercent = mrp > 0 ? (discountAmount / mrp) * 100 : 0;
+    }
+  } else {
+    // If no MRP provided, base selling price is sellingPrice/price or recommended
+    const inputSelling = Number(product.sellingPrice ?? product.price ?? recommendedSellingPrice ?? 0);
+    finalPrice = Math.max(0, inputSelling);
+    mrp = finalPrice;
+    if (discountPercent > 0) {
+      discountAmount = (mrp * discountPercent) / 100;
+      finalPrice = Math.max(0, mrp - discountAmount);
+    }
+  }
+
+  const minSellingPrice = Math.max(0, Number(product.minimumSellingPrice || 0));
+  if (minSellingPrice > 0 && finalPrice < minSellingPrice) {
+    finalPrice = Math.min(mrp > 0 ? mrp : minSellingPrice, minSellingPrice);
+    discountAmount = Math.max(0, mrp - finalPrice);
+  }
+
+  // Final MRP ceiling enforcement
+  if (mrp > 0 && finalPrice > mrp) {
+    finalPrice = mrp;
+    discountAmount = 0;
+  }
+
+  const profitAmount = finalPrice - landedCost;
+  const profitMargin = finalPrice > 0 ? (profitAmount / finalPrice) : 0;
+
+  return {
+    purchasePrice,
+    additionalCost,
+    landedCost,
+    targetProfitMargin: targetMargin,
+    recommendedSellingPrice,
+    sellingPrice: finalPrice,
+    discountPercent,
+    discountAmount,
+    minimumSellingPrice: minSellingPrice,
+    finalPrice,
+    profitAmount,
+    profitMargin,
+  };
+};
+
+/**
+ * Calculates effective price and active discount based on server time (Customer API backward compatibility)
+ */
+export const calculateEffectiveProductPrice = (product: IProduct | any): PriceCalculationResult => {
+  const mrp = Number(product.MRP ?? product.mrp ?? product.marketPrice ?? product.sellingPrice ?? product.price ?? 0);
+  const basePrice = Number(product.finalPrice ?? product.sellingPrice ?? product.price ?? mrp);
+  const marketPrice = mrp > 0 ? mrp : basePrice;
   const now = new Date();
 
   let discountActive = false;
-  let discountAmount = 0;
-  let discountPercentage = 0;
+  let discountAmount = Number(product.discountAmount || 0);
+  let discountPercentage = Number(product.discountPercent || 0);
 
   if (
     product.discountEnabled &&
@@ -36,17 +148,22 @@ export const calculateEffectiveProductPrice = (product: IProduct): PriceCalculat
     if (isStartValid && isEndValid) {
       discountActive = true;
       if (product.discountType === 'FIXED') {
-        discountAmount = product.discountValue;
-        discountPercentage = Math.round((discountAmount / basePrice) * 100);
+        discountAmount = Number(product.discountValue);
+        discountPercentage = marketPrice > 0 ? Math.round((discountAmount / marketPrice) * 100) : 0;
       } else {
-        // PERCENTAGE
-        discountPercentage = product.discountValue;
-        discountAmount = Math.round((basePrice * product.discountValue) / 100);
+        discountPercentage = Number(product.discountValue);
+        discountAmount = Math.round((marketPrice * product.discountValue) / 100);
       }
     }
+  } else if (discountPercentage > 0 || (marketPrice > basePrice)) {
+    discountActive = true;
+    if (discountPercentage <= 0 && marketPrice > 0) {
+      discountPercentage = Math.round(((marketPrice - basePrice) / marketPrice) * 100);
+    }
+    discountAmount = Math.max(0, marketPrice - basePrice);
   }
 
-  const effectiveUnitPrice = Math.max(0, basePrice - discountAmount);
+  const effectiveUnitPrice = basePrice;
 
   return {
     basePrice,

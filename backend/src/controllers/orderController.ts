@@ -15,6 +15,7 @@ import { createRazorpayOrder, verifyRazorpaySignature } from '../services/paymen
 import { sendOrderConfirmationWhatsApp } from '../services/whatsappService.js';
 import { calculateEffectiveProductPrice } from '../services/priceSyncService.js';
 import { generateDeliveryOtp } from '../utils/otp.js';
+import { calculateOrderNetProfit } from '../services/orderProfitService.js';
 
 export const checkoutPreview = async (req: AuthRequest, res: Response) => {
   try {
@@ -517,13 +518,47 @@ export const getOrders = async (req: AuthRequest, res: Response) => {
       query.$or = [{ deliveryPerson: req.user._id }, { orderStatus: 'READY_FOR_PICKUP' }];
     }
 
-    const orders = await Order.find(query)
+    const isReqAdmin = (req.user?.role as string) === 'admin' || req.user?.role === 'ADMIN';
+
+    const ordersQuery = Order.find(query)
       .populate('shop', 'name phone address rating logo')
       .populate('user', 'name phone email')
-      .populate('deliveryPerson', 'name phone')
-      .sort({ createdAt: -1 });
+      .populate('deliveryPerson', 'name phone');
 
-    res.json({ success: true, count: orders.length, orders });
+    if (isReqAdmin) {
+      ordersQuery.populate({
+        path: 'items.product',
+        select: 'name purchasePrice additionalCost landedCost MRP price discountPercent discountAmount finalPrice costPrice',
+      });
+    }
+
+    const orders = await ordersQuery.sort({ createdAt: -1 });
+
+    const ordersWithProfit = await Promise.all(
+      orders.map(async (orderDoc) => {
+        const orderObj: any = orderDoc.toObject();
+        if (isReqAdmin) {
+          orderObj.netProfitBreakdown = await calculateOrderNetProfit(orderDoc);
+        } else {
+          if (Array.isArray(orderObj.items)) {
+            orderObj.items.forEach((item: any) => {
+              if (item.product && typeof item.product === 'object') {
+                delete item.product.purchasePrice;
+                delete item.product.additionalCost;
+                delete item.product.landedCost;
+                delete item.product.costPrice;
+                delete item.product.minimumSellingPrice;
+                delete item.product.profitAmount;
+                delete item.product.profitMargin;
+              }
+            });
+          }
+        }
+        return orderObj;
+      })
+    );
+
+    res.json({ success: true, count: ordersWithProfit.length, orders: ordersWithProfit });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -531,10 +566,20 @@ export const getOrders = async (req: AuthRequest, res: Response) => {
 
 export const getOrderById = async (req: AuthRequest, res: Response) => {
   try {
-    const order = await Order.findById(req.params.id)
+    const isReqAdmin = (req.user?.role as string) === 'admin' || req.user?.role === 'ADMIN';
+    const query = Order.findById(req.params.id)
       .populate('shop', 'name phone address rating logo')
       .populate('user', 'name phone email')
       .populate('deliveryPerson', 'name phone vehicleType vehicleNumber');
+
+    if (isReqAdmin) {
+      query.populate({
+        path: 'items.product',
+        select: 'name purchasePrice additionalCost landedCost MRP price discountPercent discountAmount finalPrice costPrice',
+      });
+    }
+
+    const order = await query;
 
     if (!order) {
       return res.status(404).json({ success: false, message: 'Order not found' });
@@ -548,15 +593,56 @@ export const getOrderById = async (req: AuthRequest, res: Response) => {
 
     const orderObj: any = order.toObject();
 
-    // Part 28: Protect driver personal phone from customer
-    if (req.user?.role === 'CUSTOMER' && orderObj.deliveryPerson) {
-      delete orderObj.deliveryPerson.phone;
+    if (isReqAdmin) {
+      orderObj.netProfitBreakdown = await calculateOrderNetProfit(order);
+    } else {
+      // Part 28: Protect driver personal phone from customer
+      if (req.user?.role === 'CUSTOMER' && orderObj.deliveryPerson) {
+        delete orderObj.deliveryPerson.phone;
+      }
+      if (Array.isArray(orderObj.items)) {
+        orderObj.items.forEach((item: any) => {
+          if (item.product && typeof item.product === 'object') {
+            delete item.product.purchasePrice;
+            delete item.product.additionalCost;
+            delete item.product.landedCost;
+            delete item.product.costPrice;
+            delete item.product.minimumSellingPrice;
+            delete item.product.profitAmount;
+            delete item.product.profitMargin;
+          }
+        });
+      }
     }
 
     res.json({ success: true, order: orderObj });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
   }
+};
+
+export const restoreOrderStock = async (order: any) => {
+  if (!order || order.isStockRestored) return;
+
+  if (Array.isArray(order.items)) {
+    for (const item of order.items) {
+      if (!item.product) continue;
+      const productId = typeof item.product === 'object' ? item.product._id : item.product;
+      const prod = await Product.findById(productId);
+      if (prod) {
+        const unitMultiplier = item.unitMultiplier || getUnitMultiplier(item.selectedUnit);
+        const qtyToRestore = Number(item.quantity || 1) * unitMultiplier;
+        prod.availableQuantity = (prod.availableQuantity || 0) + qtyToRestore;
+        if (prod.availableQuantity > 0) {
+          prod.isAvailable = true;
+          prod.stockStatus = prod.availableQuantity <= 25 ? 'LOW_STOCK' : 'IN_STOCK';
+        }
+        await prod.save();
+      }
+    }
+  }
+
+  order.isStockRestored = true;
 };
 
 export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
@@ -583,6 +669,7 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
       'OUT_FOR_DELIVERY',
       'DELIVERED',
       'CANCELED',
+      'CANCELLED',
     ];
 
     if (!validStatuses.includes(status)) {
@@ -598,6 +685,10 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
 
     if (status === 'OUT_FOR_DELIVERY' && req.user?.role === 'DELIVERY') {
       order.deliveryPerson = req.user._id;
+    }
+
+    if (status === 'CANCELED' || status === 'CANCELLED') {
+      await restoreOrderStock(order);
     }
 
     await order.save();
@@ -740,6 +831,8 @@ export const cancelOrder = async (req: AuthRequest, res: Response) => {
     order.cancelledBy = req.user?.role === 'CUSTOMER' ? 'CUSTOMER' : 'ADMIN';
     order.cancelledAt = new Date();
     order.cancellationReason = cancelReasonStr;
+
+    await restoreOrderStock(order);
 
     let refundMessage = '';
     if (order.paymentStatus === 'PAID') {

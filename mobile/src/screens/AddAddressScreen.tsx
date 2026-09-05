@@ -20,8 +20,8 @@ export const AddAddressScreen: React.FC<{ navigation: any; route?: any }> = ({ n
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { returnScreen } = route?.params || {};
 
-  const [fullName, setFullName] = useState(user?.fullName || user?.name || '');
-  const [mobileNumber, setMobileNumber] = useState(user?.mobileNumber || user?.phone || '');
+  const [fullName, setFullName] = useState((user as any)?.fullName || user?.name || '');
+  const [mobileNumber, setMobileNumber] = useState((user as any)?.mobileNumber || user?.phone || '');
   const [pincode, setPincode] = useState('625001');
   const [addressLine, setAddressLine] = useState('');
   const [city, setCity] = useState('Madurai');
@@ -48,8 +48,8 @@ export const AddAddressScreen: React.FC<{ navigation: any; route?: any }> = ({ n
   // Update name/phone when user logs in
   useEffect(() => {
     if (user) {
-      if (!fullName) setFullName(user.fullName || user.name || '');
-      if (!mobileNumber) setMobileNumber(user.mobileNumber || user.phone || '');
+      if (!fullName) setFullName((user as any)?.fullName || user?.name || '');
+      if (!mobileNumber) setMobileNumber((user as any)?.mobileNumber || user?.phone || '');
     }
   }, [user]);
 

@@ -68,15 +68,24 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   if (items.length === 0) {
     return (
-      <View style={styles.emptyContainer}>
-        <Text style={{ fontSize: 44, marginBottom: 12 }}>🛒</Text>
-        <Text style={styles.emptyTitle}>Your Cart is Empty</Text>
-        <Text style={styles.emptySub}>Add fresh vegetables and groceries to get started.</Text>
-        <PrimaryButton
-          title="Browse Products"
-          onPress={() => navigation.navigate('Home')}
-          style={{ width: 220, marginTop: Spacing.md }}
-        />
+      <View style={styles.container}>
+        <View style={[styles.headerRow, { paddingHorizontal: Spacing.lg, paddingTop: Spacing.md }]}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
+            <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Cart (0)</Text>
+          <ShoppingCart size={20} color={Colors.textPrimary} strokeWidth={1.75} />
+        </View>
+        <View style={styles.emptyContainer}>
+          <Text style={{ fontSize: 44, marginBottom: 12 }}>🛒</Text>
+          <Text style={styles.emptyTitle}>Your Cart is Empty</Text>
+          <Text style={styles.emptySub}>Add fresh vegetables and groceries to get started.</Text>
+          <PrimaryButton
+            title="Browse Products"
+            onPress={() => navigation.navigate('Home')}
+            style={{ width: 220, marginTop: Spacing.md }}
+          />
+        </View>
       </View>
     );
   }

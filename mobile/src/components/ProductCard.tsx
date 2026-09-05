@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { Colors, Radii, Shadow } from '../theme';
 import { QuantityStepper } from './QuantityStepper';
 import { getProductName } from '../utils/languageHelper';
-import { SecondaryButton } from './SecondaryButton';
-import { PrimaryButton } from './PrimaryButton';
 
 interface ProductCardProps {
   product: any;
@@ -13,39 +13,49 @@ interface ProductCardProps {
   onBuyNow?: (product: any, selectedUnit: string) => void;
 }
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80';
+
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onPressProduct,
   onBuyNow,
 }) => {
+  const { items: cartItems } = useSelector((state: RootState) => state.cart);
   const [selectedUnit, setSelectedUnit] = useState<string>(
-    product.availableUnits?.[0] || product.unit || 'kg'
+    product.availableUnits?.[0] || product.unit || '1 kg'
   );
-  const [quantity, setQuantity] = useState<number>(0);
+  const [imgError, setImgError] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<boolean>(false);
 
-  const price = product.discountPrice || product.price || 150;
-  const productName = getProductName(product, 'en');
+  // Derive quantity from cart state automatically
+  const cartItem = cartItems.find((item: any) => {
+    const pId = typeof item.product === 'object' ? item.product?._id : item.product;
+    return pId === product._id;
+  });
+  const currentCartQuantity = cartItem ? cartItem.quantity : 0;
 
-  // Compute Offer Tag badge if any per spec section 3
-  const discountPercent = product.price && product.discountPrice && product.price > product.discountPrice
-    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
-    : null;
-  const offerTagText = product.offerTag || (discountPercent ? `${discountPercent}% OFF` : null);
+  const productName = getProductName(product, 'en') || product.name || 'Fresh Item';
+  const mrp = product.mrp || product.MRP || product.marketPrice || product.price || 0;
+  const sellingPrice = product.sellingPrice || product.finalPrice || product.discountPrice || product.price || 0;
+  const hasDiscount = mrp > sellingPrice;
+  const discountPercent = product.discountPercent || (hasDiscount && mrp > 0 ? Math.round(((mrp - sellingPrice) / mrp) * 100) : 0);
+  const offerTagText = discountPercent > 0 ? `${discountPercent}% OFF` : null;
+
+  const availableStock = product.availableQuantity !== undefined ? product.availableQuantity : (product.stock !== undefined ? product.stock : 100);
+  const isOutOfStock = product.isAvailable === false || product.stockStatus === 'OUT_OF_STOCK' || availableStock <= 0;
 
   const handleAddInitial = () => {
-    const nextQty = Math.max(1, quantity + 1);
-    setQuantity(nextQty);
+    if (isOutOfStock) return;
+    const nextQty = 1;
     if (onAddToCart) onAddToCart(product, selectedUnit, nextQty);
-    
-    // Brief toast feedback
     setShowToast(true);
     setTimeout(() => setShowToast(false), 1500);
   };
 
   const handleBuyNowPress = () => {
-    const nextQty = quantity > 0 ? quantity : 1;
+    if (isOutOfStock) return;
+    const nextQty = currentCartQuantity > 0 ? currentCartQuantity : 1;
     if (onBuyNow) {
       onBuyNow(product, selectedUnit);
     } else if (onAddToCart) {
@@ -54,20 +64,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const handleIncrement = () => {
-    const nextQty = quantity + 1;
-    setQuantity(nextQty);
+    if (isOutOfStock) return;
+    if (currentCartQuantity >= availableStock) {
+      return;
+    }
+    const nextQty = currentCartQuantity + 1;
     if (onAddToCart) onAddToCart(product, selectedUnit, nextQty);
   };
 
   const handleDecrement = () => {
-    const nextQty = Math.max(0, quantity - 1);
-    setQuantity(nextQty);
+    const nextQty = Math.max(0, currentCartQuantity - 1);
     if (onAddToCart) onAddToCart(product, selectedUnit, nextQty);
   };
 
+  const rawImage = (product.images && product.images.length > 0 ? product.images[0] : product.image) || FALLBACK_IMAGE;
+  const imageUrl = imgError ? FALLBACK_IMAGE : rawImage;
+
   return (
     <View style={styles.card}>
-      {/* Top-left Offer Tag Badge per spec section 3 */}
+      {/* Top-left Offer Tag Badge */}
       {offerTagText && (
         <View style={styles.offerBadge}>
           <Text style={styles.offerBadgeText}>{offerTagText}</Text>
@@ -87,55 +102,59 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         style={styles.imageWrap}
       >
         <Image
-          source={{
-            uri:
-              product.images && product.images.length > 0
-                ? product.images[0]
-                : 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400',
-          }}
+          source={{ uri: imageUrl }}
           style={styles.image}
+          onError={() => setImgError(true)}
         />
       </TouchableOpacity>
 
       <View style={styles.contentBox}>
         <TouchableOpacity onPress={() => onPressProduct && onPressProduct(product)}>
           <Text style={styles.productName} numberOfLines={1}>
-            {productName || 'Product'}
+            {productName}
           </Text>
         </TouchableOpacity>
 
         <View style={styles.priceRow}>
           <Text style={styles.priceText}>
-            ₹{price} <Text style={styles.unitText}>/ {selectedUnit}</Text>
+            ₹{sellingPrice} <Text style={styles.unitText}>/ {selectedUnit}</Text>
           </Text>
+          {hasDiscount && mrp > sellingPrice && (
+            <Text style={styles.mrpStrikethrough}>
+              ₹{mrp}
+            </Text>
+          )}
         </View>
 
-        {/* Two-button row at bottom of card per spec section 2: Add to Cart + Buy Now */}
-        <View style={styles.dualBtnRow}>
-          <TouchableOpacity
-            style={styles.cardOutlineBtn}
-            onPress={handleAddInitial}
-            activeOpacity={0.85}
-          >
-            <Text style={styles.cardOutlineBtnText}>Add</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.cardSolidBtn}
-            onPress={handleBuyNowPress}
-            activeOpacity={0.85}
-          >
-            <Text style={styles.cardSolidBtnText}>Buy Now</Text>
-          </TouchableOpacity>
-        </View>
-
-        {quantity > 0 && (
+        {isOutOfStock ? (
+          <View style={styles.outOfStockBox}>
+            <Text style={styles.outOfStockText}>Out of Stock</Text>
+          </View>
+        ) : currentCartQuantity > 0 ? (
           <QuantityStepper
-            quantity={quantity}
+            quantity={currentCartQuantity}
             onIncrement={handleIncrement}
             onDecrement={handleDecrement}
             style={styles.stepperAlign}
           />
+        ) : (
+          <View style={styles.dualBtnRow}>
+            <TouchableOpacity
+              style={styles.cardOutlineBtn}
+              onPress={handleAddInitial}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.cardOutlineBtnText}>Add</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.cardSolidBtn}
+              onPress={handleBuyNowPress}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.cardSolidBtnText}>Buy Now</Text>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>
@@ -207,11 +226,32 @@ const styles = StyleSheet.create({
   },
   priceRow: {
     marginBottom: 6,
+    flexDirection: 'row',
+    alignItems: 'baseline',
   },
   priceText: {
     fontSize: 14,
     fontWeight: '700',
     color: Colors.primary,
+  },
+  mrpStrikethrough: {
+    fontSize: 11,
+    color: Colors.textSecondary,
+    textDecorationLine: 'line-through',
+    marginLeft: 6,
+  },
+  outOfStockBox: {
+    height: 32,
+    backgroundColor: '#FEE2E2',
+    borderRadius: Radii.sm,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 4,
+  },
+  outOfStockText: {
+    color: '#B91C1C',
+    fontSize: 11,
+    fontWeight: '800',
   },
   unitText: {
     fontSize: 11,
