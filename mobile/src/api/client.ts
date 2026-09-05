@@ -49,10 +49,24 @@ export const clearStoredToken = async (): Promise<void> => {
   }
 };
 
+const DEFAULT_PROD_API_URL = 'https://pakkam.onrender.com/api';
+
 const getBaseUrl = () => {
-  if (process.env.EXPO_PUBLIC_API_URL) return process.env.EXPO_PUBLIC_API_URL;
-  if (Platform.OS === 'android') return 'http://10.0.2.2:5000/api';
-  return 'http://localhost:5000/api';
+  let url = process.env.EXPO_PUBLIC_API_URL || '';
+  if (url && typeof url === 'string' && url.trim().length > 0) {
+    url = url.trim();
+    if (!url.endsWith('/api')) {
+      url = url.endsWith('/') ? `${url}api` : `${url}/api`;
+    }
+    return url;
+  }
+  // Development fallback for local emulator
+  if (__DEV__) {
+    if (Platform.OS === 'android') return 'http://10.0.2.2:5000/api';
+    return 'http://localhost:5000/api';
+  }
+  // Standalone Production Build fallback (never use localhost on physical device)
+  return DEFAULT_PROD_API_URL;
 };
 
 const client = axios.create({

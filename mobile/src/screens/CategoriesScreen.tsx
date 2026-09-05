@@ -19,6 +19,7 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
   const initialCategoryName = route.params?.categoryName || route.params?.categoryId || 'All';
   const [selectedSubFilter, setSelectedSubFilter] = useState<string>(initialCategoryName);
   const [activeItemQty, setActiveItemQty] = useState<number>(1);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   const dynamicChips = ['All', ...Array.from(new Set([
     ...categories.map((c: any) => c.name),
@@ -39,6 +40,7 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
 
   const fetchProducts = async () => {
     try {
+      setFetchError(null);
       let url = '/products?limit=100';
       if (selectedSubFilter && selectedSubFilter !== 'All') {
         url = `/products?category=${encodeURIComponent(selectedSubFilter)}&limit=100`;
@@ -47,8 +49,9 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
       if (res.data.success) {
         dispatch(setProducts(res.data.products || []));
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error('[CategoriesScreen] Fetch products error', e);
+      setFetchError('Unable to load products. Please check your connection and try again.');
     }
   };
 
@@ -119,6 +122,23 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
                 );
               })}
             </ScrollView>
+          </View>
+        }
+        ListEmptyComponent={
+          <View style={{ padding: Spacing.xl, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 32, marginBottom: 12 }}>📦</Text>
+            <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center' }}>
+              {fetchError ? 'Unable to Load Products' : 'No Products Found'}
+            </Text>
+            <Text style={{ fontSize: 12, color: Colors.textSecondary, textAlign: 'center', marginTop: 4, marginBottom: 16 }}>
+              {fetchError || `No items found in category "${selectedSubFilter}".`}
+            </Text>
+            <TouchableOpacity
+              onPress={fetchProducts}
+              style={{ backgroundColor: Colors.primary, paddingHorizontal: 20, paddingVertical: 10, borderRadius: Radii.pill }}
+            >
+              <Text style={{ color: Colors.white, fontSize: 13, fontWeight: '700' }}>Retry Loading</Text>
+            </TouchableOpacity>
           </View>
         }
         renderItem={({ item }) => (

@@ -114,10 +114,38 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
     alert('Added to cart!');
   };
 
-  if (loading || !product) {
+  if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={{ padding: 20, color: Colors.textSecondary }}>Loading product details...</Text>
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ fontSize: 14, color: Colors.textSecondary }}>Loading product details...</Text>
+      </View>
+    );
+  }
+
+  if (!product) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center', padding: Spacing.xl }]}>
+        <Text style={{ fontSize: 40, marginBottom: 12 }}>⚠️</Text>
+        <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center', marginBottom: 8 }}>
+          Product Details Unavailable
+        </Text>
+        <Text style={{ fontSize: 13, color: Colors.textSecondary, textAlign: 'center', marginBottom: 20 }}>
+          Unable to load product information. Please check your network connection and try again.
+        </Text>
+        <View style={{ flexDirection: 'row', gap: 12 }}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{ borderWidth: 1, borderColor: Colors.border, paddingHorizontal: 16, paddingVertical: 10, borderRadius: Radii.pill }}
+          >
+            <Text style={{ color: Colors.textPrimary, fontSize: 13, fontWeight: '600' }}>Go Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={fetchProduct}
+            style={{ backgroundColor: Colors.primary, paddingHorizontal: 20, paddingVertical: 10, borderRadius: Radii.pill }}
+          >
+            <Text style={{ color: Colors.white, fontSize: 13, fontWeight: '700' }}>Retry</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

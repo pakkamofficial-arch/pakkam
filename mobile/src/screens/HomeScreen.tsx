@@ -36,6 +36,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { items } = useSelector((state: RootState) => state.cart);
 
   const [refreshing, setRefreshing] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     loadHomeData();
@@ -44,6 +45,7 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const loadHomeData = async () => {
     try {
       setRefreshing(true);
+      setFetchError(null);
       const catRes = await client.get('/categories');
       if (catRes.data.success) dispatch(setCategories(catRes.data.categories));
 
@@ -226,6 +228,21 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Text style={styles.searchPlaceholder}>Search vegetables, groceries & shops</Text>
           <Mic size={18} color={Colors.primary} strokeWidth={2} />
         </TouchableOpacity>
+
+        {/* Network Error Retry Banner (Phase 3 & 10) */}
+        {fetchError ? (
+          <View style={{ backgroundColor: '#FEF2F2', borderWidth: 1, borderColor: '#FCA5A5', padding: 12, borderRadius: 10, marginBottom: 12, alignItems: 'center' }}>
+            <Text style={{ fontSize: 12, color: '#991B1B', textAlign: 'center', marginBottom: 8, fontWeight: '600' }}>
+              ⚠️ {fetchError}
+            </Text>
+            <TouchableOpacity
+              onPress={loadHomeData}
+              style={{ backgroundColor: Colors.primary, paddingHorizontal: 16, paddingVertical: 6, borderRadius: 20 }}
+            >
+              <Text style={{ color: '#FFFFFF', fontSize: 12, fontWeight: '700' }}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
 
         {/* Dynamic Horizontal Top Category Strip */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.circleCategoriesRow}>
