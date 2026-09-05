@@ -1,6 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
+export interface INotificationToken {
+  token: string;
+  platform?: string;
+  deviceId?: string;
+  isActive?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 export interface IUser extends Document {
   name: string;
   phone: string;
@@ -15,6 +24,7 @@ export interface IUser extends Document {
   referralCode?: string;
   referredBy?: string;
   pushToken?: string;
+  notificationTokens?: INotificationToken[];
   savedUPIs?: string[];
   savedCards?: {
     cardToken: string;
@@ -46,6 +56,16 @@ const UserSchema: Schema = new Schema(
     referralCode: { type: String, unique: true, sparse: true },
     referredBy: { type: String },
     pushToken: { type: String },
+    notificationTokens: [
+      {
+        token: { type: String, required: true },
+        platform: { type: String, default: 'android' },
+        deviceId: { type: String },
+        isActive: { type: Boolean, default: true },
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, default: Date.now },
+      },
+    ],
     resetPasswordOtp: { type: String, select: false },
     resetPasswordOtpExpires: { type: Date, select: false },
     resetPasswordToken: { type: String, select: false },

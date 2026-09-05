@@ -135,12 +135,16 @@ export const OrderTrackingScreen: React.FC<{ navigation: any; route: any }> = ({
           </View>
         </View>
 
-        {/* 4-Digit Hand-Off Delivery OTP */}
+        {/* 4-Digit Hand-Off Delivery OTP (Section 15) */}
         {displayOrder.deliveryOtp ? (
           <View style={styles.otpCard}>
-            <Text style={styles.otpTitle}>🔑 Delivery Verification OTP</Text>
-            <Text style={styles.otpSub}>Provide this 4-digit OTP code to the delivery partner at hand-off:</Text>
-            <Text style={styles.otpCode}>{displayOrder.deliveryOtp}</Text>
+            <Text style={styles.otpTitle}>Delivery OTP</Text>
+            <Text style={styles.otpCode}>
+              {typeof displayOrder.deliveryOtp === 'object'
+                ? displayOrder.deliveryOtp.code || '----'
+                : String(displayOrder.deliveryOtp)}
+            </Text>
+            <Text style={styles.otpSub}>Give this OTP to your delivery partner when your order arrives.</Text>
           </View>
         ) : null}
       </ScrollView>

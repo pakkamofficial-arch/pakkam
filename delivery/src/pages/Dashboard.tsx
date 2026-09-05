@@ -537,6 +537,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ partner, onLogout }) => {
             </p>
 
             <form onSubmit={handleCompleteDelivered}>
+              {selectedOrder.deliveryOtp && (
+                <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '10px 14px', borderRadius: '8px', marginBottom: '14px', textAlign: 'center' }}>
+                  <span style={{ fontSize: '12px', color: '#15803d', fontWeight: '700' }}>Customer Delivery OTP: </span>
+                  <span style={{ fontSize: '18px', fontWeight: '800', color: '#16a34a', letterSpacing: '4px' }}>
+                    {typeof selectedOrder.deliveryOtp === 'object' ? selectedOrder.deliveryOtp.code || '----' : String(selectedOrder.deliveryOtp)}
+                  </span>
+                </div>
+              )}
+
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#334155', marginBottom: '6px' }}>
                   Enter 4-Digit Customer Delivery OTP *

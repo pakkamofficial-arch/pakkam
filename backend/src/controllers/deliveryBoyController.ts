@@ -3,6 +3,7 @@ import { DeliveryPerson } from '../models/DeliveryPerson.js';
 import { Order } from '../models/Order.js';
 import { DeliveryZone } from '../models/DeliveryZone.js';
 import { User } from '../models/User.js';
+import { sendPushNotificationToUser } from '../services/notificationService.js';
 
 /**
  * Get recommended delivery boys for an order, ranked by match score
@@ -143,6 +144,30 @@ export const assignDeliveryBoy = async (req: Request, res: Response): Promise<vo
       deliveryBoy.assignedOrders.push(order._id as any);
     }
     await deliveryBoy.save();
+
+    // FCM Push Notification to Assigned Delivery Boy (Section 10)
+    if (deliveryBoy.user) {
+      sendPushNotificationToUser(deliveryBoy.user, {
+        title: 'Pakkam — New Delivery Assigned',
+        body: `You have been assigned a new delivery order.\nOrder amount: ₹${order.total}`,
+        data: {
+          type: 'DELIVERY_ASSIGNED',
+          orderId: order._id.toString(),
+        },
+      }).catch((err) => console.error('FCM Delivery Boy assignment error:', err));
+    }
+
+    // FCM Push Notification to Customer (Section 10)
+    if (order.user) {
+      sendPushNotificationToUser(order.user, {
+        title: 'Pakkam — Delivery Partner Assigned',
+        body: 'A delivery partner has been assigned to your order.',
+        data: {
+          type: 'ORDER_UPDATE',
+          orderId: order._id.toString(),
+        },
+      }).catch((err) => console.error('FCM Customer assignment notification error:', err));
+    }
 
     res.json({
       success: true,

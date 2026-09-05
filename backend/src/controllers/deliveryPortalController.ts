@@ -83,7 +83,14 @@ export const getAvailableOrders = async (req: any, res: Response): Promise<void>
       .populate('shop', 'name address phone')
       .sort({ createdAt: -1 });
 
-    res.json({ success: true, count: orders.length, orders });
+    // Section 14: Sanitize deliveryOtp server-side for unassigned orders
+    const sanitizedOrders = orders.map((o) => {
+      const obj: any = o.toObject();
+      delete obj.deliveryOtp;
+      return obj;
+    });
+
+    res.json({ success: true, count: sanitizedOrders.length, orders: sanitizedOrders });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
   }

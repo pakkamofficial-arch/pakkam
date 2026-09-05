@@ -407,6 +407,11 @@ export const Orders: React.FC = () => {
                 <div style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
                   Payment Status: <span style={{ fontWeight: '800', color: selectedOrder.paymentStatus === 'PAID' ? '#16a34a' : selectedOrder.paymentStatus === 'REFUND_PENDING' ? '#d97706' : '#64748b' }}>{selectedOrder.paymentStatus}</span>
                 </div>
+                {selectedOrder.deliveryOtp && (
+                  <div style={{ fontSize: '13px', color: '#475569', marginTop: '4px' }}>
+                    Delivery OTP: <span style={{ fontWeight: '800', color: '#16a34a', letterSpacing: '1px' }}>{typeof selectedOrder.deliveryOtp === 'object' ? selectedOrder.deliveryOtp.code || '----' : String(selectedOrder.deliveryOtp)}</span>
+                  </div>
+                )}
                 <div style={{ fontSize: '12px', color: '#64748b', marginTop: '8px' }}>
                   Subtotal: ₹{selectedOrder.subtotal} | Discount: ₹{selectedOrder.discount || 0} | Delivery Fee: ₹{selectedOrder.deliveryFee}
                 </div>

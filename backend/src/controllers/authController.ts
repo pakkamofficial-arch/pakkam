@@ -531,3 +531,52 @@ export const resetPassword = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: error.message || 'Error resetting password' });
   }
 };
+
+export const savePushToken = async (req: AuthRequest, res: Response) => {
+  try {
+    const { pushToken, token, platform = 'android', deviceId } = req.body;
+    const activeToken = pushToken || token;
+
+    if (!activeToken || typeof activeToken !== 'string') {
+      return res.status(400).json({ success: false, message: 'Valid push token is required' });
+    }
+
+    const user = await User.findById(req.user?._id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.pushToken = activeToken;
+
+    if (!Array.isArray(user.notificationTokens)) {
+      user.notificationTokens = [];
+    }
+
+    const existingIdx = user.notificationTokens.findIndex(
+      (t) => t.token === activeToken || (deviceId && t.deviceId === deviceId)
+    );
+
+    if (existingIdx > -1) {
+      user.notificationTokens[existingIdx].token = activeToken;
+      user.notificationTokens[existingIdx].platform = platform;
+      user.notificationTokens[existingIdx].isActive = true;
+      user.notificationTokens[existingIdx].updatedAt = new Date();
+    } else {
+      user.notificationTokens.push({
+        token: activeToken,
+        platform,
+        deviceId,
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    }
+
+    await user.save();
+
+    res.json({ success: true, message: 'Push notification token registered successfully' });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+

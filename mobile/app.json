@@ -4,21 +4,22 @@
     "slug": "pakkam-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/app-logo.png",
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/pakkam-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/images/app-logo.png"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#16a34a"
+        "foregroundImage": "./assets/images/app-logo.png",
+        "backgroundColor": "#FFFFFF"
       },
       "package": "com.pakkamofficial.pakkammobile"
     },

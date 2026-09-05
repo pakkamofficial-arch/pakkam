@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setCredentials, logout } from '../redux/slices/authSlice';
 import { setAddresses } from '../redux/slices/addressSlice';
 import client, { getStoredToken, clearStoredToken } from '../api/client';
+import { registerForPushNotificationsAsync } from '../services/notificationService';
 import { Colors } from '../theme';
 
 export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -45,6 +46,11 @@ export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             } catch (addrErr) {
               console.warn('[Splash] Address fetch fallback:', addrErr);
             }
+
+            // Sync FCM Push Token (Section 4)
+            registerForPushNotificationsAsync().catch((err) =>
+              console.warn('[Splash] Push token registration warning:', err)
+            );
           }
         } catch (authErr: any) {
           console.warn('[Splash] Token validation failed:', authErr.response?.status || authErr.message);

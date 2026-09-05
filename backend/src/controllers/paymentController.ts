@@ -9,6 +9,7 @@ import { Shop } from '../models/Shop.js';
 import { Notification } from '../models/Notification.js';
 import { generateDeliveryOtp } from '../utils/otp.js';
 import { sendOrderConfirmationWhatsApp } from '../services/whatsappService.js';
+import { sendPushNotificationToUser, sendPushNotificationToRole } from '../services/notificationService.js';
 
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || 'rzp_test_pakkam_key_id';
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || 'pakkam_razorpay_secret_key_2026';
@@ -265,6 +266,28 @@ export const verifyRazorpayPayment = async (req: AuthRequest, res: Response): Pr
         message: `Paid order #${order.orderNumber} received (₹${total})`,
         order: order._id,
       });
+
+      // FCM Push Notification to Customer (Section 8)
+      if (req.user?._id) {
+        sendPushNotificationToUser(req.user._id, {
+          title: 'Pakkam — Order Confirmed',
+          body: `Hello ${address.name}, your order has been confirmed successfully.\nAmount: ₹${total}\nPayment: Online Payment\nDelivery OTP: ${otpCode}`,
+          data: {
+            type: 'ORDER_CONFIRMED',
+            orderId: order._id.toString(),
+          },
+        }).catch((err) => console.error('FCM Customer payment confirmation error:', err));
+      }
+
+      // FCM Push Notification to Admin (Section 9)
+      sendPushNotificationToRole('ADMIN', {
+        title: 'Pakkam — New Order',
+        body: `New order received from ${address.name}.\nOrder amount: ₹${total}`,
+        data: {
+          type: 'NEW_ORDER',
+          orderId: order._id.toString(),
+        },
+      }).catch((err) => console.error('FCM Admin payment notification error:', err));
     } catch (e) {
       console.error('Notification creation error:', e);
     }

@@ -13,6 +13,7 @@ import { AuthRequest } from '../middleware/auth.js';
 import { getUnitMultiplier } from './cartController.js';
 import { createRazorpayOrder, verifyRazorpaySignature } from '../services/paymentService.js';
 import { sendOrderConfirmationWhatsApp } from '../services/whatsappService.js';
+import { sendPushNotificationToUser, sendPushNotificationToRole } from '../services/notificationService.js';
 import { calculateEffectiveProductPrice } from '../services/priceSyncService.js';
 import { generateDeliveryOtp } from '../utils/otp.js';
 import { calculateOrderNetProfit } from '../services/orderProfitService.js';
@@ -483,14 +484,19 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
         order: order._id,
         isRead: false,
       });
+
+      // FCM Push Notification to Admin (Section 9)
+      sendPushNotificationToRole('ADMIN', {
+        title: 'Pakkam — New Order',
+        body: `New order received from ${address.name}.\nOrder amount: ₹${order.total}`,
+        data: {
+          type: 'NEW_ORDER',
+          orderId: order._id.toString(),
+        },
+      }).catch((err) => console.error('FCM Admin notification dispatch error:', err));
     } catch (notifErr) {
       console.error('Admin notification creation error:', notifErr);
     }
-
-    // Trigger WhatsApp Notification (Fail-safe)
-    sendOrderConfirmationWhatsApp(order).catch((err) =>
-      console.error('WhatsApp notification dispatch error:', err)
-    );
 
     const orderObj = order.toObject ? order.toObject() : { ...order };
     (orderObj as any).orderId = order.orderNumber || order._id;
@@ -693,9 +699,21 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
 
     await order.save();
 
-    // Dispatch Role Notifications (Part 15 & 19)
+    // Dispatch Role Notifications & FCM Push (Section 11)
     try {
-      if (status === 'OUT_FOR_DELIVERY') {
+      if (status === 'CONFIRMED') {
+        sendPushNotificationToUser(order.user, {
+          title: 'Pakkam — Order Confirmed',
+          body: 'Your Pakkam order has been confirmed.',
+          data: { type: 'ORDER_CONFIRMED', orderId: order._id.toString() },
+        }).catch((e) => console.error('FCM update error:', e));
+      } else if (status === 'PREPARING') {
+        sendPushNotificationToUser(order.user, {
+          title: 'Pakkam — Order Preparing',
+          body: 'Your order is being prepared.',
+          data: { type: 'ORDER_UPDATE', orderId: order._id.toString() },
+        }).catch((e) => console.error('FCM update error:', e));
+      } else if (status === 'OUT_FOR_DELIVERY') {
         await Notification.create({
           user: order.user,
           recipientRole: 'CUSTOMER',
@@ -705,6 +723,12 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
           message: `Your PAKKAM order #${order.orderNumber} is out for delivery!`,
           order: order._id,
         });
+
+        sendPushNotificationToUser(order.user, {
+          title: 'Pakkam — Out for Delivery',
+          body: 'Your order is on the way.\nPlease keep your delivery OTP ready.',
+          data: { type: 'OUT_FOR_DELIVERY', orderId: order._id.toString() },
+        }).catch((e) => console.error('FCM update error:', e));
       } else if (status === 'DELIVERED') {
         await Notification.create({
           user: order.user,
@@ -715,24 +739,18 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
           message: `Your PAKKAM order #${order.orderNumber} has been delivered successfully.`,
           order: order._id,
         });
-        await Notification.create({
-          recipientRole: 'ADMIN',
-          type: 'ORDER_UPDATE',
-          title: 'Order Delivered ✅',
-          body: `Order #${order.orderNumber} marked delivered.`,
-          message: `Order #${order.orderNumber} marked delivered.`,
-          order: order._id,
-        });
-      } else if (status === 'PREPARING') {
-        await Notification.create({
-          user: order.user,
-          recipientRole: 'CUSTOMER',
-          type: 'ORDER_UPDATE',
-          title: '🍳 Order Being Prepared',
-          body: `Your order #${order.orderNumber} is being prepared by the shop.`,
-          message: `Your order #${order.orderNumber} is being prepared by the shop.`,
-          order: order._id,
-        });
+
+        sendPushNotificationToUser(order.user, {
+          title: 'Pakkam — Order Delivered',
+          body: 'Your order has been delivered successfully.\nThank you for shopping with Pakkam!',
+          data: { type: 'DELIVERED', orderId: order._id.toString() },
+        }).catch((e) => console.error('FCM update error:', e));
+      } else if (status === 'CANCELED' || status === 'CANCELLED') {
+        sendPushNotificationToUser(order.user, {
+          title: 'Pakkam — Order Cancelled',
+          body: 'Your order has been cancelled.',
+          data: { type: 'ORDER_UPDATE', orderId: order._id.toString() },
+        }).catch((e) => console.error('FCM update error:', e));
       }
     } catch (notifErr) {
       console.error('Error dispatching status notification:', notifErr);
