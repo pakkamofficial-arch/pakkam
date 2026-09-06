@@ -6,12 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/images/applogo.png",
     "userInterfaceStyle": "light",
-    "jsEngine": "hermes",
-    "splash": {
-      "image": "./assets/images/pakkam-logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#FFFFFF"
-    },
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/images/applogo.png"
@@ -22,7 +16,12 @@
         "foregroundImage": "./assets/images/applogo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.pakkamofficial.pakkammobile"
+      "package": "com.pakkamofficial.pakkammobile",
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "POST_NOTIFICATIONS"
+      ]
     },
     "web": {
       "favicon": "./assets/images/applogo.png"
@@ -31,6 +30,9 @@
       "eas": {
         "projectId": "3c0da25f-6629-4b5a-80a1-b92c9fce1e43"
       }
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

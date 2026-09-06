@@ -1,18 +1,32 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
 const PAKKAM_TOKEN_KEY = 'pakkam_token';
+
+// Helper to check if SecureStore is available on native platform
+const isSecureStoreAvailable = () => Platform.OS !== 'web';
 
 // Helper to reliably get token across web and mobile
 export const getStoredToken = async (): Promise<string | null> => {
   try {
     let token: string | null = null;
-    // 1. Try AsyncStorage first
-    token = await AsyncStorage.getItem(PAKKAM_TOKEN_KEY);
-    // 2. Fallback to localStorage on web
-    if (!token && Platform.OS === 'web') {
-      token = localStorage.getItem(PAKKAM_TOKEN_KEY);
+    if (isSecureStoreAvailable()) {
+      token = await SecureStore.getItemAsync(PAKKAM_TOKEN_KEY);
+      // Migration fallback from legacy unencrypted AsyncStorage
+      if (!token) {
+        token = await AsyncStorage.getItem(PAKKAM_TOKEN_KEY);
+        if (token) {
+          await SecureStore.setItemAsync(PAKKAM_TOKEN_KEY, token);
+          await AsyncStorage.removeItem(PAKKAM_TOKEN_KEY);
+        }
+      }
+    } else {
+      token = await AsyncStorage.getItem(PAKKAM_TOKEN_KEY);
+      if (!token && typeof localStorage !== 'undefined') {
+        token = localStorage.getItem(PAKKAM_TOKEN_KEY);
+      }
     }
     if (token && typeof token === 'string' && token !== 'undefined' && token !== 'null') {
       return token.trim();
@@ -28,9 +42,14 @@ export const setStoredToken = async (token: string): Promise<void> => {
   try {
     if (!token || typeof token !== 'string') return;
     const cleanToken = token.trim();
-    await AsyncStorage.setItem(PAKKAM_TOKEN_KEY, cleanToken);
-    if (Platform.OS === 'web') {
-      localStorage.setItem(PAKKAM_TOKEN_KEY, cleanToken);
+    if (isSecureStoreAvailable()) {
+      await SecureStore.setItemAsync(PAKKAM_TOKEN_KEY, cleanToken);
+      await AsyncStorage.removeItem(PAKKAM_TOKEN_KEY); // Clean up plaintext storage
+    } else {
+      await AsyncStorage.setItem(PAKKAM_TOKEN_KEY, cleanToken);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(PAKKAM_TOKEN_KEY, cleanToken);
+      }
     }
   } catch (e) {
     console.error('Error setting stored token:', e);
@@ -40,8 +59,11 @@ export const setStoredToken = async (token: string): Promise<void> => {
 // Helper to clear token across web and mobile
 export const clearStoredToken = async (): Promise<void> => {
   try {
+    if (isSecureStoreAvailable()) {
+      await SecureStore.deleteItemAsync(PAKKAM_TOKEN_KEY);
+    }
     await AsyncStorage.removeItem(PAKKAM_TOKEN_KEY);
-    if (Platform.OS === 'web') {
+    if (typeof localStorage !== 'undefined') {
       localStorage.removeItem(PAKKAM_TOKEN_KEY);
     }
   } catch (e) {

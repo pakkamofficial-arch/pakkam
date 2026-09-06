@@ -45,7 +45,9 @@ export const registerForPushNotificationsAsync = async (): Promise<string | null
     });
 
     const token = tokenData.data;
-    console.log('[Notification Service] Push Token:', token);
+    if (__DEV__) {
+      console.log('[Notification Service] Push token obtained successfully.');
+    }
 
     if (Platform.OS === 'android') {
       await Notifications.setNotificationChannelAsync('default', {

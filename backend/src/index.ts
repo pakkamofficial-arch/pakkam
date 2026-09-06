@@ -90,7 +90,7 @@ app.get('/api/health', (_req, res) => {
 
 // Direct APK Download Endpoint
 app.get(['/download', '/api/download'], (_req, res) => {
-  res.redirect(302, 'https://expo.dev/artifacts/eas/2e63aade-feb4-424c-8c5d-8e14c757fba9.apk');
+  res.redirect(302, 'https://expo.dev/artifacts/eas/biqp5tsSahvO0LtE6TO_A815bp0HPA9wyjV3GcJhi6w.apk');
 });
 
 // API Routes (supporting both /api/admin and /admin for deployment flexibility)
