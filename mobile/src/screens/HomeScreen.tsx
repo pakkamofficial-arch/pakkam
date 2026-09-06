@@ -7,10 +7,9 @@ import {
   StyleSheet,
   Image,
   RefreshControl,
-  Alert,
-  Platform,
 } from 'react-native';
-import { MapPin, ChevronDown, Search, Mic, ArrowRight, Star } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MapPin, ChevronDown, Search, ArrowRight } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import {
@@ -19,20 +18,43 @@ import {
   setFreshTodayProducts,
   setPopularProducts,
 } from '../redux/slices/productSlice';
-import { setShops } from '../redux/slices/shopSlice';
-import { setCartData } from '../redux/slices/cartSlice';
+import { setCartData, addLocalProduct } from '../redux/slices/cartSlice';
 import client, { getStoredToken } from '../api/client';
 import { ProductCard } from '../components/ProductCard';
 import { Colors, Radii, Spacing } from '../theme';
 
+const CATEGORY_ITEMS = [
+  { id: 'cat-veg', name: 'Vegetables', image: require('../../assets/images/vegetables.png') },
+  { id: 'cat-fruit', name: 'Fruits', image: require('../../assets/images/fruits.png') },
+  { id: 'cat-groc', name: 'Groceries', image: require('../../assets/images/groceries.png') },
+  { id: 'cat-spices', name: 'Spices', image: require('../../assets/images/spices.png') },
+  { id: 'cat-pcare', name: 'Personal Care', image: require('../../assets/images/personal-care.png') },
+  { id: 'cat-house', name: 'Household', image: require('../../assets/images/household.png') },
+  { id: 'cat-dairy', name: 'Dairy & Eggs', image: require('../../assets/images/dairy-eggs.png') },
+  { id: 'cat-snack', name: 'Snacks', image: require('../../assets/images/snacks.png') },
+  { id: 'cat-bev', name: 'Beverages', image: require('../../assets/images/beverages.png') },
+  { id: 'cat-rte', name: 'Ready to Eat', image: require('../../assets/images/ready-to-eat.png') },
+];
+
+const HOME_CATEGORY_SECTIONS = [
+  'Fruits',
+  'Vegetables',
+  'Groceries',
+  'Spices',
+  'Personal Care',
+  'Household',
+  'Dairy & Eggs',
+  'Snacks',
+  'Beverages',
+  'Ready to Eat',
+];
+
 export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { defaultAddress } = useSelector((state: RootState) => state.address);
-  const { products, categories, freshTodayProducts, popularProducts } = useSelector(
-    (state: RootState) => state.products
-  );
-  const { shops } = useSelector((state: RootState) => state.shops);
+  const { products } = useSelector((state: RootState) => state.products);
   const { items } = useSelector((state: RootState) => state.cart);
 
   const [refreshing, setRefreshing] = useState(false);
@@ -43,71 +65,84 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   }, []);
 
   const loadHomeData = async () => {
+    setRefreshing(true);
+    setFetchError(null);
+    let loadedProductsList: any[] = [];
+
     try {
-      setRefreshing(true);
-      setFetchError(null);
-      const catRes = await client.get('/categories');
-      if (catRes.data.success) dispatch(setCategories(catRes.data.categories));
-
-      const freshRes = await client.get('/products?isFreshToday=true&limit=10');
-      if (freshRes.data.success && freshRes.data.products && freshRes.data.products.length > 0) {
-        dispatch(setFreshTodayProducts(freshRes.data.products));
+      const allProdRes = await client.get('/products?limit=100');
+      if (allProdRes.data?.success && Array.isArray(allProdRes.data?.products)) {
+        loadedProductsList = allProdRes.data.products;
+        dispatch(setProducts(loadedProductsList));
       } else {
-        const fallbackProdRes = await client.get('/products?limit=10');
-        if (fallbackProdRes.data.success) {
-          dispatch(setFreshTodayProducts(fallbackProdRes.data.products));
-        }
+        setFetchError('Unable to load products. Please check your connection and try again.');
       }
+    } catch (e: any) {
+      console.error('[HomeScreen API Error] Failed to fetch /products:', e.message);
+      setFetchError('Connection error. Tap to retry loading products.');
+    }
 
-      const allProdRes = await client.get('/products?limit=50');
-      if (allProdRes.data.success) dispatch(setProducts(allProdRes.data.products));
+    try {
+      const [catRes, freshRes, popRes] = await Promise.allSettled([
+        client.get('/categories'),
+        client.get('/products?isFreshToday=true&limit=10'),
+        client.get('/products?isPopular=true&limit=10'),
+      ]);
 
-      const popRes = await client.get('/products?isPopular=true&limit=10');
-      if (popRes.data.success && popRes.data.products && popRes.data.products.length > 0) {
-        dispatch(setPopularProducts(popRes.data.products));
-      } else if (allProdRes.data.success) {
-        dispatch(setPopularProducts(allProdRes.data.products.slice(0, 10)));
+      if (catRes.status === 'fulfilled' && catRes.value.data?.success) {
+        dispatch(setCategories(catRes.value.data.categories || []));
       }
+      if (freshRes.status === 'fulfilled' && freshRes.value.data?.success && freshRes.value.data.products?.length > 0) {
+        dispatch(setFreshTodayProducts(freshRes.value.data.products));
+      } else if (loadedProductsList.length > 0) {
+        dispatch(setFreshTodayProducts(loadedProductsList.slice(0, 10)));
+      }
+      if (popRes.status === 'fulfilled' && popRes.value.data?.success && popRes.value.data.products?.length > 0) {
+        dispatch(setPopularProducts(popRes.value.data.products));
+      } else if (loadedProductsList.length > 0) {
+        dispatch(setPopularProducts(loadedProductsList.slice(10, 20)));
+      }
+    } catch (secErr) {
+      // quiet fallback
+    }
 
-      const shopRes = await client.get('/shops');
-      if (shopRes.data.success) dispatch(setShops(shopRes.data.shops));
-
+    try {
       const token = await getStoredToken();
       if (token) {
-        try {
-          const cartRes = await client.get('/cart');
-          if (cartRes.data.success) {
-            dispatch(
-              setCartData({
-                items: cartRes.data.cart.items || [],
-                subtotal: cartRes.data.subtotal || 0,
-                deliveryFee: cartRes.data.deliveryFee || 0,
-                freeDeliveryThreshold: cartRes.data.freeDeliveryThreshold,
-                amountNeededForFreeDelivery: cartRes.data.amountNeededForFreeDelivery,
-              })
-            );
-          }
-        } catch (cartErr) {
-          // ignore cart fetch error if unauthenticated
+        const cartRes = await client.get('/cart');
+        if (cartRes.data?.success && cartRes.data?.cart) {
+          dispatch(
+            setCartData({
+              items: Array.isArray(cartRes.data.cart.items) ? cartRes.data.cart.items : [],
+              subtotal: cartRes.data.subtotal || 0,
+              deliveryFee: cartRes.data.deliveryFee || 0,
+              freeDeliveryThreshold: cartRes.data.freeDeliveryThreshold,
+              amountNeededForFreeDelivery: cartRes.data.amountNeededForFreeDelivery,
+            })
+          );
         }
       }
-    } catch (e) {
-      console.error('Home load error', e);
+    } catch (cartErr) {
+      // quiet fallback
     } finally {
       setRefreshing(false);
     }
   };
 
   const handleAddToCart = async (product: any, selectedUnit: string, quantity: number) => {
+    dispatch(addLocalProduct({ product, selectedUnit, quantity }));
+    const token = await getStoredToken();
+    if (!token) return;
+
     try {
       const res = await client.post('/cart/add', {
         productId: product._id,
         selectedUnit,
         quantity,
       });
-      if (res.data.success) {
+      if (res.data?.success) {
         const cartRes = await client.get('/cart');
-        if (cartRes.data.success) {
+        if (cartRes.data?.success) {
           dispatch(
             setCartData({
               items: cartRes.data.cart.items || [],
@@ -124,71 +159,52 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     }
   };
 
-  // Dynamic Category strip from categories Redux state or fallback list
-  const categoryIconMap: Record<string, string> = {
-    vegetables: '🥬',
-    fruits: '🍎',
-    groceries: '🌾',
-    grocery: '🌾',
-    dairy: '🥛',
-    spices: '🌶️',
-    snacks: '🍿',
-    beverages: '🧃',
+  const matchCategory = (prodCat: any, targetCategory: string) => {
+    const pCatName = (
+      typeof prodCat === 'object' && prodCat?.name
+        ? prodCat.name
+        : String(prodCat || '')
+    ).toLowerCase().trim();
+    
+    const target = targetCategory.toLowerCase().trim();
+
+    if (pCatName === target) return true;
+
+    if (target === 'vegetables') return pCatName.includes('veg');
+    if (target === 'fruits') return pCatName.includes('fruit');
+    if (target === 'groceries') {
+      return (
+        pCatName.includes('groc') ||
+        pCatName.includes('rice') ||
+        pCatName.includes('flour') ||
+        pCatName.includes('dal') ||
+        pCatName.includes('oil') ||
+        pCatName.includes('grain')
+      );
+    }
+    if (target === 'spices') return pCatName.includes('spice') || pCatName.includes('masala');
+    if (target === 'personal care') return pCatName.includes('personal') || pCatName.includes('care');
+    if (target === 'household') return pCatName.includes('house');
+    if (target === 'dairy & eggs') return pCatName.includes('dairy') || pCatName.includes('egg') || pCatName.includes('milk');
+    if (target === 'snacks') return pCatName.includes('snack') || pCatName.includes('biscuit') || pCatName.includes('chips');
+    if (target === 'beverages') return pCatName.includes('bev') || pCatName.includes('drink') || pCatName.includes('tea') || pCatName.includes('coffee');
+    if (target === 'ready to eat') return pCatName.includes('ready') || pCatName.includes('instant') || pCatName.includes('noodle');
+
+    return pCatName.includes(target);
   };
 
-  const dynamicCategories = categories && categories.length > 0
-    ? categories.map((c: any) => ({
-        id: c._id || c.name,
-        name: c.name,
-        icon: c.icon || categoryIconMap[c.name.toLowerCase()] || '🛒',
-      }))
-    : [
-        { id: 'cat-veg', name: 'Vegetables', icon: '🥬' },
-        { id: 'cat-fruit', name: 'Fruits', icon: '🍎' },
-        { id: 'cat-groc', name: 'Groceries', icon: '🌾' },
-        { id: 'cat-dairy', name: 'Dairy', icon: '🥛' },
-        { id: 'cat-spices', name: 'Spices', icon: '🌶️' },
-        { id: 'cat-snack', name: 'Snacks', icon: '🍿' },
-      ];
-
-  // Helper to filter products by category name
   const getProductsForCategory = (catName: string) => {
-    const cleanCat = catName.toLowerCase();
-    return products.filter((p: any) => {
-      const pCatName = (p.category?.name || p.category || '').toLowerCase();
-      if (cleanCat === 'groceries' || cleanCat === 'grocery') {
-        return pCatName.includes('groc');
-      }
-      return pCatName.includes(cleanCat);
-    });
+    return products.filter((p: any) => matchCategory(p.category, catName));
   };
-
-  const sectionCategoryNames = ['Vegetables', 'Fruits', 'Groceries', 'Spices', 'Dairy', 'Snacks'];
-
-  const fallbackShops = [
-    {
-      _id: 's-1',
-      name: 'Nearby Shops',
-      rating: 4.8,
-      coverImage: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=500',
-    },
-    {
-      _id: 's-2',
-      name: 'Fresh Today',
-      rating: 4.9,
-      coverImage: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500',
-    },
-  ];
-
-  const displayShops = shops.length > 0 ? shops : fallbackShops;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadHomeData} colors={[Colors.primary]} />}
+        contentContainerStyle={{ paddingBottom: items.length > 0 ? 80 : 30 }}
       >
-        {/* Header: Location row + Sign In button (if guest) or User Welcome (if authenticated) */}
+        {/* 1. Delivery Location Header */}
         <View style={styles.headerBoxRow}>
           <View style={{ flex: 1 }}>
             {isAuthenticated && user?.name ? (
@@ -218,113 +234,100 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           )}
         </View>
 
-        {/* Search bar */}
+        {/* 2. Search Bar */}
         <TouchableOpacity
           style={styles.searchBar}
           activeOpacity={0.9}
           onPress={() => navigation.navigate('Search')}
         >
           <Search size={18} color={Colors.textSecondary} strokeWidth={1.75} />
-          <Text style={styles.searchPlaceholder}>Search vegetables, groceries & shops</Text>
-          <Mic size={18} color={Colors.primary} strokeWidth={2} />
+          <Text style={styles.searchPlaceholder}>Search vegetables, groceries & items</Text>
         </TouchableOpacity>
 
-        {/* Network Error Retry Banner (Phase 3 & 10) */}
+        {/* Error Retry Banner */}
         {fetchError ? (
-          <View style={{ backgroundColor: '#FEF2F2', borderWidth: 1, borderColor: '#FCA5A5', padding: 12, borderRadius: 10, marginBottom: 12, alignItems: 'center' }}>
-            <Text style={{ fontSize: 12, color: '#991B1B', textAlign: 'center', marginBottom: 8, fontWeight: '600' }}>
-              ⚠️ {fetchError}
-            </Text>
-            <TouchableOpacity
-              onPress={loadHomeData}
-              style={{ backgroundColor: Colors.primary, paddingHorizontal: 16, paddingVertical: 6, borderRadius: 20 }}
-            >
-              <Text style={{ color: '#FFFFFF', fontSize: 12, fontWeight: '700' }}>Retry</Text>
+          <View style={styles.errorBanner}>
+            <Text style={styles.errorBannerText}>⚠️ {fetchError}</Text>
+            <TouchableOpacity onPress={loadHomeData} style={styles.retryBtn}>
+              <Text style={styles.retryBtnText}>Retry</Text>
             </TouchableOpacity>
           </View>
         ) : null}
 
-        {/* Dynamic Horizontal Top Category Strip */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.circleCategoriesRow}>
-          {dynamicCategories.map((cat: any) => (
+        {/* 3. Horizontal Category Icon Row */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.categoryIconsRow}
+          contentContainerStyle={{ paddingHorizontal: Spacing.lg }}
+        >
+          {CATEGORY_ITEMS.map((cat) => (
             <TouchableOpacity
-              key={cat.id || cat.name}
-              style={styles.circleCatItem}
-              onPress={() => navigation.navigate('Categories', { categoryName: cat.name, categoryId: cat.id })}
+              key={cat.id}
+              style={styles.categoryIconItem}
+              onPress={() => navigation.navigate('Categories', { categoryName: cat.name })}
+              activeOpacity={0.8}
             >
-              <View style={styles.circleIconBg}>
-                <Text style={styles.circleEmoji}>{cat.icon}</Text>
+              <View style={styles.categoryIconCircle}>
+                <Image source={cat.image} style={styles.categoryIconImage} />
               </View>
-              <Text style={styles.circleCatLabel} numberOfLines={1}>{cat.name}</Text>
+              <Text style={styles.categoryIconLabel} numberOfLines={1}>
+                {cat.name}
+              </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
 
-        {/* "Nearby Shops" section */}
-        <View style={styles.sectionHeaderBetween}>
-          <Text style={styles.sectionTitle}>Nearby Shops</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('ShopDetail', { shopId: 'shop-muru' })}>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Horizontal scroll of shop cards */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.shopsHorizontalRail}>
-          {displayShops.map((shop: any) => (
-            <TouchableOpacity
-              key={shop._id}
-              style={styles.shopCardItem}
-              onPress={() => navigation.navigate('ShopDetail', { shopId: shop._id })}
-              activeOpacity={0.88}
-            >
-              <Image source={{ uri: shop.coverImage || shop.logo }} style={styles.shopImage} />
-              <Text style={styles.shopCardName} numberOfLines={1}>{shop.name}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        {/* Home Delivery Promise Banner */}
+        {/* 4. Promotional Banner */}
         <View style={styles.promiseBanner}>
           <Text style={styles.promiseTitle}>Fresh groceries at your doorstep</Text>
           <Text style={styles.promiseSub}>Order now and get your items delivered within 1–2 hours.</Text>
           <View style={styles.promiseFeatureRow}>
             <Text style={styles.promiseBadge}>🥬 Fresh vegetables</Text>
             <Text style={styles.promiseBadge}>🛒 Daily groceries</Text>
-            <Text style={styles.promiseBadge}>🚚 1-2 Hr Delivery</Text>
+            <Text style={styles.promiseBadge}>🚚 1–2 Hr Delivery</Text>
           </View>
           <View style={styles.promiseActionRow}>
             <TouchableOpacity
               style={styles.promisePrimaryBtn}
               onPress={() => navigation.navigate('Categories', { categoryName: 'Vegetables' })}
+              activeOpacity={0.85}
             >
               <Text style={styles.promisePrimaryBtnText}>View Products</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.promiseSecondaryBtn}
               onPress={() => navigation.navigate('Categories', { categoryName: 'Groceries' })}
+              activeOpacity={0.85}
             >
               <Text style={styles.promiseSecondaryBtnText}>Shop Nearby</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* Category-Wise Product Sections with Horizontal Rails */}
-        {sectionCategoryNames.map((catName) => {
-          const catProducts = getProductsForCategory(catName);
-          if (catProducts.length === 0) return null;
+        {/* 5-14. Category Product Sections */}
+        {HOME_CATEGORY_SECTIONS.map((catName) => {
+          const matchingProducts = getProductsForCategory(catName);
+          if (matchingProducts.length === 0) return null;
+
+          const totalCount = matchingProducts.length;
+          const displayedProducts = matchingProducts.slice(0, 2);
 
           return (
-            <View key={catName} style={{ marginBottom: Spacing.md }}>
+            <View key={catName} style={styles.categorySection}>
               <View style={styles.sectionHeaderBetween}>
                 <Text style={styles.sectionTitle}>{catName}</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Categories', { categoryName: catName })}>
-                  <Text style={styles.seeAllText}>See All ({catProducts.length})</Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Categories', { categoryName: catName })}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.seeAllText}>See All ({totalCount})</Text>
                 </TouchableOpacity>
               </View>
 
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingLeft: Spacing.lg }}>
-                {catProducts.slice(0, 15).map((prod: any) => (
-                  <View key={prod._id} style={{ width: 170, marginRight: 12 }}>
+              <View style={styles.productGridRow}>
+                {displayedProducts.map((prod: any) => (
+                  <View key={prod._id} style={styles.productGridCol}>
                     <ProductCard
                       product={prod}
                       onAddToCart={handleAddToCart}
@@ -341,17 +344,18 @@ export const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                     />
                   </View>
                 ))}
-              </ScrollView>
+              </View>
             </View>
           );
         })}
       </ScrollView>
 
-      {/* Floating Cart Badge */}
+      {/* Floating Cart Bar */}
       {items.length > 0 && (
         <TouchableOpacity
           style={styles.floatingCart}
           onPress={() => navigation.navigate('Cart')}
+          activeOpacity={0.9}
         >
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
             <View style={styles.cartCountBadge}>
@@ -407,7 +411,7 @@ const styles = StyleSheet.create({
   },
   locationSubheadingText: {
     fontSize: 14,
-    color: Colors.textSecondary, // in gray per master prompt 2.3
+    color: Colors.textSecondary,
   },
   searchBar: {
     flexDirection: 'row',
@@ -427,19 +431,46 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textPlaceholder,
   },
-  circleCategoriesRow: {
-    paddingLeft: Spacing.lg,
+  errorBanner: {
+    backgroundColor: '#FEF2F2',
+    borderWidth: 1,
+    borderColor: '#FCA5A5',
+    padding: 12,
+    marginHorizontal: Spacing.lg,
+    borderRadius: Radii.md,
+    marginBottom: 12,
+    alignItems: 'center',
+  },
+  errorBannerText: {
+    fontSize: 12,
+    color: '#991B1B',
+    textAlign: 'center',
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  retryBtn: {
+    backgroundColor: Colors.primary,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+  retryBtnText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  categoryIconsRow: {
     marginBottom: Spacing.md,
   },
-  circleCatItem: {
+  categoryIconItem: {
     alignItems: 'center',
     marginRight: 16,
-    width: 60,
+    width: 64,
   },
-  circleIconBg: {
-    width: 56,
-    height: 56,
-    borderRadius: 28, // category icons in circles per master prompt 2.3
+  categoryIconCircle: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
     backgroundColor: Colors.surface,
     borderWidth: 1,
     borderColor: Colors.border,
@@ -447,35 +478,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 4,
   },
-  circleEmoji: {
-    fontSize: 24,
+  categoryIconImage: {
+    width: 36,
+    height: 36,
   },
-  circleCatLabel: {
-    fontSize: 12,
+  categoryIconLabel: {
+    fontSize: 11,
+    fontWeight: '500',
     color: Colors.textSecondary,
     textAlign: 'center',
-  },
-  sectionHeaderBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    marginTop: Spacing.sm,
-    marginBottom: Spacing.xs,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: Colors.textPrimary,
-  },
-  seeAllText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: Colors.primary, // "See all" link (right, green) per master prompt 2.3
-  },
-  shopsHorizontalRail: {
-    paddingLeft: Spacing.lg,
-    marginBottom: Spacing.md,
   },
   promiseBanner: {
     backgroundColor: Colors.surface,
@@ -483,7 +494,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Radii.lg,
     marginHorizontal: Spacing.lg,
-    marginVertical: Spacing.sm,
+    marginBottom: Spacing.lg,
     padding: Spacing.md,
   },
   promiseTitle: {
@@ -542,28 +553,33 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 12,
   },
-  shopCardItem: {
-    width: 140,
-    marginRight: 14,
+  categorySection: {
+    marginBottom: Spacing.md,
   },
-  shopImage: {
-    width: 140,
-    height: 100,
-    borderRadius: Radii.md,
-    resizeMode: 'cover',
-    marginBottom: 4,
+  sectionHeaderBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: Spacing.lg,
+    marginBottom: Spacing.xs,
   },
-  shopCardName: {
-    fontSize: 12,
+  sectionTitle: {
+    fontSize: 16,
     fontWeight: '700',
     color: Colors.textPrimary,
   },
-  productsGrid: {
+  seeAllText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: Colors.primary,
+  },
+  productGridRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
-    paddingBottom: 40,
+  },
+  productGridCol: {
+    width: '48%',
   },
   floatingCart: {
     position: 'absolute',
@@ -597,3 +613,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+

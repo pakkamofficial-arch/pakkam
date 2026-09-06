@@ -24,7 +24,13 @@ try {
   dns.setServers(['8.8.8.8', '8.8.4.4']);
 } catch (e) {}
 
-const seedDataPath = path.resolve(process.cwd(), 'data/product.seed.json');
+let seedDataPath = path.resolve(process.cwd(), 'data/products.seed.json');
+if (!fs.existsSync(seedDataPath)) {
+  seedDataPath = path.resolve(process.cwd(), 'data/product.seed.json');
+}
+if (!fs.existsSync(seedDataPath)) {
+  seedDataPath = path.resolve(process.cwd(), 'src/data/products.seed.json');
+}
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pakkam_db';
 
@@ -240,18 +246,31 @@ const seed = async () => {
       const catKey = String(raw.category || '').toLowerCase();
       const matchedCat = catMap[catKey] || categories.find((c) => c.name.toLowerCase().includes(catKey)) || categories[0];
 
+      // Dynamic unit resolution per unitType
+      const defaultUnits = raw.unitType === 'volume'
+        ? ['250ml', '500ml', '750ml', '1 litre']
+        : raw.unitType === 'count'
+        ? ['1 pc']
+        : ['250g', '500g', '750g', '1kg'];
+
+      const availUnits = Array.isArray(raw.availableUnits) && raw.availableUnits.length > 0
+        ? raw.availableUnits
+        : (Array.isArray(raw.unitOptions) ? raw.unitOptions.map((u: any) => u.unit) : defaultUnits);
+
       return {
         name: raw.name,
         name_en: raw.name,
         name_ta: raw.name_ta || '',
+        description: raw.description || `Fresh ${raw.name} sourced locally for PAKKAM customers.`,
+        brand: raw.brand || '',
         category: matchedCat._id,
-        unit: raw.unit || '1 kg',
-        availableUnits: [raw.unit || '1 kg'],
+        unitType: raw.unitType || 'weight',
+        unit: raw.unit || availUnits[0] || '1 kg',
+        availableUnits: availUnits,
         availableQuantity: raw.stock !== undefined ? raw.stock : 100,
         stockStatus: (raw.stock !== undefined ? raw.stock : 100) > 0 ? 'IN_STOCK' : 'OUT_OF_STOCK',
         images: [raw.image || 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600'],
         shop: shopFresh._id,
-        brand: 'Local Fresh',
         isActive: true,
         isAvailable: raw.isAvailable !== undefined ? raw.isAvailable : true,
 

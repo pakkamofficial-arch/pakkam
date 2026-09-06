@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, ScrollView, Alert, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Search, ChevronLeft } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setProducts } from '../redux/slices/productSlice';
-import { setCartData } from '../redux/slices/cartSlice';
+import { setCartData, addLocalProduct } from '../redux/slices/cartSlice';
 import client, { getStoredToken } from '../api/client';
 import { ProductCard } from '../components/ProductCard';
 import { QuantityStepper } from '../components/QuantityStepper';
+import { ProductCardSkeleton } from '../components/Skeleton';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { products, categories } = useSelector((state: RootState) => state.products);
@@ -20,6 +23,7 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
   const [selectedSubFilter, setSelectedSubFilter] = useState<string>(initialCategoryName);
   const [activeItemQty, setActiveItemQty] = useState<number>(1);
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const dynamicChips = ['All', ...Array.from(new Set([
     ...categories.map((c: any) => c.name),
@@ -40,31 +44,40 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       setFetchError(null);
       let url = '/products?limit=100';
       if (selectedSubFilter && selectedSubFilter !== 'All') {
         url = `/products?category=${encodeURIComponent(selectedSubFilter)}&limit=100`;
       }
       const res = await client.get(url);
-      if (res.data.success) {
-        dispatch(setProducts(res.data.products || []));
+      if (res.data?.success && Array.isArray(res.data?.products)) {
+        dispatch(setProducts(res.data.products));
+      } else {
+        dispatch(setProducts([]));
       }
     } catch (e: any) {
       console.error('[CategoriesScreen] Fetch products error', e);
       setFetchError('Unable to load products. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleAddToCart = async (product: any, selectedUnit: string, quantity: number) => {
+    dispatch(addLocalProduct({ product, selectedUnit, quantity }));
+    const token = await getStoredToken();
+    if (!token) return;
+
     try {
       const res = await client.post('/cart/add', {
         productId: product._id,
         selectedUnit,
         quantity,
       });
-      if (res.data.success) {
+      if (res.data?.success) {
         const cartRes = await client.get('/cart');
-        if (cartRes.data.success) {
+        if (cartRes.data?.success) {
           dispatch(
             setCartData({
               items: cartRes.data.cart.items || [],
@@ -77,14 +90,14 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
         }
       }
     } catch (e: any) {
-      console.error('[CategoriesScreen] Add to cart error', e);
+      // quiet fallback
     }
   };
 
   const displayList = products;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       {/* Header: back arrow, centered category title */}
       <View style={styles.headerBar}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
@@ -125,21 +138,32 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
           </View>
         }
         ListEmptyComponent={
-          <View style={{ padding: Spacing.xl, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 32, marginBottom: 12 }}>📦</Text>
-            <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center' }}>
-              {fetchError ? 'Unable to Load Products' : 'No Products Found'}
-            </Text>
-            <Text style={{ fontSize: 12, color: Colors.textSecondary, textAlign: 'center', marginTop: 4, marginBottom: 16 }}>
-              {fetchError || `No items found in category "${selectedSubFilter}".`}
-            </Text>
-            <TouchableOpacity
-              onPress={fetchProducts}
-              style={{ backgroundColor: Colors.primary, paddingHorizontal: 20, paddingVertical: 10, borderRadius: Radii.pill }}
-            >
-              <Text style={{ color: Colors.white, fontSize: 13, fontWeight: '700' }}>Retry Loading</Text>
-            </TouchableOpacity>
-          </View>
+          loading ? (
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingHorizontal: Spacing.lg, paddingTop: Spacing.md }}>
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+            </View>
+          ) : (
+            <View style={{ padding: Spacing.xl, alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ fontSize: 32, marginBottom: 12 }}>📦</Text>
+              <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center' }}>
+                {fetchError ? 'Unable to Load Products' : 'No Products Found'}
+              </Text>
+              <Text style={{ fontSize: 12, color: Colors.textSecondary, textAlign: 'center', marginTop: 4, marginBottom: 16 }}>
+                {fetchError || `No items found in category "${selectedSubFilter}".`}
+              </Text>
+              <TouchableOpacity
+                onPress={fetchProducts}
+                style={{ backgroundColor: Colors.primary, paddingHorizontal: 20, paddingVertical: 10, borderRadius: Radii.pill }}
+              >
+                <Text style={{ color: Colors.white, fontSize: 13, fontWeight: '700' }}>Retry Loading</Text>
+              </TouchableOpacity>
+            </View>
+          )
         }
         renderItem={({ item }) => (
           <View style={{ width: '48%' }}>

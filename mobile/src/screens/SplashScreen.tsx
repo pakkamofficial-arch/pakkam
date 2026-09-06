@@ -79,7 +79,7 @@ export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../assets/images/pakkam-logo.png')}
+          source={require('../../assets/images/applogo.png')}
           style={styles.logoImage}
           resizeMode="contain"
         />

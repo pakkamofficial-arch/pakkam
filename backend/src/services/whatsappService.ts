@@ -113,3 +113,37 @@ export const sendOrderConfirmationWhatsApp = async (order: any): Promise<boolean
     return false;
   }
 };
+
+/**
+ * Sends Password Reset OTP message via WhatsApp (Twilio Sandbox / API)
+ */
+export const sendPasswordResetWhatsApp = async (fullName: string, phone: string, otp: string): Promise<boolean> => {
+  try {
+    const formattedRecipient = formatWhatsAppNumber(phone);
+    const messageBody = `Hello ${fullName || 'Customer'}, your Pakkam password reset code is: ${otp}. It expires in 10 minutes.`;
+
+    const accountSid = process.env.TWILIO_ACCOUNT_SID;
+    const authToken = process.env.TWILIO_AUTH_TOKEN;
+    const fromWhatsApp = process.env.TWILIO_WHATSAPP_FROM || 'whatsapp:+14155238886';
+
+    console.log(`[WhatsApp Service] Preparing password reset WhatsApp message to ${formattedRecipient}:\n${messageBody}`);
+
+    if (accountSid && authToken && !accountSid.includes('your_twilio') && !authToken.includes('your_twilio')) {
+      const client = twilio(accountSid, authToken);
+      const result = await client.messages.create({
+        from: fromWhatsApp,
+        to: formattedRecipient,
+        body: messageBody,
+      });
+      console.log(`[WhatsApp Service] Password reset OTP sent via Twilio successfully! SID: ${result.sid}`);
+      return true;
+    } else {
+      console.log(`[WhatsApp Service Dev Mode] Credentials not set. Simulated password reset OTP send to ${formattedRecipient}: ${otp}`);
+      return true;
+    }
+  } catch (err: any) {
+    console.error(`[WhatsApp Service Error] Failed to send password reset WhatsApp message to ${phone}:`, err.message);
+    return false;
+  }
+};
+

@@ -12,7 +12,17 @@
     "minimumSellingPrice": 28,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality tomato delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 35
   },
   {
     "name": "Onion",
@@ -27,7 +37,17 @@
     "minimumSellingPrice": 48,
     "stock": 80,
     "image": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality onion delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 58
   },
   {
     "name": "Potato",
@@ -42,7 +62,17 @@
     "minimumSellingPrice": 26,
     "stock": 100,
     "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality potato delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 38
   },
   {
     "name": "Green Chilli",
@@ -57,7 +87,17 @@
     "minimumSellingPrice": 18,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green chilli delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 20
   },
   {
     "name": "Ginger",
@@ -72,7 +112,17 @@
     "minimumSellingPrice": 30,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ginger delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 38
   },
   {
     "name": "Garlic",
@@ -87,7 +137,17 @@
     "minimumSellingPrice": 46,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality garlic delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 58
   },
   {
     "name": "Carrot",
@@ -102,7 +162,17 @@
     "minimumSellingPrice": 30,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1598170845058-12ef4a45753b?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality carrot delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 38
   },
   {
     "name": "Beetroot",
@@ -117,7 +187,17 @@
     "minimumSellingPrice": 24,
     "stock": 35,
     "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality beetroot delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 28
   },
   {
     "name": "Ladies Finger",
@@ -132,7 +212,17 @@
     "minimumSellingPrice": 26,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1425543103986-224137c0d857?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ladies finger delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 32
   },
   {
     "name": "Cabbage",
@@ -147,7 +237,16 @@
     "minimumSellingPrice": 22,
     "stock": 45,
     "image": "https://images.unsplash.com/photo-1550081699-79c1c2e785e6?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cabbage delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ],
+    "price": 25
   },
   {
     "name": "Cauliflower",
@@ -162,7 +261,16 @@
     "minimumSellingPrice": 30,
     "stock": 35,
     "image": "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cauliflower delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ],
+    "price": 36
   },
   {
     "name": "Capsicum",
@@ -177,7 +285,17 @@
     "minimumSellingPrice": 35,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality capsicum delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 42
   },
   {
     "name": "Bottle Gourd",
@@ -192,7 +310,17 @@
     "minimumSellingPrice": 24,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality bottle gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 28
   },
   {
     "name": "Bitter Gourd",
@@ -207,7 +335,17 @@
     "minimumSellingPrice": 29,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1628773822503-930a85854652?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality bitter gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 35
   },
   {
     "name": "Cucumber",
@@ -222,7 +360,17 @@
     "minimumSellingPrice": 20,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cucumber delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 24
   },
   {
     "name": "Brinjal",
@@ -237,7 +385,17 @@
     "minimumSellingPrice": 24,
     "stock": 35,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality brinjal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 28
   },
   {
     "name": "Ridge Gourd",
@@ -252,7 +410,17 @@
     "minimumSellingPrice": 26,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ridge gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 32
   },
   {
     "name": "Snake Gourd",
@@ -267,7 +435,17 @@
     "minimumSellingPrice": 22,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality snake gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 26
   },
   {
     "name": "Pumpkin",
@@ -282,7 +460,16 @@
     "minimumSellingPrice": 25,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1506917728037-b6af01a7d403?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pumpkin delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ],
+    "price": 28
   },
   {
     "name": "Drumstick",
@@ -297,7 +484,17 @@
     "minimumSellingPrice": 24,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality drumstick delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 28
   },
   {
     "name": "Radish",
@@ -312,7 +509,17 @@
     "minimumSellingPrice": 19,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality radish delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 22
   },
   {
     "name": "Lemon",
@@ -327,7 +534,17 @@
     "minimumSellingPrice": 15,
     "stock": 60,
     "image": "https://images.unsplash.com/photo-1534531141161-e41d133a8979?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality lemon delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 20
   },
   {
     "name": "Coriander Leaves",
@@ -342,7 +559,17 @@
     "minimumSellingPrice": 10,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality coriander leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 12
   },
   {
     "name": "Mint Leaves",
@@ -357,7 +584,17 @@
     "minimumSellingPrice": 9,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mint leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 10
   },
   {
     "name": "Curry Leaves",
@@ -372,7 +609,17 @@
     "minimumSellingPrice": 6,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality curry leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 8
   },
   {
     "name": "Spinach",
@@ -387,7 +634,17 @@
     "minimumSellingPrice": 15,
     "stock": 35,
     "image": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality spinach delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 20
   },
   {
     "name": "Green Peas",
@@ -402,7 +659,17 @@
     "minimumSellingPrice": 52,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green peas delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 65
   },
   {
     "name": "French Beans",
@@ -417,7 +684,17 @@
     "minimumSellingPrice": 40,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality french beans delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 48
   },
   {
     "name": "Sweet Corn",
@@ -432,7 +709,17 @@
     "minimumSellingPrice": 24,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality sweet corn delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 30
   },
   {
     "name": "Raw Banana",
@@ -447,7 +734,17 @@
     "minimumSellingPrice": 22,
     "stock": 35,
     "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality raw banana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 25
   },
   {
     "name": "Mushroom",
@@ -462,7 +759,17 @@
     "minimumSellingPrice": 44,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mushroom delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 50
   },
   {
     "name": "Banana",
@@ -477,7 +784,17 @@
     "minimumSellingPrice": 35,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality banana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 42
   },
   {
     "name": "Apple",
@@ -492,7 +809,17 @@
     "minimumSellingPrice": 130,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality apple delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 150
   },
   {
     "name": "Pomegranate",
@@ -507,7 +834,17 @@
     "minimumSellingPrice": 150,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pomegranate delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 170
   },
   {
     "name": "Mosambi",
@@ -522,7 +859,17 @@
     "minimumSellingPrice": 65,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mosambi delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 75
   },
   {
     "name": "Orange",
@@ -537,7 +884,17 @@
     "minimumSellingPrice": 70,
     "stock": 30,
     "image": "https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality orange delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 80
   },
   {
     "name": "Papaya",
@@ -552,7 +909,17 @@
     "minimumSellingPrice": 42,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality papaya delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 48
   },
   {
     "name": "Watermelon",
@@ -567,7 +934,17 @@
     "minimumSellingPrice": 48,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1587049352847-4a222e784d38?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality watermelon delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 60
   },
   {
     "name": "Guava",
@@ -582,7 +959,17 @@
     "minimumSellingPrice": 58,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1536511135882-96f7c46f6341?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality guava delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 68
   },
   {
     "name": "Chikoo",
@@ -597,7 +984,17 @@
     "minimumSellingPrice": 52,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality chikoo delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 60
   },
   {
     "name": "Green Grapes",
@@ -612,7 +1009,17 @@
     "minimumSellingPrice": 52,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1596368708386-5d0f67975459?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green grapes delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 65
   },
   {
     "name": "Black Grapes",
@@ -627,7 +1034,17 @@
     "minimumSellingPrice": 62,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality black grapes delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 78
   },
   {
     "name": "Pineapple",
@@ -642,7 +1059,17 @@
     "minimumSellingPrice": 54,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pineapple delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 65
   },
   {
     "name": "Mango",
@@ -657,7 +1084,17 @@
     "minimumSellingPrice": 210,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mango delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 240
   },
   {
     "name": "Kiwi",
@@ -672,7 +1109,17 @@
     "minimumSellingPrice": 75,
     "stock": 25,
     "image": "https://images.unsplash.com/photo-1585059819970-31190d6ff3ec?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality kiwi delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 90
   },
   {
     "name": "Dragon Fruit",
@@ -687,7 +1134,17 @@
     "minimumSellingPrice": 60,
     "stock": 20,
     "image": "https://images.unsplash.com/photo-1527325678964-549216468488?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality dragon fruit delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 75
   },
   {
     "name": "Basmati Rice",
@@ -702,7 +1159,17 @@
     "minimumSellingPrice": 108,
     "stock": 60,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata basmati rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 125
   },
   {
     "name": "Sona Masoori Rice",
@@ -717,7 +1184,17 @@
     "minimumSellingPrice": 290,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma sona masoori rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 315
   },
   {
     "name": "Wheat Flour",
@@ -732,7 +1209,17 @@
     "minimumSellingPrice": 230,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune wheat flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 250
   },
   {
     "name": "Maida",
@@ -747,7 +1234,17 @@
     "minimumSellingPrice": 41,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata maida delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 46
   },
   {
     "name": "Sooji Rava",
@@ -762,7 +1259,17 @@
     "minimumSellingPrice": 39,
     "stock": 90,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma sooji rava delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 46
   },
   {
     "name": "Toor Dal",
@@ -777,7 +1284,17 @@
     "minimumSellingPrice": 130,
     "stock": 90,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune toor dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 145
   },
   {
     "name": "Moong Dal",
@@ -792,7 +1309,17 @@
     "minimumSellingPrice": 105,
     "stock": 85,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune moong dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 120
   },
   {
     "name": "Urad Dal",
@@ -807,7 +1334,17 @@
     "minimumSellingPrice": 115,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune urad dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 132
   },
   {
     "name": "Chana Dal",
@@ -822,7 +1359,17 @@
     "minimumSellingPrice": 78,
     "stock": 110,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata chana dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 88
   },
   {
     "name": "Masoor Dal",
@@ -837,7 +1384,17 @@
     "minimumSellingPrice": 82,
     "stock": 65,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma masoor dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 95
   },
   {
     "name": "Kabuli Chana",
@@ -852,7 +1409,17 @@
     "minimumSellingPrice": 112,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Sunpure",
+    "description": "Premium quality Sunpure kabuli chana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 138
   },
   {
     "name": "Rajma",
@@ -867,7 +1434,17 @@
     "minimumSellingPrice": 120,
     "stock": 40,
     "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Sunpure",
+    "description": "Premium quality Sunpure rajma delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 145
   },
   {
     "name": "Sunflower Oil",
@@ -882,7 +1459,17 @@
     "minimumSellingPrice": 118,
     "stock": 140,
     "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune sunflower oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ],
+    "price": 128
   },
   {
     "name": "Mustard Oil",
@@ -897,7 +1484,17 @@
     "minimumSellingPrice": 145,
     "stock": 95,
     "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata mustard oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ],
+    "price": 162
   },
   {
     "name": "Sugar",
@@ -912,7 +1509,17 @@
     "minimumSellingPrice": 40,
     "stock": 300,
     "image": "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma sugar delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 44
   },
   {
     "name": "Jaggery",
@@ -927,7 +1534,17 @@
     "minimumSellingPrice": 52,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune jaggery delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 62
   },
   {
     "name": "Salt",
@@ -942,7 +1559,17 @@
     "minimumSellingPrice": 22,
     "stock": 250,
     "image": "https://images.unsplash.com/photo-1518110168401-f2841ee59280?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata salt delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 25
   },
   {
     "name": "Poha",
@@ -957,7 +1584,17 @@
     "minimumSellingPrice": 48,
     "stock": 80,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata poha delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 58
   },
   {
     "name": "Besan",
@@ -972,7 +1609,17 @@
     "minimumSellingPrice": 84,
     "stock": 110,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune besan delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 98
   },
   {
     "name": "Tea",
@@ -987,7 +1634,17 @@
     "minimumSellingPrice": 160,
     "stock": 75,
     "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma tea delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 195
   },
   {
     "name": "Coffee Powder",
@@ -1002,7 +1659,17 @@
     "minimumSellingPrice": 155,
     "stock": 60,
     "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune coffee powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 185
   },
   {
     "name": "Turmeric Powder",
@@ -1017,7 +1684,17 @@
     "minimumSellingPrice": 32,
     "stock": 120,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Aachi",
+    "description": "Premium quality Aachi turmeric powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 42
   },
   {
     "name": "Red Chilli Powder",
@@ -1032,7 +1709,17 @@
     "minimumSellingPrice": 52,
     "stock": 100,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "MTR",
+    "description": "Premium quality MTR red chilli powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 68
   },
   {
     "name": "Coriander Powder",
@@ -1047,7 +1734,17 @@
     "minimumSellingPrice": 35,
     "stock": 95,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch coriander powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 46
   },
   {
     "name": "Cumin Seeds",
@@ -1062,7 +1759,17 @@
     "minimumSellingPrice": 78,
     "stock": 80,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "MDH",
+    "description": "Premium quality MDH cumin seeds delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 98
   },
   {
     "name": "Black Pepper",
@@ -1077,7 +1784,17 @@
     "minimumSellingPrice": 82,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest black pepper delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 110
   },
   {
     "name": "Garam Masala",
@@ -1092,7 +1809,17 @@
     "minimumSellingPrice": 48,
     "stock": 110,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest garam masala delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 64
   },
   {
     "name": "Shampoo Anti-Dandruff",
@@ -1107,7 +1834,17 @@
     "minimumSellingPrice": 122,
     "stock": 60,
     "image": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select shampoo anti-dandruff delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 145
   },
   {
     "name": "Coconut Hair Oil",
@@ -1122,7 +1859,17 @@
     "minimumSellingPrice": 82,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1608248597263-00de46808261?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune coconut hair oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ],
+    "price": 98
   },
   {
     "name": "Toothpaste",
@@ -1137,7 +1884,17 @@
     "minimumSellingPrice": 70,
     "stock": 90,
     "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune toothpaste delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 84
   },
   {
     "name": "Toothbrush Soft",
@@ -1152,7 +1909,17 @@
     "minimumSellingPrice": 31,
     "stock": 100,
     "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select toothbrush soft delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 39
   },
   {
     "name": "Face Wash",
@@ -1167,7 +1934,17 @@
     "minimumSellingPrice": 100,
     "stock": 55,
     "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann face wash delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 119
   },
   {
     "name": "Moisturizing Cream",
@@ -1182,7 +1959,17 @@
     "minimumSellingPrice": 110,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1608248597263-00de46808261?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune moisturizing cream delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 132
   },
   {
     "name": "Hand Wash Liquid",
@@ -1197,7 +1984,17 @@
     "minimumSellingPrice": 65,
     "stock": 75,
     "image": "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann hand wash liquid delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 78
   },
   {
     "name": "Tissue Paper Roll",
@@ -1212,7 +2009,17 @@
     "minimumSellingPrice": 76,
     "stock": 60,
     "image": "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select tissue paper roll delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 92
   },
   {
     "name": "Garbage Bags Medium",
@@ -1227,7 +2034,17 @@
     "minimumSellingPrice": 56,
     "stock": 80,
     "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann garbage bags medium delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 69
   },
   {
     "name": "Aluminium Foil",
@@ -1242,7 +2059,17 @@
     "minimumSellingPrice": 63,
     "stock": 55,
     "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select aluminium foil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ],
+    "price": 78
   },
   {
     "name": "Dishwash Scrub Pad",
@@ -1257,7 +2084,17 @@
     "minimumSellingPrice": 22,
     "stock": 100,
     "image": "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune dishwash scrub pad delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 29
   },
   {
     "name": "Basmati Rice",
@@ -1272,7 +2109,17 @@
     "minimumSellingPrice": 480,
     "stock": 50,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Royal",
+    "description": "Premium quality Royal basmati rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 555
   },
   {
     "name": "Ponni Boiled Rice",
@@ -1287,7 +2134,17 @@
     "minimumSellingPrice": 325,
     "stock": 80,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune ponni boiled rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ],
+    "price": 355
   },
   {
     "name": "Idli Rice",
@@ -1302,7 +2159,17 @@
     "minimumSellingPrice": 300,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "India Gate",
+    "description": "Premium quality India Gate idli rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 335
   },
   {
     "name": "Wheat Flour (Atta)",
@@ -1317,7 +2184,17 @@
     "minimumSellingPrice": 250,
     "stock": 65,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Aashirvaad",
+    "description": "Premium quality Aashirvaad wheat flour (atta) delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 285
   },
   {
     "name": "Rava (Sooji)",
@@ -1332,7 +2209,17 @@
     "minimumSellingPrice": 52,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Golden Harvest",
+    "description": "Premium quality Golden Harvest rava (sooji) delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 63
   },
   {
     "name": "Turmeric Powder",
@@ -1347,7 +2234,17 @@
     "minimumSellingPrice": 28,
     "stock": 90,
     "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Aachi",
+    "description": "Premium quality Aachi turmeric powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 34
   },
   {
     "name": "Red Chilli Powder",
@@ -1362,7 +2259,17 @@
     "minimumSellingPrice": 34,
     "stock": 90,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "MTR",
+    "description": "Premium quality MTR red chilli powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 41
   },
   {
     "name": "Coriander Powder",
@@ -1377,7 +2284,17 @@
     "minimumSellingPrice": 27,
     "stock": 85,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch coriander powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 32
   },
   {
     "name": "Sambar Powder",
@@ -1392,7 +2309,17 @@
     "minimumSellingPrice": 45,
     "stock": 70,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest sambar powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 55
   },
   {
     "name": "Rasam Powder",
@@ -1407,6 +2334,16 @@
     "minimumSellingPrice": 43,
     "stock": 65,
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "isAvailable": true,
+    "brand": "Eastern",
+    "description": "Premium quality Eastern rasam powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ],
+    "price": 52
   }
 ]

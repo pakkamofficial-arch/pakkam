@@ -138,7 +138,7 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
 
         {/* Wide rounded banner image (carousel — show dot indicators) */}
         <View style={styles.bannerContainer}>
-          <Image source={{ uri: shop.coverImage }} style={styles.bannerImage} />
+          <Image source={{ uri: shop.coverImage }} style={styles.bannerImage} resizeMode="cover" />
           <View style={styles.dotRow}>
             <View style={[styles.dot, styles.dotActive]} />
             <View style={styles.dot} />
@@ -267,7 +267,6 @@ const styles = StyleSheet.create({
   bannerImage: {
     height: 160,
     width: '100%',
-    resizeMode: 'cover',
   },
   dotRow: {
     position: 'absolute',

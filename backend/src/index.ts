@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
 import { connectDB } from './config/db.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -29,6 +31,7 @@ import deliveryBoyRoutes from './routes/deliveryBoyRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import pincodeRoutes from './routes/pincodeRoutes.js';
 import deliveryApplicationRoutes from './routes/deliveryApplicationRoutes.js';
+import guestRoutes from './routes/guestRoutes.js';
 
 dotenv.config();
 
@@ -55,6 +58,7 @@ connectDB();
 
 // Middleware
 app.use(cors());
+app.use(compression());
 app.use(
   express.json({
     limit: '10mb',
@@ -64,6 +68,15 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Auth rate limiter (Requirement 1: 10-20 requests/min/IP)
+const authLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many authentication attempts. Please try again in a minute.' },
+});
 
 // Root Health Check
 app.get('/', (_req, res) => {
@@ -76,8 +89,8 @@ app.get('/api/health', (_req, res) => {
 });
 
 // API Routes (supporting both /api/admin and /admin for deployment flexibility)
-app.use('/api/auth', authRoutes);
-app.use('/auth', authRoutes);
+app.use('/api/auth', authLimiter, authRoutes);
+app.use('/auth', authLimiter, authRoutes);
 app.use('/api/pincode', pincodeRoutes);
 app.use('/pincode', pincodeRoutes);
 app.use('/api/shops', shopRoutes);
@@ -92,6 +105,8 @@ app.use('/api/addresses', addressRoutes);
 app.use('/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/orders', orderRoutes);
+app.use('/api/guest', guestRoutes);
+app.use('/guest', guestRoutes);
 app.use('/api/monthly-grocery', monthlyGroceryRoutes);
 app.use('/monthly-grocery', monthlyGroceryRoutes);
 app.use('/api/coupons', couponRoutes);

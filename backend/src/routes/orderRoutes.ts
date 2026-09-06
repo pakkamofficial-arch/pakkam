@@ -13,7 +13,7 @@ import { protect, optionalAuth } from '../middleware/auth.js';
 
 const router = Router();
 
-router.post('/', optionalAuth, createOrder);
+router.post('/', protect, createOrder);
 router.post('/preview', optionalAuth, checkoutPreview);
 router.post('/create-payment-order', protect, createPaymentOrder);
 router.get('/', protect, getOrders);

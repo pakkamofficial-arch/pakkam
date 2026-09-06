@@ -15,7 +15,6 @@ export const ShopCard: React.FC<ShopCardProps> = ({ shop, onPressShop }) => {
       onPress={() => onPressShop && onPressShop(shop)}
       activeOpacity={0.88}
     >
-      {/* Banner Image: 110px height per spec */}
       <Image
         source={{
           uri:
@@ -24,6 +23,7 @@ export const ShopCard: React.FC<ShopCardProps> = ({ shop, onPressShop }) => {
             'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=500',
         }}
         style={styles.bannerImage}
+        resizeMode="cover"
       />
 
       {/* Content Padding 12px per spec */}
@@ -74,8 +74,7 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     width: '100%',
-    height: 110, // Banner Image: 110px height per spec
-    resizeMode: 'cover',
+    height: 110,
   },
   body: {
     padding: 12, // Content Padding: 12px per spec

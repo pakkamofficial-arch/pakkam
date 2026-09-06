@@ -3,6 +3,7 @@ import { Order } from '../models/Order.js';
 import { Cart } from '../models/Cart.js';
 import { Address } from '../models/Address.js';
 import { Product } from '../models/Product.js';
+import { Shop } from '../models/Shop.js';
 import { Coupon } from '../models/Coupon.js';
 import { Wallet } from '../models/Wallet.js';
 import { WalletTransaction } from '../models/WalletTransaction.js';
@@ -20,15 +21,36 @@ import { calculateOrderNetProfit } from '../services/orderProfitService.js';
 
 export const checkoutPreview = async (req: AuthRequest, res: Response) => {
   try {
-    const { couponCode, walletAmountApplied = 0 } = req.body;
+    const { couponCode, walletAmountApplied = 0, directItems } = req.body;
 
-    const cart = await Cart.findOne({ user: req.user?._id }).populate({
-      path: 'items.product',
-      populate: { path: 'shop' },
-    });
+    let itemsToProcess: any[] = [];
+    if (directItems && Array.isArray(directItems) && directItems.length > 0) {
+      for (const dItem of directItems) {
+        const pId = dItem.productId || (typeof dItem.product === 'object' ? dItem.product?._id : dItem.product);
+        const prod = await Product.findById(pId).populate('shop');
+        if (prod) {
+          itemsToProcess.push({
+            product: prod,
+            selectedUnit: dItem.selectedUnit || prod.unit || 'kg',
+            quantity: dItem.quantity || 1,
+            unitMultiplier: dItem.unitMultiplier,
+            price: dItem.price || prod.discountPrice || prod.price,
+          });
+        }
+      }
+      if (itemsToProcess.length === 0) {
+        return res.status(400).json({ success: false, message: 'Invalid product details for direct checkout' });
+      }
+    } else {
+      const cart = await Cart.findOne({ user: req.user?._id }).populate({
+        path: 'items.product',
+        populate: { path: 'shop' },
+      });
 
-    if (!cart || cart.items.length === 0) {
-      return res.status(400).json({ success: false, message: 'Your cart is empty' });
+      if (!cart || cart.items.length === 0) {
+        return res.status(400).json({ success: false, message: 'Your cart is empty' });
+      }
+      itemsToProcess = cart.items;
     }
 
     let subtotal = 0;
@@ -37,7 +59,7 @@ export const checkoutPreview = async (req: AuthRequest, res: Response) => {
     const priceChangeMessages: string[] = [];
     const itemsPreview: any[] = [];
 
-    for (const item of cart.items) {
+    for (const item of itemsToProcess) {
       const prod: any = item.product;
       if (!prod || !prod.isActive) {
         return res.status(400).json({ success: false, message: `Product ${prod?.name || ''} is no longer available` });
@@ -177,6 +199,8 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       addressId,
       newAddress,
       shippingAddress,
+      deliveryAddress,
+      items,
       directItems,
       productId,
       quantity,
@@ -200,7 +224,7 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
         });
 
         if (!isValid) {
-          return res.status(400).json({ success: false, message: 'Invalid payment signature' });
+          return res.status(400).json({ success: false, message: 'Invalid payment signature', errorDetail: 'INVALID_PAYMENT_SIGNATURE' });
         }
       }
     }
@@ -214,14 +238,25 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
     }
 
     let itemsToProcess: any[] = [];
-    if (cart && cart.items && cart.items.length > 0) {
-      itemsToProcess = cart.items;
+    let isDirectPurchase = false;
+
+    if (items && Array.isArray(items) && items.length > 0) {
+      itemsToProcess = items;
+      isDirectPurchase = true;
     } else if (directItems && Array.isArray(directItems) && directItems.length > 0) {
       itemsToProcess = directItems;
+      isDirectPurchase = true;
+    } else if (cart && cart.items && cart.items.length > 0) {
+      itemsToProcess = cart.items;
     } else if (productId) {
       itemsToProcess = [{ product: productId, quantity: quantity || 1, selectedUnit: selectedUnit || 'kg' }];
+      isDirectPurchase = true;
     } else {
-      return res.status(400).json({ success: false, message: 'Your cart is empty' });
+      return res.status(400).json({
+        success: false,
+        message: 'Order items array is empty. Please select products to purchase or add items to your cart.',
+        errorDetail: 'EMPTY_ITEMS_ARRAY',
+      });
     }
 
     // Resolve address
@@ -233,7 +268,7 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       address = await Address.findById(addressId);
     }
 
-    const inputAddr = shippingAddress || newAddress;
+    const inputAddr = shippingAddress || deliveryAddress || newAddress;
     if (!address && inputAddr) {
       if (req.user?._id) {
         const isFirst = (await Address.countDocuments({ user: req.user._id })) === 0;
@@ -273,7 +308,11 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
     }
 
     if (!address) {
-      return res.status(400).json({ success: false, message: 'Please provide a delivery location.' });
+      return res.status(400).json({
+        success: false,
+        message: 'Delivery address is required. Please select or enter a delivery address.',
+        errorDetail: 'MISSING_DELIVERY_ADDRESS',
+      });
     }
 
     // Pincode Format Check Only (Strict 6 numeric digits)
@@ -287,8 +326,15 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       active: true,
     });
 
-    const firstProductDoc: any = typeof itemsToProcess[0].product === 'object' ? itemsToProcess[0].product : await Product.findById(itemsToProcess[0].product);
-    const shopId = firstProductDoc?.shop?._id || firstProductDoc?.shop;
+    const firstItem = itemsToProcess[0];
+    const firstPId = firstItem?.productId || (typeof firstItem?.product === 'object' ? firstItem?.product?._id : firstItem?.product);
+    const firstProductDoc: any = typeof firstItem?.product === 'object' ? firstItem?.product : await Product.findById(firstPId);
+    let shopId = firstProductDoc?.shop?._id || firstProductDoc?.shop;
+
+    if (!shopId) {
+      const defaultShop = await Shop.findOne();
+      shopId = defaultShop ? defaultShop._id : '661500000000000000000001';
+    }
 
     // Calculate Subtotal & Verify Stock
     let subtotal = 0;
@@ -297,7 +343,7 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
     const productsToUpdate: { productDoc: any; deductUnits: number }[] = [];
 
     for (const item of itemsToProcess) {
-      const prodId = typeof item.product === 'object' ? item.product._id : item.product;
+      const prodId = item.productId || (typeof item.product === 'object' ? item.product?._id : item.product);
       const prod: any = await Product.findById(prodId);
       if (!prod || !prod.isActive) {
         return res.status(400).json({ success: false, message: 'Product is no longer available' });
@@ -463,8 +509,8 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       await pDoc.save();
     }
 
-    // Clear cart after order creation if cart exists
-    if (cart) {
+    // Clear cart after order creation if cart exists and it was not a direct purchase
+    if (cart && !isDirectPurchase) {
       cart.items = [];
       await cart.save();
     }
@@ -509,7 +555,16 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       order: orderObj,
     });
   } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Error in createOrder:', error);
+    if (error.name === 'ValidationError') {
+      const fieldMsgs = error.errors ? Object.values(error.errors).map((e: any) => e.message).join(', ') : error.message;
+      return res.status(400).json({
+        success: false,
+        message: `Order validation failed: ${fieldMsgs}`,
+        errorDetail: 'MONGOOSE_VALIDATION_ERROR',
+      });
+    }
+    res.status(500).json({ success: false, message: error.message || 'Server error creating order' });
   }
 };
 

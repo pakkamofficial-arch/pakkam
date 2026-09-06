@@ -48,10 +48,19 @@ export const Products: React.FC = () => {
       const targetMargin = Number(editingProduct.targetProfitMargin ?? 0.20);
       const availQty = Number(editingProduct.availableQuantity ?? 100);
 
+      const availUnitsArr = typeof editingProduct.availableUnits === 'string'
+        ? editingProduct.availableUnits.split(',').map((u: string) => u.trim()).filter(Boolean)
+        : (Array.isArray(editingProduct.availableUnits) ? editingProduct.availableUnits : ['1 kg']);
+
       const res = await api.put(`/products/${editingProduct._id}`, {
         name: editingProduct.name_en || editingProduct.name,
         name_en: editingProduct.name_en || editingProduct.name,
         name_ta: editingProduct.name_ta || '',
+        brand: editingProduct.brand || '',
+        description: editingProduct.description || '',
+        unitType: editingProduct.unitType || 'weight',
+        availableUnits: availUnitsArr.length > 0 ? availUnitsArr : ['1 kg'],
+        unit: editingProduct.unit || availUnitsArr[0] || '1 kg',
         purchasePrice: pPrice,
         additionalCost: aCost,
         MRP: mrpNum,
@@ -183,6 +192,50 @@ export const Products: React.FC = () => {
                     onChange={(e) => setEditingProduct({ ...editingProduct, name_ta: e.target.value })}
                   />
                 </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>Brand Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Fortune, Aashirvaad (or empty for loose produce)"
+                    value={editingProduct.brand || ''}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, brand: e.target.value })}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>Unit Type</label>
+                  <select
+                    style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px' }}
+                    value={editingProduct.unitType || 'weight'}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, unitType: e.target.value })}
+                  >
+                    <option value="weight">Weight (g / kg)</option>
+                    <option value="volume">Volume (ml / litre)</option>
+                    <option value="count">Count (pc / dozen)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>Available Units (comma separated)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 250g, 500g, 750g, 1kg or 250ml, 500ml, 1 litre"
+                  value={Array.isArray(editingProduct.availableUnits) ? editingProduct.availableUnits.join(', ') : (editingProduct.availableUnits || '')}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, availableUnits: e.target.value })}
+                />
+              </div>
+
+              <div style={{ marginBottom: '12px' }}>
+                <label style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>Product Description</label>
+                <textarea
+                  style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px', minHeight: '60px' }}
+                  placeholder="Short description for customer product detail page"
+                  value={editingProduct.description || ''}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })}
+                />
               </div>
 
               {/* INPUT FIELDS SECTION */}

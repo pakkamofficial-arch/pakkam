@@ -105,6 +105,9 @@ export const calculateProductPricing = (product: {
     discountAmount = 0;
   }
 
+  finalPrice = Math.round(finalPrice);
+  discountAmount = Math.round(discountAmount);
+
   const profitAmount = finalPrice - landedCost;
   const profitMargin = finalPrice > 0 ? (profitAmount / finalPrice) : 0;
 
@@ -113,7 +116,7 @@ export const calculateProductPricing = (product: {
     additionalCost,
     landedCost,
     targetProfitMargin: targetMargin,
-    recommendedSellingPrice,
+    recommendedSellingPrice: Math.round(recommendedSellingPrice),
     sellingPrice: finalPrice,
     discountPercent,
     discountAmount,
@@ -163,17 +166,19 @@ export const calculateEffectiveProductPrice = (product: IProduct | any): PriceCa
     discountAmount = Math.max(0, marketPrice - basePrice);
   }
 
-  const effectiveUnitPrice = basePrice;
+  const roundedBase = Math.round(basePrice);
+  const roundedMarket = Math.round(marketPrice);
+  const roundedDiscount = Math.round(discountAmount);
 
   return {
-    basePrice,
-    sellingPrice: basePrice,
-    effectiveUnitPrice,
-    marketPrice,
+    basePrice: roundedBase,
+    sellingPrice: roundedBase,
+    effectiveUnitPrice: roundedBase,
+    marketPrice: roundedMarket,
     priceSource: product.priceSource || 'Government Price Monitoring System',
     priceUpdatedAt: product.priceUpdatedAt || new Date(),
     discountActive,
-    discountAmount,
+    discountAmount: roundedDiscount,
     discountPercentage,
   };
 };

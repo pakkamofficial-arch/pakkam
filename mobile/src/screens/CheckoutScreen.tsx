@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Modal, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MapPin, CreditCard, Smartphone, Banknote, ChevronLeft, Clock, ChevronRight, Check, Plus } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -10,16 +11,20 @@ import client, { getStoredToken } from '../api/client';
 import { Colors, Radii, Spacing } from '../theme';
 import { PrimaryButton } from '../components/PrimaryButton';
 
-export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+export const CheckoutScreen: React.FC<{ navigation: any; route?: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
+  const directPurchaseItem = route?.params?.directPurchaseItem;
+  const directItems = route?.params?.directItems || (directPurchaseItem ? [directPurchaseItem] : undefined);
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { defaultAddress, addresses } = useSelector((state: RootState) => state.address);
-  const { subtotal, deliveryFee, coupon, walletApplied } = useSelector((state: RootState) => state.cart);
+  const { subtotal, deliveryFee, coupon, walletApplied, items: cartItems } = useSelector((state: RootState) => state.cart);
   const [paymentMethod, setPaymentMethod] = useState<'ONLINE' | 'COD'>('ONLINE');
   const [loading, setLoading] = useState(false);
   const [serviceable, setServiceable] = useState<boolean | null>(null);
   const [serviceMessage, setServiceMessage] = useState<string>('');
   const [showAddressModal, setShowAddressModal] = useState(false);
+  const [showOrderConfirmModal, setShowOrderConfirmModal] = useState(false);
 
   const [checkoutData, setCheckoutData] = useState<any>(null);
   const [priceNotice, setPriceNotice] = useState<string>('');
@@ -31,16 +36,28 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
   const totalWeightKg = checkoutData?.totalWeightKg ?? 0;
 
   React.useEffect(() => {
+    if (!isAuthenticated) {
+      navigation.replace('Login', {
+        returnTo: 'Checkout',
+        returnParams: route?.params,
+      });
+      return;
+    }
     checkServiceability();
     fetchCheckoutPreview();
   }, [defaultAddress, isAuthenticated, coupon]);
 
   const fetchCheckoutPreview = async () => {
     try {
-      const res = await client.post('/orders/preview', {
+      const payload: any = {
         couponCode: coupon?.code,
         walletAmountApplied: walletApplied,
-      });
+      };
+      if (directItems) {
+        payload.directItems = directItems;
+        payload.items = directItems;
+      }
+      const res = await client.post('/orders/preview', payload);
       if (res.data.success) {
         setCheckoutData(res.data);
         if (res.data.priceChanged && res.data.priceChangeMessages?.length > 0) {
@@ -89,18 +106,88 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
     });
   };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrderClick = () => {
     if (serviceable === false) {
       alert(serviceMessage);
       return;
     }
+    if (!defaultAddress) {
+      alert('Please add or select a delivery address first');
+      return;
+    }
+    setShowOrderConfirmModal(true);
+  };
 
+  const buildOrderPayload = (source: 'buyNow' | 'cart') => {
+    let itemsList: any[] = [];
+
+    if (source === 'buyNow' && directItems && directItems.length > 0) {
+      itemsList = directItems.map((item: any) => ({
+        productId: item.productId || (typeof item.product === 'object' ? item.product?._id : item.product),
+        product: typeof item.product === 'object' ? item.product : undefined,
+        name: item.name || item.product?.name || '',
+        price: item.price || item.product?.discountPrice || item.product?.price || 0,
+        selectedUnit: item.selectedUnit || item.unit || '1 unit',
+        quantity: item.quantity || 1,
+        unitMultiplier: item.unitMultiplier,
+      }));
+    } else if (cartItems && cartItems.length > 0) {
+      itemsList = cartItems.map((item: any) => ({
+        productId: item.productId || (typeof item.product === 'object' ? item.product?._id : item.product),
+        product: typeof item.product === 'object' ? item.product : undefined,
+        name: item.name || item.product?.name || '',
+        price: item.price || item.product?.discountPrice || item.product?.price || 0,
+        selectedUnit: item.selectedUnit || item.unit || '1 unit',
+        quantity: item.quantity || 1,
+        unitMultiplier: item.unitMultiplier,
+      }));
+    }
+
+    const shippingAddressSnapshot = defaultAddress
+      ? {
+          name: defaultAddress.name || defaultAddress.fullName || 'Customer',
+          phone: defaultAddress.phone || defaultAddress.mobileNumber || '9876543210',
+          houseFlat: defaultAddress.houseFlat || defaultAddress.addressLine || 'Address',
+          street: defaultAddress.street || defaultAddress.locality || '',
+          locality: defaultAddress.locality || defaultAddress.area || '',
+          city: defaultAddress.city || 'Madurai',
+          state: defaultAddress.state || 'Tamil Nadu',
+          pincode: defaultAddress.pincode || '625001',
+        }
+      : {
+          name: 'Customer',
+          phone: '9876543210',
+          houseFlat: 'Main Street',
+          city: 'Madurai',
+          state: 'Tamil Nadu',
+          pincode: '625001',
+        };
+
+    return {
+      source,
+      items: itemsList,
+      directItems: source === 'buyNow' ? itemsList : undefined,
+      addressId: defaultAddress?._id,
+      shippingAddress: shippingAddressSnapshot,
+      newAddress: shippingAddressSnapshot,
+      paymentMethod,
+      couponCode: coupon?.code,
+      walletAmountApplied: walletApplied || 0,
+    };
+  };
+
+  const submitOrder = async (orderPayload: any) => {
+    setShowOrderConfirmModal(false);
     try {
       setLoading(true);
 
       if (paymentMethod === 'ONLINE') {
         // 1. Create Razorpay Payment Order on Backend
-        const payRes = await client.post('/payments/create-order', { amount: computedGrandTotal });
+        const payRes = await client.post('/payments/create-order', {
+          amount: computedGrandTotal,
+          directItems: orderPayload.directItems,
+          items: orderPayload.items,
+        });
 
         if (!payRes.data.success || !payRes.data.order_id) {
           alert(payRes.data.message || 'Failed to initialize payment gateway.');
@@ -130,11 +217,15 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
                   razorpay_signature: response.razorpay_signature,
                   addressId: defaultAddress?._id,
                   deliveryFee: finalDeliveryFee,
+                  directItems: orderPayload.directItems,
+                  items: orderPayload.items,
                 });
 
                 if (verifyRes.data.success && verifyRes.data.order) {
                   const order = verifyRes.data.order;
-                  dispatch(resetCart());
+                  if (orderPayload.source === 'cart') {
+                    dispatch(resetCart());
+                  }
                   dispatch(setActiveOrder(order));
                   navigation.replace('OrderConfirmation', { order });
                   return;
@@ -180,11 +271,15 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
             razorpay_signature,
             addressId: defaultAddress?._id,
             deliveryFee,
+            directItems: orderPayload.directItems,
+            items: orderPayload.items,
           });
 
           if (verifyRes.data.success && verifyRes.data.order) {
             const order = verifyRes.data.order;
-            dispatch(resetCart());
+            if (orderPayload.source === 'cart') {
+              dispatch(resetCart());
+            }
             dispatch(setActiveOrder(order));
             navigation.replace('OrderConfirmation', { order });
             return;
@@ -193,40 +288,13 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
       }
 
       // COD Flow
-      const shippingAddressSnapshot = defaultAddress
-        ? {
-            name: defaultAddress.name || defaultAddress.fullName || 'Guest Customer',
-            phone: defaultAddress.phone || defaultAddress.mobileNumber || '9876543210',
-            houseFlat: defaultAddress.houseFlat || defaultAddress.addressLine || 'Address',
-            street: defaultAddress.street || defaultAddress.locality || '',
-            locality: defaultAddress.locality || defaultAddress.area || '',
-            city: defaultAddress.city || 'Madurai',
-            state: defaultAddress.state || 'Tamil Nadu',
-            pincode: defaultAddress.pincode || '625001',
-          }
-        : {
-            name: 'Guest Customer',
-            phone: '9876543210',
-            houseFlat: 'Main Street',
-            city: 'Madurai',
-            state: 'Tamil Nadu',
-            pincode: '625001',
-          };
-
-      const orderPayload = {
-        addressId: defaultAddress?._id,
-        shippingAddress: shippingAddressSnapshot,
-        newAddress: shippingAddressSnapshot,
-        paymentMethod: 'COD',
-        couponCode: coupon?.code,
-        walletAmountApplied: walletApplied,
-      };
-
       const res = await client.post('/orders', orderPayload);
 
       if (res.data.success && res.data.order) {
         const order = res.data.order;
-        dispatch(resetCart());
+        if (orderPayload.source === 'cart') {
+          dispatch(resetCart());
+        }
         dispatch(setActiveOrder(order));
 
         navigation.replace('OrderConfirmation', { order });
@@ -238,8 +306,14 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
     }
   };
 
+  const executePlaceOrder = () => {
+    const source = directItems && directItems.length > 0 ? 'buyNow' : 'cart';
+    const payload = buildOrderPayload(source);
+    submitOrder(payload);
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 110 }}>
         {/* Header */}
         <View style={styles.headerRow}>
@@ -404,7 +478,7 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
       <View style={styles.footerBar}>
         <PrimaryButton
           title={loading ? 'Placing Order...' : `Place Order • ₹${computedGrandTotal}`}
-          onPress={handlePlaceOrder}
+          onPress={handlePlaceOrderClick}
           loading={loading}
           disabled={serviceable === false}
         />
@@ -466,7 +540,7 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
                 style={styles.addNewAddrBtn}
                 onPress={() => {
                   setShowAddressModal(false);
-                  navigation.navigate('AddAddress', { isExplicitAdd: true });
+                  navigation.navigate('AddAddress', { isExplicitAdd: true, ...route?.params });
                 }}
               >
                 <Plus size={16} color={Colors.primary} strokeWidth={2} />
@@ -478,6 +552,53 @@ export const CheckoutScreen: React.FC<{ navigation: any }> = ({ navigation }) =>
                 onPress={() => setShowAddressModal(false)}
               >
                 <Text style={styles.modalCloseText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Order Confirmation Modal */}
+      <Modal visible={showOrderConfirmModal} transparent animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Confirm Your Order?</Text>
+            <Text style={styles.modalSub}>
+              Please review your order summary before submitting.
+            </Text>
+
+            <View style={styles.confirmSummaryBox}>
+              <View style={styles.confirmRow}>
+                <Text style={styles.confirmLabel}>Item Count:</Text>
+                <Text style={styles.confirmValue}>
+                  {checkoutData?.items?.length || (directItems ? directItems.length : 1)} item(s)
+                </Text>
+              </View>
+              <View style={styles.confirmRow}>
+                <Text style={styles.confirmLabel}>Total Amount:</Text>
+                <Text style={styles.confirmValueHighlight}>₹{computedGrandTotal}</Text>
+              </View>
+              <View style={styles.confirmRow}>
+                <Text style={styles.confirmLabel}>Payment Method:</Text>
+                <Text style={styles.confirmValue}>
+                  {paymentMethod === 'COD' ? 'Cash on Delivery (COD)' : 'Online Payment'}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.modalBtnRow}>
+              <TouchableOpacity
+                style={styles.confirmCancelBtn}
+                onPress={() => setShowOrderConfirmModal(false)}
+              >
+                <Text style={styles.confirmCancelBtnText}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.confirmSubmitBtn}
+                onPress={executePlaceOrder}
+              >
+                <Text style={styles.confirmSubmitBtnText}>Confirm</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -604,7 +725,72 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     color: Colors.textPrimary,
-    marginBottom: 14,
+    marginBottom: 6,
+  },
+  modalSub: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+    marginBottom: Spacing.md,
+  },
+  confirmSummaryBox: {
+    backgroundColor: '#F0FDF4',
+    borderWidth: 1,
+    borderColor: '#DCFCE7',
+    padding: Spacing.md,
+    borderRadius: Radii.md,
+    marginBottom: Spacing.md,
+    gap: 8,
+  },
+  confirmRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 2,
+  },
+  confirmLabel: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+  },
+  confirmValue: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: Colors.textPrimary,
+  },
+  confirmValueHighlight: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: Colors.primary,
+  },
+  modalBtnRow: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+  },
+  confirmCancelBtn: {
+    flex: 1,
+    height: 44,
+    borderRadius: Radii.button,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  confirmCancelBtnText: {
+    color: Colors.textPrimary,
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  confirmSubmitBtn: {
+    flex: 1,
+    height: 44,
+    borderRadius: Radii.button,
+    backgroundColor: Colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  confirmSubmitBtnText: {
+    color: Colors.surface,
+    fontWeight: '700',
+    fontSize: 14,
   },
   addrSelectCard: {
     borderWidth: 1,
@@ -692,8 +878,8 @@ const styles = StyleSheet.create({
   totalRow: {
     borderTopWidth: 1,
     borderTopColor: Colors.border,
-    paddingTop: 8,
-    marginTop: 6,
+    paddingTop: 10,
+    marginTop: 10,
   },
   totalLabel: {
     fontSize: 14,

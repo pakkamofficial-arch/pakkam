@@ -97,7 +97,6 @@ client.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response && error.response.status === 401) {
-      console.warn('[API Client] 401 Unauthorized received for:', error.config?.url);
       const isAuthEndpoint = error.config?.url?.includes('/auth/login') || error.config?.url?.includes('/auth/register');
       if (!isAuthEndpoint) {
         await clearStoredToken();

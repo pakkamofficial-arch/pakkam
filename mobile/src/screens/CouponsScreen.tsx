@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft, Tag, Copy } from 'lucide-react-native';
 import client from '../api/client';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const CouponsScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const [coupons, setCoupons] = useState<any[]>([]);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export const CouponsScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 60 }}>
         <View style={styles.headerRow}>
           <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>

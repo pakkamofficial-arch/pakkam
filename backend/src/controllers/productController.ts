@@ -103,6 +103,10 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const getProductById = async (req: Request, res: Response) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
+    }
+
     const product = await Product.findById(req.params.id)
       .populate('category')
       .populate('shop', 'name phone address rating isOpen logo coverImage');

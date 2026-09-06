@@ -85,6 +85,41 @@ const cartSlice = createSlice({
       state.items = state.items.filter((i) => i._id !== action.payload);
       recalculateTotals(state);
     },
+    addLocalProduct: (
+      state,
+      action: PayloadAction<{ product: any; selectedUnit?: string; quantity?: number }>
+    ) => {
+      const { product, selectedUnit = '1 kg', quantity = 1 } = action.payload;
+      if (!product) return;
+      const prodId = product._id;
+      const existingIdx = state.items.findIndex((item) => {
+        const pId = typeof item?.product === 'object' ? item.product?._id : item?.product;
+        return pId === prodId;
+      });
+
+      const price = product.sellingPrice || product.price || 0;
+
+      if (existingIdx > -1) {
+        if (quantity <= 0) {
+          state.items.splice(existingIdx, 1);
+        } else {
+          state.items[existingIdx].quantity = quantity;
+          if (selectedUnit) state.items[existingIdx].selectedUnit = selectedUnit;
+        }
+      } else if (quantity > 0) {
+        state.items.push({
+          _id: `guest_item_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+          product,
+          shop: product.shop || null,
+          selectedUnit,
+          unitMultiplier: 1,
+          quantity,
+          price,
+          discountPrice: price,
+        });
+      }
+      recalculateTotals(state);
+    },
     setCoupon: (state, action: PayloadAction<any>) => {
       state.coupon = action.payload;
     },
@@ -111,6 +146,7 @@ export const {
   setCartData,
   updateLocalItemQty,
   removeLocalItem,
+  addLocalProduct,
   setCoupon,
   clearCoupon,
   setWalletApplied,

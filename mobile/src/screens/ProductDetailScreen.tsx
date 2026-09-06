@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ShoppingCart, ChevronLeft, Share2 } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { setCartData } from '../redux/slices/cartSlice';
+import { setCartData, addLocalProduct } from '../redux/slices/cartSlice';
 import client, { getStoredToken } from '../api/client';
 import { Colors, Radii, Spacing } from '../theme';
+import { Skeleton } from '../components/Skeleton';
 import { IconChip } from '../components/IconChip';
 import { QuantityStepper } from '../components/QuantityStepper';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -13,6 +15,7 @@ import { SecondaryButton } from '../components/SecondaryButton';
 import { ProductCard } from '../components/ProductCard';
 
 export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const { productId } = route.params || {};
   const dispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
@@ -20,12 +23,18 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const [selectedUnit, setSelectedUnit] = useState('250g');
   const [quantity, setQuantity] = useState(1);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const { defaultAddress } = useSelector((state: RootState) => state.address);
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const packSizeChips = product?.availableUnits && product.availableUnits.length > 0
+  const packSizeChips = Array.isArray(product?.availableUnits) && product.availableUnits.length > 0
     ? product.availableUnits
-    : ['250g', '500g', '1kg', '2kg', '5kg'];
+    : (product?.unitType === 'volume'
+        ? ['250ml', '500ml', '750ml', '1 litre']
+        : product?.unitType === 'count'
+        ? ['1 pc']
+        : ['250g', '500g', '750g', '1kg']);
 
   useEffect(() => {
     fetchProduct();
@@ -36,44 +45,61 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
       setLoading(true);
       const res = await client.get(`/products/${productId}`);
       if (res.data.success && res.data.product) {
-        const prod = res.data.product;
-        setProduct(prod);
-        const defUnit = prod.availableUnits?.[0] || prod.unit || '250g';
-        setSelectedUnit(defUnit);
+        const p = res.data.product;
+        setProduct(p);
+        const units = Array.isArray(p.availableUnits) && p.availableUnits.length > 0 ? p.availableUnits : [p.unit || '1 kg'];
+        setSelectedUnit(units[0]);
 
-        // Fetch related products from same category/shop
-        fetchRelated(prod.category?._id || prod.category, prod.shop?._id || prod.shop);
-      } else {
-        handleFetchError();
+        if (p.category) {
+          const catName = typeof p.category === 'object' ? p.category.name : p.category;
+          const relRes = await client.get(`/products?category=${encodeURIComponent(catName)}&limit=6`);
+          if (relRes.data.success && Array.isArray(relRes.data.products)) {
+            setRelatedProducts(relRes.data.products.filter((item: any) => item._id !== p._id));
+          }
+        }
       }
     } catch (e) {
-      handleFetchError();
+      console.error(e);
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchRelated = async (catId?: string, shopId?: string) => {
-    try {
-      let url = '/products?limit=6';
-      if (catId) url += `&category=${catId}`;
-      const res = await client.get(url);
-      if (res.data.success) {
-        const filtered = (res.data.products || []).filter((p: any) => p._id !== productId);
-        setRelatedProducts(filtered);
-      }
-    } catch (e) {
-      // quiet fallback
+  const handleBuyNow = () => {
+    const availableQty = product?.availableQuantity ?? 100;
+    if (quantity > availableQty) {
+      alert(`Only ${availableQty} ${product?.unit || 'items'} left in stock!`);
+      return;
+    }
+
+    const directPurchaseItem = {
+      productId: product?._id || productId,
+      product,
+      name: product?.name,
+      image: product?.images?.[0] || '',
+      price: product?.discountPrice || product?.price || 0,
+      selectedUnit: selectedUnit || product?.unit || 'kg',
+      quantity,
+    };
+
+    const targetScreen = defaultAddress ? 'Checkout' : 'LocationSelect';
+
+    if (!isAuthenticated) {
+      navigation.navigate('Login', {
+        returnTo: targetScreen,
+        returnParams: { directPurchaseItem },
+      });
+      return;
+    }
+
+    if (!defaultAddress) {
+      navigation.navigate('LocationSelect', { directPurchaseItem, isExplicitAdd: true });
+    } else {
+      navigation.navigate('Checkout', { directPurchaseItem });
     }
   };
 
-  const handleFetchError = () => {
-    console.warn('[ProductDetailScreen] Failed to load product ID:', productId);
-  };
-
   const handleAddToCart = async (redirectToCheckout = false) => {
-    const token = await getStoredToken();
-
     const availableQty = product?.availableQuantity ?? 100;
     if (quantity > availableQty) {
       alert(`Only ${availableQty} ${product?.unit || 'items'} left in stock!`);
@@ -81,12 +107,14 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
     }
 
     if (redirectToCheckout) {
-      navigation.navigate('AddAddress', {
-        intendedProduct: product,
-        intendedUnit: selectedUnit,
-        quantity,
-        source: 'buy_now',
-      });
+      handleBuyNow();
+      return;
+    }
+
+    dispatch(addLocalProduct({ product, selectedUnit, quantity }));
+    const token = await getStoredToken();
+    if (!token) {
+      alert('Added to cart!');
       return;
     }
 
@@ -96,9 +124,9 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
         selectedUnit,
         quantity,
       });
-      if (res.data.success) {
+      if (res.data?.success) {
         const cartRes = await client.get('/cart');
-        if (cartRes.data.success) {
+        if (cartRes.data?.success) {
           dispatch(
             setCartData({
               items: cartRes.data.cart.items || [],
@@ -109,15 +137,19 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
         }
       }
     } catch (e: any) {
-      console.warn('[Cart] Guest add note:', e.message);
+      // quiet fallback
     }
     alert('Added to cart!');
   };
 
   if (loading) {
     return (
-      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <Text style={{ fontSize: 14, color: Colors.textSecondary }}>Loading product details...</Text>
+      <View style={[styles.container, { paddingTop: Math.max(insets.top + 16, 24), paddingHorizontal: Spacing.lg }]}>
+        <Skeleton height={220} borderRadius={12} style={{ marginBottom: 16 }} />
+        <Skeleton height={24} width="60%" style={{ marginBottom: 8 }} />
+        <Skeleton height={18} width="40%" style={{ marginBottom: 16 }} />
+        <Skeleton height={60} borderRadius={10} style={{ marginBottom: 16 }} />
+        <Skeleton height={90} borderRadius={10} />
       </View>
     );
   }
@@ -159,7 +191,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
   const isOutOfStock = product.isAvailable === false || product.stockStatus === 'OUT_OF_STOCK' || stockQty <= 0;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       {/* Header: back arrow, cart icon */}
       <View style={styles.topHeader}>
         <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.goBack()}>
@@ -182,6 +214,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
           <Image
             source={{ uri: product.images && product.images.length > 0 ? product.images[0] : 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600' }}
             style={styles.image}
+            resizeMode="contain"
           />
           {hasDiscount && (
             <View style={styles.discountBadgeTag}>
@@ -194,6 +227,11 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
           {/* Product name bold (English + Tamil) + Share button */}
           <View style={styles.nameRow}>
             <View style={{ flex: 1 }}>
+              {product.brand ? (
+                <Text style={{ fontSize: 12, fontWeight: '700', color: Colors.primary, marginBottom: 2, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                  {product.brand}
+                </Text>
+              ) : null}
               <Text style={styles.productName}>{product.name}</Text>
               {product.name_ta ? <Text style={styles.productNameTamil}>({product.name_ta})</Text> : null}
             </View>
@@ -261,6 +299,16 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
             </Text>
           </View>
 
+          {/* Product Info / Description Card */}
+          <View style={{ marginTop: Spacing.md, padding: Spacing.md, backgroundColor: '#F8FAFC', borderRadius: Radii.md, borderWidth: 1, borderColor: '#E2E8F0' }}>
+            <Text style={{ fontSize: 13, fontWeight: '700', color: Colors.textPrimary, marginBottom: 4 }}>
+              Product Info
+            </Text>
+            <Text style={{ fontSize: 13, color: Colors.textSecondary, lineHeight: 18 }}>
+              {product.description || `Fresh ${product.name} sourced directly from local verified shops.`}
+            </Text>
+          </View>
+
           {/* Quantity Stepper + Add to Cart button */}
           <View style={styles.qtyRow}>
             <QuantityStepper
@@ -317,6 +365,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
                     <Image
                       source={{ uri: relProd.images?.[0] || 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=300' }}
                       style={styles.relatedImg}
+                      resizeMode="contain"
                     />
                     <Text style={styles.relatedName} numberOfLines={1}>{relProd.name}</Text>
                     <Text style={styles.relatedPrice}>₹ {relProd.discountPrice || relProd.price}</Text>
@@ -338,7 +387,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
         />
         <PrimaryButton
           title="Buy Now"
-          onPress={() => handleAddToCart(true)}
+          onPress={handleBuyNow}
           style={{ flex: 1 }}
           disabled={isOutOfStock}
         />
@@ -441,7 +490,6 @@ const styles = StyleSheet.create({
   image: {
     width: '80%',
     height: '80%',
-    resizeMode: 'contain',
   },
   paginationDotsRow: {
     position: 'absolute',
@@ -611,7 +659,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 80,
     borderRadius: Radii.sm,
-    resizeMode: 'contain',
     marginBottom: 6,
   },
   relatedName: {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Platform, Modal, TextInput } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   MapPin,
   CreditCard,
@@ -29,6 +30,7 @@ import { setAddresses, setDefaultAddress } from '../redux/slices/addressSlice';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
 
@@ -115,7 +117,7 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
 
   if (!isAuthenticated || !user) {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 60 }}>
+      <ScrollView style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]} contentContainerStyle={{ paddingBottom: 60 }}>
         <View style={styles.headerRow}>
           <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
             <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
@@ -144,7 +146,7 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 60 }}>
+    <ScrollView style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]} contentContainerStyle={{ paddingBottom: 60 }}>
       {/* Header: back arrow, centered "Profile" */}
       <View style={styles.headerRow}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>

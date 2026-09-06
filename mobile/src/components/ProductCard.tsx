@@ -21,16 +21,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onPressProduct,
   onBuyNow,
 }) => {
+  if (!product || typeof product !== 'object') {
+    return null;
+  }
+
   const { items: cartItems } = useSelector((state: RootState) => state.cart);
+  const safeAvailableUnits = Array.isArray(product.availableUnits) ? product.availableUnits : [];
   const [selectedUnit, setSelectedUnit] = useState<string>(
-    product.availableUnits?.[0] || product.unit || '1 kg'
+    safeAvailableUnits[0] || product.unit || '1 kg'
   );
   const [imgError, setImgError] = useState<boolean>(false);
   const [showToast, setShowToast] = useState<boolean>(false);
 
   // Derive quantity from cart state automatically
-  const cartItem = cartItems.find((item: any) => {
-    const pId = typeof item.product === 'object' ? item.product?._id : item.product;
+  const safeCartItems = Array.isArray(cartItems) ? cartItems : [];
+  const cartItem = safeCartItems.find((item: any) => {
+    const pId = typeof item?.product === 'object' ? item.product?._id : item?.product;
     return pId === product._id;
   });
   const currentCartQuantity = cartItem ? cartItem.quantity : 0;
@@ -104,6 +110,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <Image
           source={{ uri: imageUrl }}
           style={styles.image}
+          resizeMode="contain"
           onError={() => setImgError(true)}
         />
       </TouchableOpacity>
@@ -212,7 +219,6 @@ const styles = StyleSheet.create({
   image: {
     width: '85%',
     height: '85%',
-    resizeMode: 'contain',
   },
   contentBox: {
     padding: 10,

@@ -20,6 +20,9 @@ export interface IOrder extends Document {
   orderNumber: string;
   user?: mongoose.Types.ObjectId;
   customerType?: 'guest' | 'registered';
+  guestName?: string;
+  guestPhone?: string;
+  guestAddress?: any;
   shop: mongoose.Types.ObjectId;
   items: IOrderItem[];
   deliveryAddress: {
@@ -100,6 +103,9 @@ const OrderSchema: Schema = new Schema(
     orderNumber: { type: String, required: true, unique: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
     customerType: { type: String, enum: ['guest', 'registered'], default: 'guest' },
+    guestName: { type: String },
+    guestPhone: { type: String },
+    guestAddress: { type: Schema.Types.Mixed },
     shop: { type: Schema.Types.ObjectId, ref: 'Shop', required: true },
     items: [
       {

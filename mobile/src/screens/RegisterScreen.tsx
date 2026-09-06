@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Eye, EyeOff } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
@@ -9,8 +10,9 @@ import client, { setStoredToken } from '../api/client';
 import { BackButton } from '../components/BackButton';
 
 export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const { returnScreen, intendedProduct, intendedUnit } = route?.params || {};
+  const { returnTo, returnScreen, returnParams, intendedProduct, intendedUnit } = route?.params || {};
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
     const cleanName = name.trim();
     const cleanPhone = phone.trim();
     const cleanEmail = email.trim().toLowerCase();
-    const cleanUsername = username.trim();
+    const cleanUsername = username.trim() || `usr_${cleanPhone}`;
 
     if (!cleanName) {
       setError('Full name is required.');
@@ -39,24 +41,16 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
     }
 
     if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
-      setError('Enter a valid mobile number.');
+      setError('Enter a valid 10-digit mobile number.');
       return;
     }
 
-    if (!cleanEmail) {
-      setError('Email ID is required.');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(cleanEmail)) {
-      setError('Enter a valid email address.');
-      return;
-    }
-
-    if (!cleanUsername) {
-      setError('User ID is required.');
-      return;
+    if (cleanEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(cleanEmail)) {
+        setError('Enter a valid email address.');
+        return;
+      }
     }
 
     if (!password || password.length < 6) {
@@ -77,19 +71,20 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
         name: cleanName,
         mobileNumber: cleanPhone,
         phone: cleanPhone,
-        email: cleanEmail,
+        email: cleanEmail || undefined,
         userId: cleanUsername,
         username: cleanUsername,
         password,
         confirmPassword,
         role: 'CUSTOMER',
       });
+
       if (res.data.success) {
         const { user, token } = res.data;
         await setStoredToken(token);
         dispatch(setCredentials({ user, token }));
 
-        if (intendedProduct) {
+        if (intendedProduct && !returnParams?.directPurchaseItem) {
           try {
             await client.post('/cart/add', {
               productId: intendedProduct._id,
@@ -101,12 +96,9 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
           }
         }
 
-        if (returnScreen === 'Checkout') {
-          navigation.replace('Checkout');
-        } else if (returnScreen === 'AddAddress') {
-          navigation.replace('AddAddress');
-        } else if (returnScreen) {
-          navigation.replace(returnScreen);
+        const target = returnTo || returnScreen;
+        if (target) {
+          navigation.replace(target, returnParams || { intendedProduct, intendedUnit });
         } else {
           navigation.replace('MainTabs');
         }
@@ -119,7 +111,8 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={[styles.container, { paddingTop: Math.max(insets.top + 16, 24) }]} keyboardShouldPersistTaps="handled">
       <View style={styles.topBackRow}>
         <BackButton navigation={navigation} fallbackScreen="Login" />
       </View>
@@ -142,13 +135,8 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
         </View>
 
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Email ID *</Text>
+          <Text style={styles.label}>Email ID (Optional)</Text>
           <TextInput style={styles.input} placeholder="e.g. ravi@example.com" value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
-        </View>
-
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>User ID / Username *</Text>
-          <TextInput style={styles.input} placeholder="e.g. ravi123" value={username} onChangeText={setUsername} autoCapitalize="none" />
         </View>
 
         <View style={styles.inputGroup}>
@@ -197,12 +185,13 @@ export const RegisterScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
 
         <View style={styles.footerRow}>
           <Text style={styles.footerText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Login', { returnScreen, returnTo, returnParams, intendedProduct, intendedUnit })}>
             <Text style={styles.link}>Sign In</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

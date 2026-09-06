@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Phone, Check, ChevronLeft } from 'lucide-react-native';
 import client from '../api/client';
 import { Colors, Radii, Spacing } from '../theme';
@@ -7,6 +8,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
 
 export const OrderTrackingScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const { orderId } = route.params || {};
   const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -64,7 +66,7 @@ export const OrderTrackingScreen: React.FC<{ navigation: any; route: any }> = ({
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 90 }}>
         {/* Header: back arrow, centered "Order Tracking" */}
         <View style={styles.headerRow}>

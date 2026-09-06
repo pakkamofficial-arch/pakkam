@@ -2,1411 +2,6357 @@
   {
     "name": "Tomato",
     "category": "Vegetables",
-    "unit": "1 kg",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 10
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 18
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 35
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 68
+      }
+    ],
     "purchasePrice": 24,
-    "additionalCost": 3,
-    "mrp": 40,
-    "sellingPrice": 35,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 28,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 50,
-    "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/tomato,vegetable?lock=101",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality tomato delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Onion",
     "category": "Vegetables",
-    "unit": "1 kg",
-    "purchasePrice": 42,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 18
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      }
+    ],
+    "purchasePrice": 49,
     "additionalCost": 4,
-    "mrp": 65,
-    "sellingPrice": 58,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 48,
-    "stock": 80,
-    "image": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=800&q=80",
-    "isAvailable": true
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/onion,vegetable?lock=102",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality onion delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Potato",
     "category": "Vegetables",
-    "unit": "1 kg",
-    "purchasePrice": 22,
-    "additionalCost": 2,
-    "mrp": 45,
-    "sellingPrice": 38,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 26,
-    "stock": 100,
-    "image": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 22
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 42
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 80
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 195
+      }
+    ],
+    "purchasePrice": 26,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/potato,vegetable?lock=103",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality potato delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Green Chilli",
     "category": "Vegetables",
-    "unit": "250 g",
-    "purchasePrice": 15,
-    "additionalCost": 2,
-    "mrp": 25,
-    "sellingPrice": 20,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.15,
-    "minimumSellingPrice": 18,
-    "stock": 30,
-    "image": "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 10
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 22
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 40
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 75
+      }
+    ],
+    "purchasePrice": 68,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/green,chilli,pepper?lock=104",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green chilli delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Ginger",
     "category": "Vegetables",
-    "unit": "250 g",
-    "purchasePrice": 25,
-    "additionalCost": 3,
-    "mrp": 45,
-    "sellingPrice": 38,
-    "discountPercent": 16,
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 18
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 165
+      }
+    ],
+    "purchasePrice": 115,
+    "additionalCost": 5,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 30,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/ginger,root?lock=105",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ginger delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Garlic",
     "category": "Vegetables",
-    "unit": "250 g",
-    "purchasePrice": 40,
-    "additionalCost": 4,
-    "mrp": 70,
-    "sellingPrice": 58,
-    "discountPercent": 17,
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 30
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 75
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 145
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 280
+      }
+    ],
+    "purchasePrice": 225,
+    "additionalCost": 6,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 46,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?w=800&q=80",
-    "isAvailable": true
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/garlic,bulb?lock=106",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality garlic delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Carrot",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 25,
-    "additionalCost": 3,
-    "mrp": 45,
-    "sellingPrice": 38,
-    "discountPercent": 16,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 18
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      }
+    ],
+    "purchasePrice": 52,
+    "additionalCost": 5,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 30,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1598170845058-12ef4a45753b?w=800&q=80",
-    "isAvailable": true
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/carrot,vegetable?lock=107",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality carrot delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Beetroot",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 20,
-    "additionalCost": 2,
-    "mrp": 35,
-    "sellingPrice": 28,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 24,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 35,
-    "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/beetroot,vegetable?lock=108",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality beetroot delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Ladies Finger",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 22,
-    "additionalCost": 2,
-    "mrp": 38,
-    "sellingPrice": 32,
-    "discountPercent": 16,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 52
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 4,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 26,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1425543103986-224137c0d857?w=800&q=80",
-    "isAvailable": true
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/okra,ladies,finger?lock=109",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ladies finger delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Cabbage",
     "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 18
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 35
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 65
+      }
+    ],
+    "purchasePrice": 35,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/cabbage,vegetable?lock=110",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cabbage delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
     "unit": "1 pc",
-    "purchasePrice": 18,
-    "additionalCost": 2,
-    "mrp": 30,
-    "sellingPrice": 25,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 22,
-    "stock": 45,
-    "image": "https://images.unsplash.com/photo-1550081699-79c1c2e785e6?w=800&q=80",
-    "isAvailable": true
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ]
   },
   {
     "name": "Cauliflower",
     "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 45,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/cauliflower,vegetable?lock=111",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cauliflower delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
     "unit": "1 pc",
-    "purchasePrice": 25,
-    "additionalCost": 3,
-    "mrp": 45,
-    "sellingPrice": 36,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 30,
-    "stock": 35,
-    "image": "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=800&q=80",
-    "isAvailable": true
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ]
   },
   {
     "name": "Capsicum",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 30,
-    "additionalCost": 3,
-    "mrp": 50,
-    "sellingPrice": 42,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 35,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 18
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      }
+    ],
+    "purchasePrice": 50,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 30,
-    "image": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/green,capsicum,bell,pepper?lock=112",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality capsicum delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Bottle Gourd",
     "category": "Vegetables",
-    "unit": "1 pc",
-    "purchasePrice": 20,
-    "additionalCost": 2,
-    "mrp": 35,
-    "sellingPrice": 28,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 24,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 20
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 40
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 75
+      }
+    ],
+    "purchasePrice": 35,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 30,
-    "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/bottle,gourd?lock=113",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality bottle gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Bitter Gourd",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 25,
-    "additionalCost": 2,
-    "mrp": 45,
-    "sellingPrice": 35,
-    "discountPercent": 22,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 29,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1628773822503-930a85854652?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 16
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 50,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/bitter,gourd?lock=114",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality bitter gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Cucumber",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 16,
-    "additionalCost": 2,
-    "mrp": 30,
-    "sellingPrice": 24,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 20,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 12
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 22
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 40
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 75
+      }
+    ],
+    "purchasePrice": 34,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 40,
-    "image": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/cucumber,vegetable?lock=115",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cucumber delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Brinjal",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 20,
-    "additionalCost": 2,
-    "mrp": 35,
-    "sellingPrice": 28,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 24,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 52
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 35,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/brinjal,eggplant,aubergine?lock=116",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality brinjal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Ridge Gourd",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 22,
-    "additionalCost": 2,
-    "mrp": 40,
-    "sellingPrice": 32,
-    "discountPercent": 20,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 45,
+    "additionalCost": 4,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 26,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/ridge,gourd,sponge,gourd?lock=117",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ridge gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Snake Gourd",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 18,
-    "additionalCost": 2,
-    "mrp": 32,
-    "sellingPrice": 26,
-    "discountPercent": 19,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 22,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 52
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 44,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/snake,gourd?lock=118",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality snake gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Pumpkin",
     "category": "Vegetables",
-    "unit": "1 kg",
-    "purchasePrice": 20,
-    "additionalCost": 3,
-    "mrp": 35,
-    "sellingPrice": 28,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 25,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 15
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 30
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 55
+      }
+    ],
+    "purchasePrice": 25,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 30,
-    "image": "https://images.unsplash.com/photo-1506917728037-b6af01a7d403?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/pumpkin,vegetable?lock=119",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pumpkin delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "unit": "1 pc",
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ]
   },
   {
     "name": "Drumstick",
     "category": "Vegetables",
-    "unit": "250 g",
-    "purchasePrice": 20,
-    "additionalCost": 2,
-    "mrp": 35,
-    "sellingPrice": 28,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 24,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 18
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 32
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 25,
-    "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/drumstick,moringa?lock=120",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality drumstick delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Radish",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 15,
-    "additionalCost": 2,
-    "mrp": 28,
-    "sellingPrice": 22,
-    "discountPercent": 21,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 19,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 12
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 22
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 42
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 80
+      }
+    ],
+    "purchasePrice": 38,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 30,
-    "image": "https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Lemon",
-    "category": "Vegetables",
-    "unit": "4 pcs",
-    "purchasePrice": 12,
-    "additionalCost": 1,
-    "mrp": 25,
-    "sellingPrice": 20,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.35,
-    "minimumSellingPrice": 15,
-    "stock": 60,
-    "image": "https://images.unsplash.com/photo-1534531141161-e41d133a8979?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/radish,vegetable?lock=121",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality radish delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Coriander Leaves",
     "category": "Vegetables",
-    "unit": "1 bunch",
-    "purchasePrice": 8,
-    "additionalCost": 1,
-    "mrp": 15,
-    "sellingPrice": 12,
-    "discountPercent": 20,
+    "unitOptions": [
+      {
+        "unit": "1 bunch",
+        "multiplier": 1,
+        "mrp": 15
+      },
+      {
+        "unit": "2 bunches",
+        "multiplier": 2,
+        "mrp": 28
+      }
+    ],
+    "purchasePrice": 7,
+    "additionalCost": 2,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 10,
     "stock": 50,
-    "image": "https://images.unsplash.com/photo-1588879460618-9249e7d947d1?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/coriander,cilantro,leaves?lock=122",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality coriander leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Mint Leaves",
     "category": "Vegetables",
-    "unit": "1 bunch",
-    "purchasePrice": 7,
-    "additionalCost": 1,
-    "mrp": 15,
-    "sellingPrice": 10,
-    "discountPercent": 33,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 9,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "1 bunch",
+        "multiplier": 1,
+        "mrp": 12
+      },
+      {
+        "unit": "2 bunches",
+        "multiplier": 2,
+        "mrp": 22
+      }
+    ],
+    "purchasePrice": 6,
+    "additionalCost": 2,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/mint,leaves,herb?lock=123",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mint leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Curry Leaves",
     "category": "Vegetables",
-    "unit": "1 bunch",
-    "purchasePrice": 4,
-    "additionalCost": 1,
-    "mrp": 10,
-    "sellingPrice": 8,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.35,
-    "minimumSellingPrice": 6,
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 8
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 15
+      },
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 28
+      }
+    ],
+    "purchasePrice": 38,
+    "additionalCost": 2,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 40,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/curry,leaves?lock=124",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality curry leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Spinach",
     "category": "Vegetables",
-    "unit": "1 bunch",
-    "purchasePrice": 12,
+    "unitOptions": [
+      {
+        "unit": "1 bunch",
+        "multiplier": 1,
+        "mrp": 15
+      },
+      {
+        "unit": "2 bunches",
+        "multiplier": 2,
+        "mrp": 28
+      },
+      {
+        "unit": "4 bunches",
+        "multiplier": 4,
+        "mrp": 50
+      }
+    ],
+    "purchasePrice": 16,
     "additionalCost": 2,
-    "mrp": 25,
-    "sellingPrice": 20,
-    "discountPercent": 20,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 15,
-    "stock": 35,
-    "image": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=800&q=80",
-    "isAvailable": true
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/spinach,leaves?lock=125",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality spinach delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Green Peas",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 45,
-    "additionalCost": 4,
-    "mrp": 80,
-    "sellingPrice": 65,
-    "discountPercent": 19,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 25
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 50
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 95
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 180
+      }
+    ],
+    "purchasePrice": 60,
+    "additionalCost": 5,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 52,
     "stock": 25,
-    "image": "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/green,peas?lock=126",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green peas delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "French Beans",
     "category": "Vegetables",
-    "unit": "500 g",
-    "purchasePrice": 35,
-    "additionalCost": 3,
-    "mrp": 60,
-    "sellingPrice": 48,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 40,
-    "stock": 30,
-    "image": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 28
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 52
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 100
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 90,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/french,beans,vegetable?lock=127",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality french beans delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Sweet Corn",
     "category": "Vegetables",
-    "unit": "2 pcs",
-    "purchasePrice": 20,
-    "additionalCost": 2,
-    "mrp": 35,
-    "sellingPrice": 30,
-    "discountPercent": 14,
+    "unitOptions": [
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 20
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 38
+      },
+      {
+        "unit": "4 pieces",
+        "multiplier": 4,
+        "mrp": 72
+      }
+    ],
+    "purchasePrice": 15,
+    "additionalCost": 3,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 24,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/sweet,corn,cob?lock=128",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality sweet corn delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Raw Banana",
     "category": "Vegetables",
-    "unit": "3 pcs",
-    "purchasePrice": 18,
-    "additionalCost": 2,
-    "mrp": 30,
-    "sellingPrice": 25,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 22,
+    "unitOptions": [
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 15
+      },
+      {
+        "unit": "4 pieces",
+        "multiplier": 4,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 30
+      }
+    ],
+    "purchasePrice": 14,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 35,
-    "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/raw,green,banana?lock=129",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality raw banana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Mushroom",
     "category": "Vegetables",
-    "unit": "200 g",
-    "purchasePrice": 38,
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 85,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/button,mushroom?lock=130",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mushroom delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Broccoli",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 30
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 85,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/broccoli,vegetable?lock=131",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality broccoli delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Zucchini",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 35
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      }
+    ],
+    "purchasePrice": 95,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/zucchini,courgette?lock=132",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality zucchini delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Spring Onion",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "1 bunch",
+        "multiplier": 1,
+        "mrp": 20
+      },
+      {
+        "unit": "2 bunches",
+        "multiplier": 2,
+        "mrp": 38
+      }
+    ],
+    "purchasePrice": 15,
     "additionalCost": 3,
-    "mrp": 60,
-    "sellingPrice": 50,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 44,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/spring,onion,scallion?lock=133",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality spring onion delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Celery",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "1 bunch",
+        "multiplier": 1,
+        "mrp": 35
+      },
+      {
+        "unit": "2 bunches",
+        "multiplier": 2,
+        "mrp": 65
+      }
+    ],
+    "purchasePrice": 28,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/celery,stalks?lock=134",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality celery delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Turnip",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 12
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 22
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 42
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 80
+      }
+    ],
+    "purchasePrice": 32,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 25,
-    "image": "https://images.unsplash.com/photo-1504470695779-75300268aa0e?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/turnip,vegetable?lock=135",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality turnip delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Ash Gourd",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 15
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 30
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 55
+      }
+    ],
+    "purchasePrice": 20,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/ash,gourd,winter,melon?lock=136",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ash gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Ivy Gourd",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/ivy,gourd,coccinia?lock=137",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality ivy gourd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cluster Beans",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 15
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 48,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/cluster,beans,guar?lock=138",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cluster beans delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Sweet Potato",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 250
+      }
+    ],
+    "purchasePrice": 40,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/sweet,potato,root?lock=139",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality sweet potato delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Yam",
+    "category": "Vegetables",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      }
+    ],
+    "purchasePrice": 45,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/yam,tuber,vegetable?lock=140",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality yam delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Banana",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 30,
-    "additionalCost": 3,
-    "mrp": 50,
-    "sellingPrice": 42,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 35,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 60
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 115
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/banana,fruit?lock=201",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality banana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Apple",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 110,
-    "additionalCost": 10,
-    "mrp": 180,
-    "sellingPrice": 150,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 130,
-    "stock": 30,
-    "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 55
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 105
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 200
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 390
+      }
+    ],
+    "purchasePrice": 125,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/red,apple,fruit?lock=202",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality apple delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Pomegranate",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 130,
-    "additionalCost": 10,
-    "mrp": 200,
-    "sellingPrice": 170,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 150,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 40
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 145
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 280
+      }
+    ],
+    "purchasePrice": 115,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/pomegranate,fruit?lock=203",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pomegranate delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Mosambi",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 55,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 60
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 115
+      }
+    ],
+    "purchasePrice": 40,
     "additionalCost": 5,
-    "mrp": 90,
-    "sellingPrice": 75,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 65,
-    "stock": 30,
-    "image": "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=800&q=80",
-    "isAvailable": true
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/sweet,lime,mosambi?lock=204",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mosambi delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Orange",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 60,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 40
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 80
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 150
+      }
+    ],
+    "purchasePrice": 63,
     "additionalCost": 5,
-    "mrp": 100,
-    "sellingPrice": 80,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 70,
-    "stock": 30,
-    "image": "https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80",
-    "isAvailable": true
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/orange,fruit?lock=205",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality orange delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Papaya",
     "category": "Fruits",
-    "unit": "1 pc",
-    "purchasePrice": 35,
-    "additionalCost": 4,
-    "mrp": 60,
-    "sellingPrice": 48,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 42,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 70
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 130
+      }
+    ],
+    "purchasePrice": 40,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/papaya,fruit?lock=206",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality papaya delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Watermelon",
     "category": "Fruits",
-    "unit": "1 pc",
-    "purchasePrice": 40,
+    "unitOptions": [
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 30
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 55
+      },
+      {
+        "unit": "4 kg",
+        "multiplier": 4,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 21,
     "additionalCost": 5,
-    "mrp": 75,
-    "sellingPrice": 60,
-    "discountPercent": 20,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 48,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1587049352847-4a222e784d38?w=800&q=80",
-    "isAvailable": true
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/watermelon,fruit?lock=207",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality watermelon delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Guava",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 50,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 20
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 70
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 135
+      }
+    ],
+    "purchasePrice": 53,
     "additionalCost": 5,
-    "mrp": 80,
-    "sellingPrice": 68,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 58,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1536511135882-96f7c46f6341?w=800&q=80",
-    "isAvailable": true
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/guava,fruit?lock=208",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality guava delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Chikoo",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 45,
-    "additionalCost": 4,
-    "mrp": 75,
-    "sellingPrice": 60,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 52,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 25
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 45
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 85
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 165
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/sapodilla,chikoo,fruit?lock=209",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality chikoo delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Green Grapes",
     "category": "Fruits",
-    "unit": "500 g",
-    "purchasePrice": 45,
-    "additionalCost": 4,
-    "mrp": 80,
-    "sellingPrice": 65,
-    "discountPercent": 19,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 80
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 150
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 290
+      }
+    ],
+    "purchasePrice": 115,
+    "additionalCost": 7,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 52,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1596368708386-5d0f67975459?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/green,grapes,fruit?lock=210",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality green grapes delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Black Grapes",
     "category": "Fruits",
-    "unit": "500 g",
-    "purchasePrice": 55,
-    "additionalCost": 4,
-    "mrp": 95,
-    "sellingPrice": 78,
-    "discountPercent": 18,
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 160
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 310
+      }
+    ],
+    "purchasePrice": 120,
+    "additionalCost": 7,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 62,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/black,grapes,fruit?lock=211",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality black grapes delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Pineapple",
     "category": "Fruits",
-    "unit": "1 pc",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 120
+      }
+    ],
     "purchasePrice": 45,
-    "additionalCost": 5,
-    "mrp": 80,
-    "sellingPrice": 65,
-    "discountPercent": 19,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 54,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&q=80",
-    "isAvailable": true
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/pineapple,fruit?lock=212",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pineapple delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Mango",
     "category": "Fruits",
-    "unit": "1 kg",
-    "purchasePrice": 180,
-    "additionalCost": 15,
-    "mrp": 300,
-    "sellingPrice": 240,
-    "discountPercent": 20,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 210,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 30
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 100
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 70,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/mango,fruit?lock=213",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality mango delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Kiwi",
     "category": "Fruits",
-    "unit": "3 pcs",
-    "purchasePrice": 65,
-    "additionalCost": 5,
-    "mrp": 110,
-    "sellingPrice": 90,
-    "discountPercent": 18,
-    "targetProfitMargin": 0.22,
-    "minimumSellingPrice": 75,
-    "stock": 25,
-    "image": "https://images.unsplash.com/photo-1585059819970-31190d6ff3ec?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 55
+      },
+      {
+        "unit": "4 pieces",
+        "multiplier": 4,
+        "mrp": 105
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 130
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 250
+      }
+    ],
+    "purchasePrice": 180,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/kiwi,fruit?lock=214",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality kiwi delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Dragon Fruit",
     "category": "Fruits",
-    "unit": "1 pc",
-    "purchasePrice": 50,
-    "additionalCost": 5,
-    "mrp": 90,
-    "sellingPrice": 75,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 60,
-    "stock": 20,
-    "image": "https://images.unsplash.com/photo-1527325678964-549216468488?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Basmati Rice",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 95,
-    "additionalCost": 5,
-    "mrp": 150,
-    "sellingPrice": 125,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 108,
-    "stock": 60,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Sona Masoori Rice",
-    "category": "Groceries",
-    "unit": "5 kg",
-    "purchasePrice": 260,
-    "additionalCost": 15,
-    "mrp": 360,
-    "sellingPrice": 315,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.12,
-    "minimumSellingPrice": 290,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Wheat Flour",
-    "category": "Groceries",
-    "unit": "5 kg",
-    "purchasePrice": 210,
-    "additionalCost": 10,
-    "mrp": 280,
-    "sellingPrice": 250,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.12,
-    "minimumSellingPrice": 230,
-    "stock": 50,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Maida",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 36,
-    "additionalCost": 3,
-    "mrp": 55,
-    "sellingPrice": 46,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.15,
-    "minimumSellingPrice": 41,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Sooji Rava",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 34,
-    "additionalCost": 2,
-    "mrp": 55,
-    "sellingPrice": 46,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.21,
-    "minimumSellingPrice": 39,
-    "stock": 90,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Toor Dal",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 115,
-    "additionalCost": 5,
-    "mrp": 165,
-    "sellingPrice": 145,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.17,
-    "minimumSellingPrice": 130,
-    "stock": 90,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Moong Dal",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 92,
-    "additionalCost": 4,
-    "mrp": 135,
-    "sellingPrice": 120,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 105,
-    "stock": 85,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Urad Dal",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 102,
-    "additionalCost": 4,
-    "mrp": 150,
-    "sellingPrice": 132,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.19,
-    "minimumSellingPrice": 115,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Chana Dal",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 68,
-    "additionalCost": 3,
-    "mrp": 100,
-    "sellingPrice": 88,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.19,
-    "minimumSellingPrice": 78,
-    "stock": 110,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Masoor Dal",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 72,
-    "additionalCost": 3,
-    "mrp": 110,
-    "sellingPrice": 95,
-    "discountPercent": 14,
-    "targetProfitMargin": 0.21,
-    "minimumSellingPrice": 82,
-    "stock": 65,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Kabuli Chana",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 98,
-    "additionalCost": 4,
-    "mrp": 160,
-    "sellingPrice": 138,
-    "discountPercent": 14,
-    "targetProfitMargin": 0.26,
-    "minimumSellingPrice": 112,
-    "stock": 50,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Rajma",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 105,
-    "additionalCost": 5,
-    "mrp": 170,
-    "sellingPrice": 145,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 120,
-    "stock": 40,
-    "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Sunflower Oil",
-    "category": "Groceries",
-    "unit": "1 L",
-    "purchasePrice": 105,
-    "additionalCost": 4,
-    "mrp": 145,
-    "sellingPrice": 128,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.14,
-    "minimumSellingPrice": 118,
-    "stock": 140,
-    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Mustard Oil",
-    "category": "Groceries",
-    "unit": "1 L",
-    "purchasePrice": 128,
-    "additionalCost": 5,
-    "mrp": 180,
-    "sellingPrice": 162,
-    "discountPercent": 10,
-    "targetProfitMargin": 0.17,
-    "minimumSellingPrice": 145,
-    "stock": 95,
-    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Sugar",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 36,
-    "additionalCost": 2,
-    "mrp": 50,
-    "sellingPrice": 44,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.13,
-    "minimumSellingPrice": 40,
-    "stock": 300,
-    "image": "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Jaggery",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 45,
-    "additionalCost": 3,
-    "mrp": 75,
-    "sellingPrice": 62,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.22,
-    "minimumSellingPrice": 52,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Salt",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 18,
-    "additionalCost": 2,
-    "mrp": 28,
-    "sellingPrice": 25,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 22,
-    "stock": 250,
-    "image": "https://images.unsplash.com/photo-1518110168401-f2841ee59280?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Poha",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 42,
-    "additionalCost": 3,
-    "mrp": 70,
-    "sellingPrice": 58,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.22,
-    "minimumSellingPrice": 48,
-    "stock": 80,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Besan",
-    "category": "Groceries",
-    "unit": "1 kg",
-    "purchasePrice": 74,
-    "additionalCost": 4,
-    "mrp": 120,
-    "sellingPrice": 98,
-    "discountPercent": 18,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 84,
-    "stock": 110,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Tea",
-    "category": "Groceries",
-    "unit": "500 g",
+    "unitOptions": [
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 70
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 135
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 190
+      }
+    ],
     "purchasePrice": 140,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/dragon,fruit?lock=215",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality dragon fruit delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Strawberry",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "125 g",
+        "multiplier": 0.125,
+        "mrp": 70
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 125
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 240
+      }
+    ],
+    "purchasePrice": 300,
+    "additionalCost": 10,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/strawberry,fruit?lock=216",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality strawberry delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Blueberry",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "125 g",
+        "multiplier": 0.125,
+        "mrp": 150
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 290
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 560
+      }
+    ],
+    "purchasePrice": 650,
+    "additionalCost": 12,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 10,
+    "image": "https://loremflickr.com/600/600/blueberry,fruit?lock=217",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality blueberry delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Raspberry",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "125 g",
+        "multiplier": 0.125,
+        "mrp": 180
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 350
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 680
+      }
+    ],
+    "purchasePrice": 750,
+    "additionalCost": 12,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 10,
+    "image": "https://loremflickr.com/600/600/raspberry,fruit?lock=218",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality raspberry delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Blackberry",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "125 g",
+        "multiplier": 0.125,
+        "mrp": 180
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 350
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 680
+      }
+    ],
+    "purchasePrice": 750,
+    "additionalCost": 12,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 10,
+    "image": "https://loremflickr.com/600/600/blackberry,fruit?lock=219",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality blackberry delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Pear",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 50
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 95
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 180
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 350
+      }
+    ],
+    "purchasePrice": 110,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/pear,fruit?lock=220",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality pear delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Plum",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 75
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 140
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 270
+      }
+    ],
+    "purchasePrice": 280,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/plum,fruit?lock=221",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality plum delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Peach",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 65
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 125
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 240
+      }
+    ],
+    "purchasePrice": 230,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/peach,fruit?lock=222",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality peach delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cherry",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "125 g",
+        "multiplier": 0.125,
+        "mrp": 90
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 175
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 340
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 650
+      }
+    ],
+    "purchasePrice": 600,
+    "additionalCost": 12,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 10,
+    "image": "https://loremflickr.com/600/600/cherry,fruit?lock=223",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality cherry delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Muskmelon",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 20
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 40
+      },
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 28,
     "additionalCost": 5,
-    "mrp": 220,
-    "sellingPrice": 195,
-    "discountPercent": 11,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 160,
-    "stock": 75,
-    "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
-    "isAvailable": true
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/muskmelon,cantaloupe,fruit?lock=224",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality muskmelon delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Coffee Powder",
-    "category": "Groceries",
-    "unit": "100 g",
+    "name": "Custard Apple",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 40
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 80
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 150
+      }
+    ],
+    "purchasePrice": 54,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/custard,apple,fruit?lock=225",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality custard apple delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Jackfruit",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 165
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 320
+      }
+    ],
     "purchasePrice": 135,
-    "additionalCost": 4,
-    "mrp": 210,
-    "sellingPrice": 185,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 155,
-    "stock": 60,
-    "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Turmeric Powder",
-    "category": "Spices",
-    "unit": "200 g",
-    "purchasePrice": 28,
-    "additionalCost": 1,
-    "mrp": 50,
-    "sellingPrice": 42,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.31,
-    "minimumSellingPrice": 32,
-    "stock": 120,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Red Chilli Powder",
-    "category": "Spices",
-    "unit": "200 g",
-    "purchasePrice": 44,
-    "additionalCost": 2,
-    "mrp": 80,
-    "sellingPrice": 68,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.32,
-    "minimumSellingPrice": 52,
-    "stock": 100,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Coriander Powder",
-    "category": "Spices",
-    "unit": "200 g",
-    "purchasePrice": 30,
-    "additionalCost": 1,
-    "mrp": 55,
-    "sellingPrice": 46,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.32,
-    "minimumSellingPrice": 35,
-    "stock": 95,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Cumin Seeds",
-    "category": "Spices",
-    "unit": "200 g",
-    "purchasePrice": 68,
-    "additionalCost": 2,
-    "mrp": 120,
-    "sellingPrice": 98,
-    "discountPercent": 18,
-    "targetProfitMargin": 0.28,
-    "minimumSellingPrice": 78,
-    "stock": 80,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Black Pepper",
-    "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 72,
-    "additionalCost": 3,
-    "mrp": 130,
-    "sellingPrice": 110,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.31,
-    "minimumSellingPrice": 82,
-    "stock": 50,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Garam Masala",
-    "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 42,
-    "additionalCost": 2,
-    "mrp": 75,
-    "sellingPrice": 64,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.31,
-    "minimumSellingPrice": 48,
-    "stock": 110,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Shampoo Anti-Dandruff",
-    "category": "Personal Care",
-    "unit": "180 ml",
-    "purchasePrice": 105,
-    "additionalCost": 4,
-    "mrp": 165,
-    "sellingPrice": 145,
-    "discountPercent": 12,
+    "additionalCost": 8,
+    "discountPercent": 0,
     "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 122,
-    "stock": 60,
-    "image": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=800&q=80",
-    "isAvailable": true
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/jackfruit,fruit?lock=226",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality jackfruit delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Coconut Hair Oil",
-    "category": "Personal Care",
-    "unit": "200 ml",
-    "purchasePrice": 72,
-    "additionalCost": 3,
-    "mrp": 110,
-    "sellingPrice": 98,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 82,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1608248597263-00de46808261?w=800&q=80",
-    "isAvailable": true
+    "name": "Litchi",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 85
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 165
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 320
+      }
+    ],
+    "purchasePrice": 250,
+    "additionalCost": 10,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/lychee,litchi,fruit?lock=227",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality litchi delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Toothpaste",
-    "category": "Personal Care",
-    "unit": "150 g",
-    "purchasePrice": 62,
-    "additionalCost": 2,
-    "mrp": 95,
-    "sellingPrice": 84,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 70,
-    "stock": 90,
-    "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80",
-    "isAvailable": true
+    "name": "Passion Fruit",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 100
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 190
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 360
+      }
+    ],
+    "purchasePrice": 280,
+    "additionalCost": 10,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/passion,fruit?lock=228",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality passion fruit delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Toothbrush Soft",
-    "category": "Personal Care",
+    "name": "Avocado",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 105
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 125
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 240
+      }
+    ],
+    "purchasePrice": 190,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/avocado,fruit?lock=229",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality avocado delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Coconut",
+    "category": "Fruits",
+    "unitOptions": [
+      {
+        "unit": "1 piece",
+        "multiplier": 1,
+        "mrp": 35
+      },
+      {
+        "unit": "2 pieces",
+        "multiplier": 2,
+        "mrp": 68
+      },
+      {
+        "unit": "5 pieces",
+        "multiplier": 5,
+        "mrp": 165
+      }
+    ],
+    "purchasePrice": 28,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/coconut,fruit?lock=230",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality coconut delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
     "unit": "1 pc",
-    "purchasePrice": 28,
-    "additionalCost": 1,
-    "mrp": 45,
-    "sellingPrice": 39,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 31,
-    "stock": 100,
-    "image": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Face Wash",
-    "category": "Personal Care",
-    "unit": "100 ml",
-    "purchasePrice": 85,
-    "additionalCost": 3,
-    "mrp": 135,
-    "sellingPrice": 119,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 100,
-    "stock": 55,
-    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Moisturizing Cream",
-    "category": "Personal Care",
-    "unit": "100 ml",
-    "purchasePrice": 95,
-    "additionalCost": 4,
-    "mrp": 150,
-    "sellingPrice": 132,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 110,
-    "stock": 50,
-    "image": "https://images.unsplash.com/photo-1608248597263-00de46808261?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Hand Wash Liquid",
-    "category": "Personal Care",
-    "unit": "250 ml",
-    "purchasePrice": 58,
-    "additionalCost": 2,
-    "mrp": 90,
-    "sellingPrice": 78,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.25,
-    "minimumSellingPrice": 65,
-    "stock": 75,
-    "image": "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Tissue Paper Roll",
-    "category": "Household Essentials",
-    "unit": "4 rolls",
-    "purchasePrice": 65,
-    "additionalCost": 3,
-    "mrp": 105,
-    "sellingPrice": 92,
-    "discountPercent": 12,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 76,
-    "stock": 60,
-    "image": "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Garbage Bags Medium",
-    "category": "Household Essentials",
-    "unit": "30 bags",
-    "purchasePrice": 48,
-    "additionalCost": 2,
-    "mrp": 80,
-    "sellingPrice": 69,
-    "discountPercent": 14,
-    "targetProfitMargin": 0.27,
-    "minimumSellingPrice": 56,
-    "stock": 80,
-    "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Aluminium Foil",
-    "category": "Household Essentials",
-    "unit": "9 m",
-    "purchasePrice": 55,
-    "additionalCost": 2,
-    "mrp": 90,
-    "sellingPrice": 78,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.24,
-    "minimumSellingPrice": 63,
-    "stock": 55,
-    "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80",
-    "isAvailable": true
-  },
-  {
-    "name": "Dishwash Scrub Pad",
-    "category": "Household Essentials",
-    "unit": "3 pcs",
-    "purchasePrice": 18,
-    "additionalCost": 1,
-    "mrp": 35,
-    "sellingPrice": 29,
-    "discountPercent": 17,
-    "targetProfitMargin": 0.34,
-    "minimumSellingPrice": 22,
-    "stock": 100,
-    "image": "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=800&q=80",
-    "isAvailable": true
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ]
   },
   {
     "name": "Basmati Rice",
     "category": "Rice & Grains",
-    "unit": "5 kg",
-    "purchasePrice": 420,
-    "additionalCost": 12,
-    "mrp": 620,
-    "sellingPrice": 555,
-    "discountPercent": 10,
-    "targetProfitMargin": 0.22,
-    "minimumSellingPrice": 480,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 70
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 135
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 260
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 625
+      }
+    ],
+    "purchasePrice": 92,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
     "stock": 50,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "image": "https://loremflickr.com/600/600/basmati,rice?lock=301",
+    "isAvailable": true,
+    "brand": "Royal",
+    "description": "Premium quality Royal basmati rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Ponni Boiled Rice",
     "category": "Rice & Grains",
-    "unit": "5 kg",
-    "purchasePrice": 285,
-    "additionalCost": 10,
-    "mrp": 390,
-    "sellingPrice": 355,
-    "discountPercent": 9,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 325,
-    "stock": 80,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 300
+      },
+      {
+        "unit": "10 kg",
+        "multiplier": 10,
+        "mrp": 580
+      }
+    ],
+    "purchasePrice": 43,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 60,
+    "image": "https://loremflickr.com/600/600/ponni,rice?lock=302",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune ponni boiled rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
   },
   {
     "name": "Idli Rice",
     "category": "Rice & Grains",
-    "unit": "5 kg",
-    "purchasePrice": 260,
-    "additionalCost": 10,
-    "mrp": 370,
-    "sellingPrice": 335,
-    "discountPercent": 9,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 300,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 60
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 115
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 275
+      },
+      {
+        "unit": "10 kg",
+        "multiplier": 10,
+        "mrp": 530
+      }
+    ],
+    "purchasePrice": 40,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 60,
+    "image": "https://loremflickr.com/600/600/idli,rice?lock=303",
+    "isAvailable": true,
+    "brand": "India Gate",
+    "description": "Premium quality India Gate idli rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Wheat Flour (Atta)",
-    "category": "Flours",
-    "unit": "5 kg",
-    "purchasePrice": 225,
-    "additionalCost": 8,
-    "mrp": 320,
-    "sellingPrice": 285,
-    "discountPercent": 11,
-    "targetProfitMargin": 0.2,
-    "minimumSellingPrice": 250,
-    "stock": 65,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "name": "Brown Rice",
+    "category": "Rice & Grains",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 200
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 475
+      }
+    ],
+    "purchasePrice": 70,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/brown,rice?lock=304",
+    "isAvailable": true,
+    "brand": "Royal",
+    "description": "Premium quality Royal brown rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
-    "name": "Rava (Sooji)",
+    "name": "Red Rice",
+    "category": "Rice & Grains",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 50
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 95
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 180
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 425
+      }
+    ],
+    "purchasePrice": 64,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/red,rice,grain?lock=305",
+    "isAvailable": true,
+    "brand": "24 Mantra Organic",
+    "description": "Premium quality 24 Mantra Organic red rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Black Rice",
+    "category": "Rice & Grains",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 190
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 365
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 875
+      }
+    ],
+    "purchasePrice": 130,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/black,rice?lock=306",
+    "isAvailable": true,
+    "brand": "Daawat",
+    "description": "Premium quality Daawat black rice delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Foxtail Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 85,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/foxtail,millet?lock=307",
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select foxtail millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Pearl Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 45
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 85
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 165
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 395
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/pearl,millet?lock=308",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann pearl millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Finger Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 45
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 85
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 165
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 395
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/finger,millet,ragi?lock=309",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune finger millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Little Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 82,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/little,millet?lock=310",
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select little millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Barnyard Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 70
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 135
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 260
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 625
+      }
+    ],
+    "purchasePrice": 90,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/barnyard,millet?lock=311",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune barnyard millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Kodo Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 82,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/kodo,millet?lock=312",
+    "isAvailable": true,
+    "brand": "Pakkam Select",
+    "description": "Premium quality Pakkam Select kodo millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Proso Millet",
+    "category": "Millets",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 82,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/proso,millet?lock=313",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune proso millet delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Wheat Flour",
     "category": "Flours",
-    "unit": "1 kg",
-    "purchasePrice": 48,
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 250
+      }
+    ],
+    "purchasePrice": 38,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 60,
+    "image": "https://loremflickr.com/600/600/wheat,flour?lock=314",
+    "isAvailable": true,
+    "brand": "Pillsbury",
+    "description": "Premium quality Pillsbury wheat flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Maida",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 28
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 52
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 100
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 240
+      }
+    ],
+    "purchasePrice": 34,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/maida,flour?lock=315",
+    "isAvailable": true,
+    "brand": "Aashirvaad",
+    "description": "Premium quality Aashirvaad maida delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Rava",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 55
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 105
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 250
+      }
+    ],
+    "purchasePrice": 37,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/rava,semolina?lock=316",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann rava delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Besan Flour",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 45
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 85
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 165
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 395
+      }
+    ],
+    "purchasePrice": 58,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/besan,gram,flour?lock=317",
+    "isAvailable": true,
+    "brand": "Pillsbury",
+    "description": "Premium quality Pillsbury besan flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Rice Flour",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 300
+      }
+    ],
+    "purchasePrice": 43,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/rice,flour?lock=318",
+    "isAvailable": true,
+    "brand": "Golden Harvest",
+    "description": "Premium quality Golden Harvest rice flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Corn Flour",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 30
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 70,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/corn,flour?lock=319",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann corn flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Multigrain Flour",
+    "category": "Flours",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 85,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/multigrain,flour?lock=320",
+    "isAvailable": true,
+    "brand": "Aashirvaad",
+    "description": "Premium quality Aashirvaad multigrain flour delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Toor Dal",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 145
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 285
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 700
+      }
+    ],
+    "purchasePrice": 98,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/toor,dal?lock=401",
+    "isAvailable": true,
+    "brand": "24 Mantra Organic",
+    "description": "Premium quality 24 Mantra Organic toor dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Moong Dal",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 70
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 135
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 265
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 650
+      }
+    ],
+    "purchasePrice": 92,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/moong,dal?lock=402",
+    "isAvailable": true,
+    "brand": "24 Mantra Organic",
+    "description": "Premium quality 24 Mantra Organic moong dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Urad Dal",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 145
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 285
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 700
+      }
+    ],
+    "purchasePrice": 100,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/urad,dal?lock=403",
+    "isAvailable": true,
+    "brand": "24 Mantra Organic",
+    "description": "Premium quality 24 Mantra Organic urad dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Chana Dal",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 200
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 490
+      }
+    ],
+    "purchasePrice": 70,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/chana,dal?lock=404",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann chana dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Masoor Dal",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 82,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/masoor,dal?lock=405",
+    "isAvailable": true,
+    "brand": "Organic Tattva",
+    "description": "Premium quality Organic Tattva masoor dal delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Kabuli Chana",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 70
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 135
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 260
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 625
+      }
+    ],
+    "purchasePrice": 90,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/kabuli,chana?lock=406",
+    "isAvailable": true,
+    "brand": "Natureland",
+    "description": "Premium quality Natureland kabuli chana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Rajma",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 145
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 280
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 680
+      }
+    ],
+    "purchasePrice": 100,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/rajma,kidney,beans?lock=407",
+    "isAvailable": true,
+    "brand": "Natureland",
+    "description": "Premium quality Natureland rajma delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Black Chana",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 200
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 490
+      }
+    ],
+    "purchasePrice": 68,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/black,chana?lock=408",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann black chana delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "White Peas",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 50
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 95
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 180
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 435
+      }
+    ],
+    "purchasePrice": 62,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/white,peas?lock=409",
+    "isAvailable": true,
+    "brand": "Organic Tattva",
+    "description": "Premium quality Organic Tattva white peas delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Green Gram",
+    "category": "Pulses",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 575
+      }
+    ],
+    "purchasePrice": 82,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/green,gram,moong?lock=410",
+    "isAvailable": true,
+    "brand": "Tata Sampann",
+    "description": "Premium quality Tata Sampann green gram delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Sugar",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 25
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 48
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 92
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 225
+      }
+    ],
+    "purchasePrice": 40,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 80,
+    "image": "https://loremflickr.com/600/600/sugar?lock=411",
+    "isAvailable": true,
+    "brand": "Nirma",
+    "description": "Premium quality Nirma sugar delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Jaggery",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 40
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 75
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 145
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 350
+      }
+    ],
+    "purchasePrice": 52,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/jaggery?lock=412",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune jaggery delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Salt",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 12
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 22
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 42
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 14,
     "additionalCost": 2,
-    "mrp": 72,
-    "sellingPrice": 63,
-    "discountPercent": 13,
-    "targetProfitMargin": 0.23,
-    "minimumSellingPrice": 52,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
-    "isAvailable": true
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 100,
+    "image": "https://loremflickr.com/600/600/salt?lock=413",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata salt delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Poha",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 65
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 125
+      },
+      {
+        "unit": "5 kg",
+        "multiplier": 5,
+        "mrp": 300
+      }
+    ],
+    "purchasePrice": 42,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/poha,flattened,rice?lock=414",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata poha delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Vermicelli",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 20
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 45
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 85
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 165
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/vermicelli,semai?lock=415",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata vermicelli delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Soya Chunks",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 30
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 120
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 230
+      }
+    ],
+    "purchasePrice": 78,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/soya,chunks?lock=416",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata soya chunks delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Tamarind",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 35
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 65
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 125
+      },
+      {
+        "unit": "2 kg",
+        "multiplier": 2,
+        "mrp": 240
+      }
+    ],
+    "purchasePrice": 80,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/tamarind?lock=417",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata tamarind delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Coconut Powder",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 30
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 65
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 120
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 230
+      }
+    ],
+    "purchasePrice": 150,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/desiccated,coconut?lock=418",
+    "isAvailable": true,
+    "brand": "Tata",
+    "description": "Premium quality Tata coconut powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "unit": "1 pc",
+    "availableUnits": [
+      "1 pc",
+      "2 pcs",
+      "5 pcs"
+    ]
+  },
+  {
+    "name": "Baking Soda",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 15
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 30
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 55,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/baking,soda?lock=419",
+    "isAvailable": true,
+    "brand": "Sunpure",
+    "description": "Premium quality Sunpure baking soda delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Baking Powder",
+    "category": "Groceries",
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 25
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 55
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 105,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/baking,powder?lock=420",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune baking powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Turmeric Powder",
     "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 24,
-    "additionalCost": 1,
-    "mrp": 40,
-    "sellingPrice": 34,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.29,
-    "minimumSellingPrice": 28,
-    "stock": 90,
-    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 20
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 160
+      }
+    ],
+    "purchasePrice": 105,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/turmeric,powder?lock=501",
+    "isAvailable": true,
+    "brand": "Aachi",
+    "description": "Premium quality Aachi turmeric powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Red Chilli Powder",
     "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 30,
-    "additionalCost": 1,
-    "mrp": 48,
-    "sellingPrice": 41,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.29,
-    "minimumSellingPrice": 34,
-    "stock": 90,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 25
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 55
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 105
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 200
+      }
+    ],
+    "purchasePrice": 135,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/red,chilli,powder?lock=502",
+    "isAvailable": true,
+    "brand": "MTR",
+    "description": "Premium quality MTR red chilli powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Coriander Powder",
     "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 22,
-    "additionalCost": 1,
-    "mrp": 38,
-    "sellingPrice": 32,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.28,
-    "minimumSellingPrice": 27,
-    "stock": 85,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 20
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 160
+      }
+    ],
+    "purchasePrice": 105,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/coriander,powder?lock=503",
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch coriander powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cumin Seeds",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 25
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 45
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 100
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 380,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/cumin,seeds?lock=504",
+    "isAvailable": true,
+    "brand": "MDH",
+    "description": "Premium quality MDH cumin seeds delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Black Pepper",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 35
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 65
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 150
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 285
+      }
+    ],
+    "purchasePrice": 580,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/black,pepper?lock=505",
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest black pepper delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Garam Masala",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 25
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 45
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 100
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 280,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/garam,masala?lock=506",
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest garam masala delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Sambar Powder",
     "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 38,
-    "additionalCost": 2,
-    "mrp": 65,
-    "sellingPrice": 55,
-    "discountPercent": 15,
-    "targetProfitMargin": 0.28,
-    "minimumSellingPrice": 45,
-    "stock": 70,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 30
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 65
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 120
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 230
+      }
+    ],
+    "purchasePrice": 155,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/sambar,powder?lock=507",
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest sambar powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
   },
   {
     "name": "Rasam Powder",
     "category": "Spices",
-    "unit": "100 g",
-    "purchasePrice": 36,
-    "additionalCost": 2,
-    "mrp": 62,
-    "sellingPrice": 52,
-    "discountPercent": 16,
-    "targetProfitMargin": 0.27,
-    "minimumSellingPrice": 43,
-    "stock": 65,
-    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80",
-    "isAvailable": true
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 30
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 65
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 120
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 230
+      }
+    ],
+    "purchasePrice": 150,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/rasam,powder?lock=508",
+    "isAvailable": true,
+    "brand": "Eastern",
+    "description": "Premium quality Eastern rasam powder delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Mustard Seeds",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 15
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 28
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 60
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 110
+      }
+    ],
+    "purchasePrice": 145,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/mustard,seeds?lock=509",
+    "isAvailable": true,
+    "brand": "MDH",
+    "description": "Premium quality MDH mustard seeds delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Fennel Seeds",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 20
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 35
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 80
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 150
+      }
+    ],
+    "purchasePrice": 200,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/fennel,seeds?lock=510",
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch fennel seeds delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Fenugreek Seeds",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 15
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 28
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 60
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 110
+      }
+    ],
+    "purchasePrice": 135,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/fenugreek,seeds?lock=511",
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch fenugreek seeds delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cardamom",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "10 g",
+        "multiplier": 0.01,
+        "mrp": 45
+      },
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 105
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 200
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 390
+      }
+    ],
+    "purchasePrice": 3600,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 15,
+    "image": "https://loremflickr.com/600/600/cardamom,spice?lock=512",
+    "isAvailable": true,
+    "brand": "Aachi",
+    "description": "Premium quality Aachi cardamom delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cloves",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 35
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 65
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 125
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 300
+      }
+    ],
+    "purchasePrice": 1150,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/cloves,spice?lock=513",
+    "isAvailable": true,
+    "brand": "MDH",
+    "description": "Premium quality MDH cloves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Cinnamon",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 25
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 45
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 85
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 200
+      }
+    ],
+    "purchasePrice": 750,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/cinnamon,sticks?lock=514",
+    "isAvailable": true,
+    "brand": "MTR",
+    "description": "Premium quality MTR cinnamon delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Bay Leaves",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "10 g",
+        "multiplier": 0.01,
+        "mrp": 15
+      },
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 30
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 55
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 400,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 25,
+    "image": "https://loremflickr.com/600/600/bay,leaves,spice?lock=515",
+    "isAvailable": true,
+    "brand": "Aachi",
+    "description": "Premium quality Aachi bay leaves delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Star Anise",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "10 g",
+        "multiplier": 0.01,
+        "mrp": 25
+      },
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 55
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 100
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 190
+      }
+    ],
+    "purchasePrice": 700,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/star,anise,spice?lock=516",
+    "isAvailable": true,
+    "brand": "MDH",
+    "description": "Premium quality MDH star anise delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Asafoetida",
+    "category": "Spices",
+    "unitOptions": [
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 35
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 65
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 120
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 280
+      }
+    ],
+    "purchasePrice": 950,
+    "additionalCost": 7,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/asafoetida,hing,spice?lock=517",
+    "isAvailable": true,
+    "brand": "Everest",
+    "description": "Premium quality Everest asafoetida delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Oregano",
+    "category": "Seasonings",
+    "unitOptions": [
+      {
+        "unit": "10 g",
+        "multiplier": 0.01,
+        "mrp": 25
+      },
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 50
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 90
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 170
+      }
+    ],
+    "purchasePrice": 650,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/oregano,herb?lock=518",
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch oregano delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "name": "Mixed Herbs",
+    "category": "Seasonings",
+    "unitOptions": [
+      {
+        "unit": "10 g",
+        "multiplier": 0.01,
+        "mrp": 25
+      },
+      {
+        "unit": "25 g",
+        "multiplier": 0.025,
+        "mrp": 50
+      },
+      {
+        "unit": "50 g",
+        "multiplier": 0.05,
+        "mrp": 90
+      },
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 170
+      }
+    ],
+    "purchasePrice": 600,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 20,
+    "image": "https://loremflickr.com/600/600/mixed,herbs,seasoning?lock=519",
+    "isAvailable": true,
+    "brand": "Catch",
+    "description": "Premium quality Catch mixed herbs delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil601",
+    "name": "Sunflower Oil",
+    "category": "Cooking Oils",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 145
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 285
+      },
+      {
+        "unit": "5 L",
+        "multiplier": 5,
+        "mrp": 690
+      }
+    ],
+    "purchasePrice": 125,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/sunflower-oil,cooking-oil?lock=601",
+    "isAvailable": true,
+    "brand": "Freedom",
+    "description": "Premium quality Freedom sunflower oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil602",
+    "name": "Groundnut Oil",
+    "category": "Cooking Oils",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 195
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 380
+      },
+      {
+        "unit": "5 L",
+        "multiplier": 5,
+        "mrp": 925
+      }
+    ],
+    "purchasePrice": 165,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/groundnut-oil,peanut-oil?lock=602",
+    "isAvailable": true,
+    "brand": "Fortune",
+    "description": "Premium quality Fortune groundnut oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil603",
+    "name": "Coconut Oil",
+    "category": "Cooking Oils",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 110
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 215
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 420
+      },
+      {
+        "unit": "5 L",
+        "multiplier": 5,
+        "mrp": 1025
+      }
+    ],
+    "purchasePrice": 185,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/coconut-oil?lock=603",
+    "isAvailable": true,
+    "brand": "Freedom",
+    "description": "Premium quality Freedom coconut oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil604",
+    "name": "Mustard Oil",
+    "category": "Cooking Oils",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 100
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 195
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 380
+      },
+      {
+        "unit": "5 L",
+        "multiplier": 5,
+        "mrp": 925
+      }
+    ],
+    "purchasePrice": 165,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/mustard-oil?lock=604",
+    "isAvailable": true,
+    "brand": "Sundrop",
+    "description": "Premium quality Sundrop mustard oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil605",
+    "name": "Olive Oil",
+    "category": "Cooking Oils",
+    "unitOptions": [
+      {
+        "unit": "250 ml",
+        "multiplier": 0.25,
+        "mrp": 180
+      },
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 340
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 650
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 1250
+      }
+    ],
+    "purchasePrice": 560,
+    "additionalCost": 10,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/olive-oil?lock=605",
+    "isAvailable": true,
+    "brand": "Saffola",
+    "description": "Premium quality Saffola olive oil delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil606",
+    "name": "Ghee",
+    "category": "Dairy & Cooking",
+    "unitOptions": [
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 180
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 350
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 680
+      }
+    ],
+    "purchasePrice": 570,
+    "additionalCost": 10,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/ghee,clarified-butter?lock=606",
+    "isAvailable": true,
+    "brand": "Heritage",
+    "description": "Premium quality Heritage ghee delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil607",
+    "name": "Butter",
+    "category": "Dairy & Cooking",
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 60
+      },
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 115
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 280
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 550
+      }
+    ],
+    "purchasePrice": 440,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/butter?lock=607",
+    "isAvailable": true,
+    "brand": "Amul",
+    "description": "Premium quality Amul butter delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil608",
+    "name": "Tomato Ketchup",
+    "category": "Sauces",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 35
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 75
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 140
+      }
+    ],
+    "purchasePrice": 95,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/tomato-ketchup?lock=608",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan tomato ketchup delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil609",
+    "name": "Chilli Sauce",
+    "category": "Sauces",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 90
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 170
+      }
+    ],
+    "purchasePrice": 115,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/chilli-sauce?lock=609",
+    "isAvailable": true,
+    "brand": "Ching's Secret",
+    "description": "Premium quality Ching's Secret chilli sauce delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil610",
+    "name": "Soy Sauce",
+    "category": "Sauces",
+    "unitOptions": [
+      {
+        "unit": "200 ml",
+        "multiplier": 0.2,
+        "mrp": 40
+      },
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 160
+      }
+    ],
+    "purchasePrice": 110,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/soy-sauce?lock=610",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan soy sauce delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil611",
+    "name": "Vinegar",
+    "category": "Sauces",
+    "unitOptions": [
+      {
+        "unit": "250 ml",
+        "multiplier": 0.25,
+        "mrp": 30
+      },
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 100
+      }
+    ],
+    "purchasePrice": 65,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/vinegar,bottle?lock=611",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan vinegar delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "oil612",
+    "name": "Mayonnaise",
+    "category": "Sauces",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 60
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 130
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 245
+      }
+    ],
+    "purchasePrice": 165,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/mayonnaise?lock=612",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan mayonnaise delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil613",
+    "name": "Mint Chutney",
+    "category": "Condiments",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 40
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 85
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 160
+      }
+    ],
+    "purchasePrice": 105,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/mint-chutney?lock=613",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan mint chutney delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil614",
+    "name": "Tamarind Chutney",
+    "category": "Condiments",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 45
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 95
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 180
+      }
+    ],
+    "purchasePrice": 120,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 40,
+    "image": "https://loremflickr.com/600/600/tamarind-chutney?lock=614",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan tamarind chutney delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "oil615",
+    "name": "Pickle",
+    "category": "Condiments",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 55
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 125
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 230
+      }
+    ],
+    "purchasePrice": 155,
+    "additionalCost": 5,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/pickle,indian-pickle?lock=615",
+    "isAvailable": true,
+    "brand": "Kissan",
+    "description": "Premium quality Kissan pickle delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy701",
+    "name": "Full Cream Milk",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 35
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 68
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 135
+      }
+    ],
+    "purchasePrice": 58,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/full-cream-milk?lock=701",
+    "isAvailable": true,
+    "brand": "Heritage",
+    "description": "Premium quality Heritage full cream milk delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "dairy702",
+    "name": "Toned Milk",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 58
+      },
+      {
+        "unit": "2 L",
+        "multiplier": 2,
+        "mrp": 115
+      }
+    ],
+    "purchasePrice": 48,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/toned-milk?lock=702",
+    "isAvailable": true,
+    "brand": "Amul",
+    "description": "Premium quality Amul toned milk delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "dairy703",
+    "name": "Curd",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 25
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 55
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 105
+      }
+    ],
+    "purchasePrice": 75,
+    "additionalCost": 4,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 45,
+    "image": "https://loremflickr.com/600/600/curd,yogurt?lock=703",
+    "isAvailable": true,
+    "brand": "Hatsun",
+    "description": "Premium quality Hatsun curd delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy704",
+    "name": "Paneer",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 90
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 220
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 420
+      }
+    ],
+    "purchasePrice": 300,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/paneer,indian-cheese?lock=704",
+    "isAvailable": true,
+    "brand": "Hatsun",
+    "description": "Premium quality Hatsun paneer delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy705",
+    "name": "Cheese Slices",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "100 g",
+        "multiplier": 0.1,
+        "mrp": 85
+      },
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 165
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 395
+      }
+    ],
+    "purchasePrice": 280,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 35,
+    "image": "https://loremflickr.com/600/600/cheese-slices?lock=705",
+    "isAvailable": true,
+    "brand": "Heritage",
+    "description": "Premium quality Heritage cheese slices delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy706",
+    "name": "Mozzarella Cheese",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "200 g",
+        "multiplier": 0.2,
+        "mrp": 120
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 285
+      },
+      {
+        "unit": "1 kg",
+        "multiplier": 1,
+        "mrp": 550
+      }
+    ],
+    "purchasePrice": 380,
+    "additionalCost": 8,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/mozzarella-cheese?lock=706",
+    "isAvailable": true,
+    "brand": "Hatsun",
+    "description": "Premium quality Hatsun mozzarella cheese delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy707",
+    "name": "Cheese Spread",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "150 g",
+        "multiplier": 0.15,
+        "mrp": 110
+      },
+      {
+        "unit": "250 g",
+        "multiplier": 0.25,
+        "mrp": 175
+      },
+      {
+        "unit": "500 g",
+        "multiplier": 0.5,
+        "mrp": 330
+      }
+    ],
+    "purchasePrice": 230,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/cheese-spread?lock=707",
+    "isAvailable": true,
+    "brand": "Hatsun",
+    "description": "Premium quality Hatsun cheese spread delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy708",
+    "name": "Fresh Cream",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "200 ml",
+        "multiplier": 0.2,
+        "mrp": 70
+      },
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 150
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 285
+      }
+    ],
+    "purchasePrice": 195,
+    "additionalCost": 6,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 30,
+    "image": "https://loremflickr.com/600/600/fresh-cream?lock=708",
+    "isAvailable": true,
+    "brand": "",
+    "description": "Premium quality fresh cream delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "weight",
+    "unit": "1kg",
+    "availableUnits": [
+      "250g",
+      "500g",
+      "750g",
+      "1kg"
+    ]
+  },
+  {
+    "id": "dairy709",
+    "name": "Buttermilk",
+    "category": "Dairy",
+    "unitOptions": [
+      {
+        "unit": "200 ml",
+        "multiplier": 0.2,
+        "mrp": 15
+      },
+      {
+        "unit": "500 ml",
+        "multiplier": 0.5,
+        "mrp": 30
+      },
+      {
+        "unit": "1 L",
+        "multiplier": 1,
+        "mrp": 55
+      }
+    ],
+    "purchasePrice": 38,
+    "additionalCost": 3,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 50,
+    "image": "https://loremflickr.com/600/600/buttermilk?lock=709",
+    "isAvailable": true,
+    "brand": "Nandini",
+    "description": "Premium quality Nandini buttermilk delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "volume",
+    "unit": "1 litre",
+    "availableUnits": [
+      "250ml",
+      "500ml",
+      "750ml",
+      "1 litre"
+    ]
+  },
+  {
+    "id": "dairy710",
+    "name": "Eggs",
+    "category": "Eggs",
+    "unitOptions": [
+      {
+        "unit": "6 pcs",
+        "multiplier": 6,
+        "mrp": 45
+      },
+      {
+        "unit": "12 pcs",
+        "multiplier": 12,
+        "mrp": 88
+      },
+      {
+        "unit": "18 pcs",
+        "multiplier": 18,
+        "mrp": 130
+      },
+      {
+        "unit": "30 pcs",
+        "multiplier": 30,
+        "mrp": 215
+      }
+    ],
+    "purchasePrice": 6,
+    "additionalCost": 1,
+    "discountPercent": 0,
+    "targetProfitMargin": 0.25,
+    "stock": 100,
+    "image": "https://loremflickr.com/600/600/eggs,egg-tray?lock=710",
+    "isAvailable": true,
+    "brand": "Suguna",
+    "description": "Premium quality Suguna eggs delivered fresh from local verified shops to your doorstep via PAKKAM.",
+    "unitType": "count",
+    "unit": "12 pcs",
+    "availableUnits": [
+      "6 pcs",
+      "12 pcs",
+      "30 pcs"
+    ]
   }
 ]

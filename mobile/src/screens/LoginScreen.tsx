@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Eye, EyeOff } from 'lucide-react-native';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/slices/authSlice';
@@ -9,8 +10,9 @@ import { Colors } from '../theme';
 import { BackButton } from '../components/BackButton';
 
 export const LoginScreen: React.FC<{ navigation: any; route?: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const { returnScreen, intendedProduct, intendedUnit } = route?.params || {};
+  const { returnTo, returnScreen, returnParams, intendedProduct, intendedUnit } = route?.params || {};
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +37,7 @@ export const LoginScreen: React.FC<{ navigation: any; route?: any }> = ({ naviga
         await setStoredToken(token);
         dispatch(setCredentials({ user, token }));
 
-        if (intendedProduct) {
+        if (intendedProduct && !returnParams?.directPurchaseItem) {
           try {
             await client.post('/cart/add', {
               productId: intendedProduct._id,
@@ -47,12 +49,9 @@ export const LoginScreen: React.FC<{ navigation: any; route?: any }> = ({ naviga
           }
         }
 
-        if (returnScreen === 'Checkout') {
-          navigation.replace('Checkout');
-        } else if (returnScreen === 'AddAddress') {
-          navigation.replace('AddAddress');
-        } else if (returnScreen) {
-          navigation.replace(returnScreen);
+        const target = returnTo || returnScreen;
+        if (target) {
+          navigation.replace(target, returnParams || { intendedProduct, intendedUnit });
         } else {
           navigation.replace('MainTabs');
         }
@@ -65,68 +64,70 @@ export const LoginScreen: React.FC<{ navigation: any; route?: any }> = ({ naviga
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-      <View style={styles.topBackRow}>
-        <BackButton navigation={navigation} fallbackScreen="MainTabs" />
-      </View>
-      <View style={styles.header}>
-        <Text style={styles.logoIcon}>🥬</Text>
-        <Text style={styles.title}>Welcome to PAKKAM</Text>
-        <Text style={styles.subtitle}>Sign in to order fresh groceries from nearby local shops</Text>
-      </View>
-
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-      <View style={styles.form}>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Mobile Number or Email ID</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Mobile number or Email ID"
-            value={emailOrPhone}
-            onChangeText={setEmailOrPhone}
-            autoCapitalize="none"
-            keyboardType="email-address"
-          />
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={[styles.container, { paddingTop: Math.max(insets.top + 16, 24) }]} keyboardShouldPersistTaps="handled">
+        <View style={styles.topBackRow}>
+          <BackButton navigation={navigation} fallbackScreen="MainTabs" />
+        </View>
+        <View style={styles.header}>
+       
+          <Text style={styles.title}>Welcome to PAKKAM</Text>
+          <Text style={styles.subtitle}>Sign in to order fresh groceries from nearby local shops</Text>
         </View>
 
-        <View style={styles.inputGroup}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={styles.label}>Password</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-              <Text style={styles.forgotPasswordLink}>Forgot Password?</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.passwordWrapper}>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+        <View style={styles.form}>
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Mobile Number or Email ID</Text>
             <TextInput
-              style={styles.passwordInput}
-              placeholder="Enter password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
+              style={styles.input}
+              placeholder="Mobile number or Email ID"
+              value={emailOrPhone}
+              onChangeText={setEmailOrPhone}
+              autoCapitalize="none"
+              keyboardType="email-address"
             />
-            <TouchableOpacity
-              style={styles.eyeBtn}
-              onPress={() => setShowPassword(!showPassword)}
-              activeOpacity={0.7}
-            >
-              {showPassword ? <EyeOff size={18} color="#64748b" /> : <Eye size={18} color="#64748b" />}
+          </View>
+
+          <View style={styles.inputGroup}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={styles.label}>Password</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+                <Text style={styles.forgotPasswordLink}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.passwordWrapper}>
+              <TextInput
+                style={styles.passwordInput}
+                placeholder="Enter password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+              />
+              <TouchableOpacity
+                style={styles.eyeBtn}
+                onPress={() => setShowPassword(!showPassword)}
+                activeOpacity={0.7}
+              >
+                {showPassword ? <EyeOff size={18} color="#64748b" /> : <Eye size={18} color="#64748b" />}
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
+            <Text style={styles.loginButtonText}>{loading ? 'Signing In...' : 'Sign In'}</Text>
+          </TouchableOpacity>
+
+          <View style={styles.footerRow}>
+            <Text style={styles.footerText}>Don't have an account? </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Register', { returnTo, returnScreen, returnParams, intendedProduct, intendedUnit })}>
+              <Text style={styles.registerLink}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>
-
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
-          <Text style={styles.loginButtonText}>{loading ? 'Signing In...' : 'Sign In'}</Text>
-        </TouchableOpacity>
-
-        <View style={styles.footerRow}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.registerLink}>Register</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

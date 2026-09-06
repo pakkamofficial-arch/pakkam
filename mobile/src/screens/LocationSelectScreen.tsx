@@ -141,7 +141,11 @@ export const LocationSelectScreen: React.FC<{ navigation: any; route: any }> = (
       dispatch(updateUser({ name, phone, hasCompletedOnboarding: true }));
     } finally {
       setSubmitting(false);
-      navigation.replace('MainTabs');
+      if (route.params?.directPurchaseItem || route.params?.source === 'cart' || isExplicitAdd) {
+        navigation.replace('Checkout', route.params);
+      } else {
+        navigation.replace('MainTabs');
+      }
     }
   };
 

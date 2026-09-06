@@ -13,6 +13,14 @@ import { protect, authorize } from '../middleware/auth.js';
 const router = Router();
 
 router.get('/', getProducts);
+router.get('/fresh-today', (req, res) => {
+  req.query.isFreshToday = 'true';
+  return getProducts(req, res);
+});
+router.get('/popular', (req, res) => {
+  req.query.isPopular = 'true';
+  return getProducts(req, res);
+});
 router.get('/price-history', getPriceHistory);
 router.get('/:id/price-history', getPriceHistory);
 router.get('/:id', getProductById);

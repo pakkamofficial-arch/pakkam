@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { X, ChevronLeft, ShoppingCart, Tag } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -15,6 +16,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { getProductName } from '../utils/languageHelper';
 
 export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { defaultAddress } = useSelector((state: RootState) => state.address);
@@ -28,8 +30,10 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const fetchCart = async () => {
     try {
+      const token = await getStoredToken();
+      if (!token) return;
       const res = await client.get('/cart');
-      if (res.data.success) {
+      if (res.data?.success && res.data?.cart) {
         dispatch(
           setCartData({
             items: res.data.cart.items || [],
@@ -40,13 +44,15 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           })
         );
       }
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      // quiet fallback
     }
   };
 
   const handleUpdateQuantity = async (itemId: string, newQty: number) => {
     dispatch(updateLocalItemQty({ itemId, quantity: newQty }));
+    const token = await getStoredToken();
+    if (!token) return;
     try {
       await client.put('/cart/item', { itemId, quantity: newQty });
     } catch (e) {
@@ -56,6 +62,8 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const handleRemoveItem = async (itemId: string) => {
     dispatch(removeLocalItem(itemId));
+    const token = await getStoredToken();
+    if (!token) return;
     try {
       await client.delete(`/cart/item/${itemId}`);
     } catch (e) {
@@ -68,7 +76,7 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   if (items.length === 0) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
         <View style={[styles.headerRow, { paddingHorizontal: Spacing.lg, paddingTop: Spacing.md }]}>
           <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
             <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
@@ -91,7 +99,7 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 110 }}>
         {/* Header */}
         <View style={styles.headerRow}>
@@ -231,10 +239,18 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               alert(`Minimum order value is ₹199. Please add ₹${199 - subtotal} more items to your cart.`);
               return;
             }
+            const targetScreen = defaultAddress ? 'Checkout' : 'LocationSelect';
+            if (!isAuthenticated) {
+              navigation.navigate('Login', {
+                returnTo: targetScreen,
+                returnParams: { source: 'cart' },
+              });
+              return;
+            }
             if (!defaultAddress) {
-              navigation.navigate('AddAddress', { source: 'cart' });
+              navigation.navigate('LocationSelect', { source: 'cart', isExplicitAdd: true });
             } else {
-              navigation.navigate('Checkout');
+              navigation.navigate('Checkout', { source: 'cart' });
             }
           }}
           disabled={subtotal < 199}

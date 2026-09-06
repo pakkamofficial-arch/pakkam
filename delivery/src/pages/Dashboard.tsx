@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Truck, Package, Clock, CheckCircle2, DollarSign, MapPin, Phone, LogOut, Check, ArrowRight, AlertTriangle, AlertCircle } from 'lucide-react';
 import api from '../services/api';
+import { DeliveryOrderSkeleton, DashboardStatSkeleton } from '../components/Skeleton';
 
 interface DashboardProps {
   partner: any;
@@ -434,8 +435,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ partner, onLogout }) => {
           </div>
         )}
 
-        {/* Available Orders Tab */}
-        {tab === 'available' && (
+        {/* Order Lists per Active Tab */}
+        {loading ? (
+          <div style={{ marginTop: '16px' }}>
+            <DeliveryOrderSkeleton />
+            <DeliveryOrderSkeleton />
+            <DeliveryOrderSkeleton />
+          </div>
+        ) : tab === 'available' ? (
           <div>
             <h2 style={{ fontSize: '16px', fontWeight: '700', color: '#0f172a', marginBottom: '12px' }}>
               Orders Available in Your Service PIN Codes

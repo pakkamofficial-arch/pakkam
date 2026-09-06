@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import Razorpay from 'razorpay';
 import { AuthRequest } from '../middleware/auth.js';
 import { Cart } from '../models/Cart.js';
+import { Product } from '../models/Product.js';
 import { Order } from '../models/Order.js';
 import { Address } from '../models/Address.js';
 import { Shop } from '../models/Shop.js';
@@ -31,23 +32,38 @@ try {
  */
 export const createRazorpayOrder = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    // Section 5 & 10: Recompute total server-side (never trust frontend amount)
+    // Recompute total server-side (never trust frontend amount)
+    const { directItems } = req.body;
     let amountInPaise = 0;
-    const cart = await Cart.findOne({ user: req.user?._id }).populate('items.product');
-    
-    if (cart && cart.items.length > 0) {
+
+    if (directItems && Array.isArray(directItems) && directItems.length > 0) {
       let subtotal = 0;
-      for (const item of cart.items) {
-        const p: any = item.product;
+      for (const dItem of directItems) {
+        const pId = dItem.productId || (typeof dItem.product === 'object' ? dItem.product?._id : dItem.product);
+        const p: any = await Product.findById(pId);
         if (p && p.isActive) {
-          const price = p.discountPrice || p.price;
-          subtotal += price * item.quantity;
+          const price = dItem.price || p.discountPrice || p.price;
+          subtotal += price * (dItem.quantity || 1);
         }
       }
-      // Apply default delivery fee if subtotal < 499
       const deliveryFee = subtotal >= 499 ? 0 : 30;
       const totalAmount = Math.max(0, subtotal + deliveryFee);
       amountInPaise = Math.round(totalAmount * 100);
+    } else {
+      const cart = await Cart.findOne({ user: req.user?._id }).populate('items.product');
+      if (cart && cart.items.length > 0) {
+        let subtotal = 0;
+        for (const item of cart.items) {
+          const p: any = item.product;
+          if (p && p.isActive) {
+            const price = p.discountPrice || p.price;
+            subtotal += price * item.quantity;
+          }
+        }
+        const deliveryFee = subtotal >= 499 ? 0 : 30;
+        const totalAmount = Math.max(0, subtotal + deliveryFee);
+        amountInPaise = Math.round(totalAmount * 100);
+      }
     }
 
     if (amountInPaise <= 0) {
@@ -137,11 +153,36 @@ export const verifyRazorpayPayment = async (req: AuthRequest, res: Response): Pr
       }
     }
 
-    // Fetch customer cart
-    const cart = await Cart.findOne({ user: req.user?._id }).populate('items.product');
-    if (!cart || cart.items.length === 0) {
-      res.status(400).json({ success: false, message: 'Cart is empty' });
-      return;
+    const { directItems } = req.body;
+    let itemsToProcess: any[] = [];
+    let isDirectPurchase = false;
+    let cart: any = null;
+
+    if (directItems && Array.isArray(directItems) && directItems.length > 0) {
+      isDirectPurchase = true;
+      for (const dItem of directItems) {
+        const pId = dItem.productId || (typeof dItem.product === 'object' ? dItem.product?._id : dItem.product);
+        const p = await Product.findById(pId);
+        if (p) {
+          itemsToProcess.push({
+            product: p,
+            selectedUnit: dItem.selectedUnit || p.unit || '1 unit',
+            quantity: dItem.quantity || 1,
+            price: dItem.price || p.discountPrice || p.price,
+          });
+        }
+      }
+      if (itemsToProcess.length === 0) {
+        res.status(400).json({ success: false, message: 'Invalid product details for direct payment' });
+        return;
+      }
+    } else {
+      cart = await Cart.findOne({ user: req.user?._id }).populate('items.product');
+      if (!cart || cart.items.length === 0) {
+        res.status(400).json({ success: false, message: 'Cart is empty' });
+        return;
+      }
+      itemsToProcess = cart.items;
     }
 
     // Validate Address ownership or guest address
@@ -182,9 +223,9 @@ export const verifyRazorpayPayment = async (req: AuthRequest, res: Response): Pr
 
     // Recalculate Subtotal & Totals server-side
     let subtotal = 0;
-    const orderItemsSnapshot = cart.items.map((item: any) => {
+    const orderItemsSnapshot = itemsToProcess.map((item: any) => {
       const p = item.product;
-      const price = p.discountPrice || p.price;
+      const price = item.price || p.discountPrice || p.price;
       subtotal += price * item.quantity;
       return {
         product: p._id,
@@ -242,9 +283,11 @@ export const verifyRazorpayPayment = async (req: AuthRequest, res: Response): Pr
       ],
     });
 
-    // Clear Customer Cart
-    cart.items = [];
-    await cart.save();
+    // Clear Customer Cart if cart purchase
+    if (cart && !isDirectPurchase) {
+      cart.items = [];
+      await cart.save();
+    }
 
     // Create Admin & Customer Notifications
     try {

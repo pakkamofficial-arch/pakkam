@@ -8,12 +8,14 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Eye, EyeOff, Lock, Phone, KeyRound, CheckCircle2 } from 'lucide-react-native';
 import client from '../api/client';
 import { BackButton } from '../components/BackButton';
 import { Colors } from '../theme';
 
 export const ForgotPasswordScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const [step, setStep] = useState<'REQUEST' | 'VERIFY' | 'RESET' | 'SUCCESS'>('REQUEST');
 
   const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -120,7 +122,7 @@ export const ForgotPasswordScreen: React.FC<{ navigation: any }> = ({ navigation
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+    <ScrollView contentContainerStyle={[styles.container, { paddingTop: Math.max(insets.top + 16, 24) }]} keyboardShouldPersistTaps="handled">
       <View style={styles.topBackRow}>
         <BackButton navigation={navigation} fallbackScreen="Login" />
       </View>

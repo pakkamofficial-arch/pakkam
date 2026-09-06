@@ -4,6 +4,7 @@ import { User } from '../models/User.js';
 import { Wallet } from '../models/Wallet.js';
 import { WalletTransaction } from '../models/WalletTransaction.js';
 import { AuthRequest } from '../middleware/auth.js';
+import { sendPasswordResetWhatsApp } from '../services/whatsappService.js';
 
 // OTP store (in-memory map for dev/testing, production uses Redis)
 const otpStore = new Map<string, { otp: string; expiresAt: number }>();
@@ -136,19 +137,16 @@ export const register = async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, message: 'Enter a valid mobile number.' });
     }
 
-    // 3. Email ID required & format
-    if (!rawEmail) {
-      return res.status(400).json({ success: false, message: 'Email ID is required.' });
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(rawEmail)) {
-      return res.status(400).json({ success: false, message: 'Enter a valid email address.' });
+    // 3. Email ID optional (validate format if provided)
+    if (rawEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(rawEmail)) {
+        return res.status(400).json({ success: false, message: 'Enter a valid email address.' });
+      }
     }
 
-    // 4. User ID / Username required
-    if (!rawUsername) {
-      return res.status(400).json({ success: false, message: 'User ID is required.' });
-    }
+    // 4. User ID / Username auto-generated if omitted
+    const effectiveUsername = rawUsername || `usr_${rawPhone}`;
 
     // 5. Password strength
     if (!password || password.length < 6) {
@@ -156,24 +154,26 @@ export const register = async (req: Request, res: Response) => {
     }
 
     // 6. Confirm password match
-    if (password !== confirmPassword) {
+    if (confirmPassword && password !== confirmPassword) {
       return res.status(400).json({ success: false, message: 'Passwords do not match.' });
     }
 
     // Check unique constraints individually for clear errors
     const phoneExists = await User.findOne({ phone: rawPhone });
     if (phoneExists) {
-      return res.status(400).json({ success: false, message: 'Mobile number already registered.' });
+      return res.status(400).json({ success: false, message: 'An account with this mobile number already exists — try logging in instead.' });
     }
 
-    const emailExists = await User.findOne({ email: rawEmail });
-    if (emailExists) {
-      return res.status(400).json({ success: false, message: 'Email already registered.' });
+    if (rawEmail) {
+      const emailExists = await User.findOne({ email: rawEmail });
+      if (emailExists) {
+        return res.status(400).json({ success: false, message: 'An account with this email address already exists.' });
+      }
     }
 
-    const usernameExists = await User.findOne({ username: rawUsername });
+    const usernameExists = await User.findOne({ username: effectiveUsername });
     if (usernameExists) {
-      return res.status(400).json({ success: false, message: 'User ID already exists.' });
+      return res.status(400).json({ success: false, message: 'Username/User ID already taken.' });
     }
 
     const generatedReferralCode = 'PK' + Math.floor(100000 + Math.random() * 900000);
@@ -189,8 +189,8 @@ export const register = async (req: Request, res: Response) => {
     const user = await User.create({
       name: rawName,
       phone: rawPhone,
-      email: rawEmail,
-      username: rawUsername,
+      email: rawEmail || undefined,
+      username: effectiveUsername,
       password,
       role: assignedRole,
       referralCode: generatedReferralCode,
@@ -243,8 +243,12 @@ export const login = async (req: Request, res: Response) => {
       .select('+password')
       .populate('shop');
 
-    if (!user || !(await user.comparePassword(password))) {
-      return res.status(401).json({ success: false, message: 'Invalid mobile/email or password.' });
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'No account found with this mobile number or email.' });
+    }
+
+    if (!(await user.comparePassword(password))) {
+      return res.status(401).json({ success: false, message: 'Incorrect password.' });
     }
 
     if (!user.isActive) {
@@ -418,6 +422,9 @@ export const forgotPassword = async (req: Request, res: Response) => {
     user.resetPasswordOtpExpires = expiresAt;
     user.resetPasswordToken = resetToken;
     await user.save();
+
+    // Send WhatsApp OTP message via whatsappService
+    await sendPasswordResetWhatsApp(user.name, user.phone, resetOtp);
 
     console.log(`[PASSWORD RESET] Sent reset OTP ${resetOtp} for user ${user.phone}`);
 

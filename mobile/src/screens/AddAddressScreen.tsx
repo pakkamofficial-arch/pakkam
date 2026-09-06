@@ -182,7 +182,7 @@ export const AddAddressScreen: React.FC<{ navigation: any; route?: any }> = ({ n
         }
       }
 
-      navigation.replace('Checkout');
+      navigation.replace('Checkout', route?.params);
     } catch (e: any) {
       setError('Failed to confirm location. Please check all fields.');
     } finally {

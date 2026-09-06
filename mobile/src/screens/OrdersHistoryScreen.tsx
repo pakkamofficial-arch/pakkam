@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, RefreshControl, Alert, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft } from 'lucide-react-native';
 import { useDispatch } from 'react-redux';
 import { setCartData } from '../redux/slices/cartSlice';
-import client from '../api/client';
+import client, { getStoredToken } from '../api/client';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const OrdersHistoryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const [orders, setOrders] = useState<any[]>([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -18,12 +20,18 @@ export const OrdersHistoryScreen: React.FC<{ navigation: any }> = ({ navigation 
   const fetchOrders = async () => {
     try {
       setRefreshing(true);
+      const token = await getStoredToken();
+      if (!token) {
+        setOrders([]);
+        setRefreshing(false);
+        return;
+      }
       const res = await client.get('/orders');
-      if (res.data.success && res.data.orders) {
+      if (res.data?.success && Array.isArray(res.data?.orders)) {
         setOrders(res.data.orders);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      setOrders([]);
     } finally {
       setRefreshing(false);
     }
@@ -106,7 +114,7 @@ export const OrdersHistoryScreen: React.FC<{ navigation: any }> = ({ navigation 
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       <ScrollView
         contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 60 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={fetchOrders} colors={[Colors.primary]} />}
