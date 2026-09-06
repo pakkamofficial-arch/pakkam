@@ -1,5 +1,5 @@
 export const config = {
-  downloadUrl: import.meta.env.VITE_ANDROID_DOWNLOAD_URL || 'https://pakkam.onrender.com/download',
+  downloadUrl: import.meta.env.VITE_ANDROID_DOWNLOAD_URL || 'https://expo.dev/artifacts/eas/2e63aade-feb4-424c-8c5d-8e14c757fba9.apk',
   supportEmail: import.meta.env.VITE_SUPPORT_EMAIL || 'pakkamofficial@gmail.com',
   supportPhone: import.meta.env.VITE_SUPPORT_PHONE || '+919876543210',
   whatsappUrl: import.meta.env.VITE_WHATSAPP_URL || 'https://wa.me/919876543210',

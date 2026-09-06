@@ -88,6 +88,11 @@ app.get('/api/health', (_req, res) => {
   res.json({ success: true, message: 'PAKKAM backend is healthy' });
 });
 
+// Direct APK Download Endpoint
+app.get(['/download', '/api/download'], (_req, res) => {
+  res.redirect(302, 'https://expo.dev/artifacts/eas/2e63aade-feb4-424c-8c5d-8e14c757fba9.apk');
+});
+
 // API Routes (supporting both /api/admin and /admin for deployment flexibility)
 app.use('/api/auth', authLimiter, authRoutes);
 app.use('/auth', authLimiter, authRoutes);
