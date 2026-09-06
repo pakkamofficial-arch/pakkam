@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, TextInput } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronLeft, Search, ShoppingCart, ZoomIn } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -10,6 +11,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const ShopScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
   const [searchQuery, setSearchQuery] = useState('');
@@ -83,7 +85,7 @@ export const ShopScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
       {/* Header: back arrow, zoom icon, cart icon with orange badge count per master prompt 2.5 */}
       <View style={styles.topHeader}>
         <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.goBack()}>
@@ -141,7 +143,7 @@ export const ShopScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       />
 
       {/* Bottom: full-width green "Order from this shop" button */}
-      <View style={styles.bottomFixedBar}>
+      <View style={[styles.bottomFixedBar, { paddingBottom: Math.max(insets.bottom, Spacing.lg) }]}>
         <PrimaryButton
           title="Order from this shop"
           onPress={() => navigation.navigate('Cart')}

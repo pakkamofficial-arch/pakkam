@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet, Alert, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Star, MapPin, Clock, ChevronLeft, ShoppingBag } from 'lucide-react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -12,6 +13,7 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { Colors, Radii, Spacing } from '../theme';
 
 export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const { shopId } = route.params || {};
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -20,7 +22,6 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
   const [selectedSubTab, setSelectedSubTab] = useState('Vegetables');
   const [loading, setLoading] = useState(true);
 
-  // Shop categories per master prompt 2.6: Vegetables, Fruits, Groceries
   const shopCategories = ['Vegetables', 'Fruits', 'Groceries', 'Dairy'];
 
   const sampleShopProducts = [
@@ -35,31 +36,39 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
   const fetchShopDetails = async () => {
     try {
       setLoading(true);
-      const res = await client.get(`/shops/${shopId}`);
-      if (res.data.success) {
-        setShop(res.data.shop);
-        setProducts(res.data.products || []);
+      if (shopId) {
+        const res = await client.get(`/shops/${shopId}`);
+        if (res.data?.success && res.data?.shop) {
+          setShop(res.data.shop);
+          if (Array.isArray(res.data.products) && res.data.products.length > 0) {
+            setProducts(res.data.products);
+          } else {
+            setProducts(sampleShopProducts);
+          }
+        }
       } else {
         setShop({
-          name: 'Shop name',
-          description: 'Delivery 1 108 items',
-          address: 'Adyar Main Road',
+          _id: 'shop-demo',
+          name: 'Madurai Fresh Supermarket',
           rating: 4.8,
-          distance: '4.8',
+          distance: 1.2,
+          openingTime: '07:00 AM',
+          closingTime: '10:00 PM',
           isOpen: true,
-          coverImage: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800',
+          banners: ['https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'],
         });
         setProducts(sampleShopProducts);
       }
     } catch (e) {
       setShop({
-        name: 'Shop name',
-        description: 'Delivery 1 108 items',
-        address: 'Adyar Main Road',
+        _id: 'shop-demo',
+        name: 'Madurai Fresh Supermarket',
         rating: 4.8,
-        distance: '4.8',
+        distance: 1.2,
+        openingTime: '07:00 AM',
+        closingTime: '10:00 PM',
         isOpen: true,
-        coverImage: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800',
+        banners: ['https://images.unsplash.com/photo-1542838132-92c53300491e?w=800'],
       });
       setProducts(sampleShopProducts);
     } finally {
@@ -68,43 +77,43 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
   };
 
   const handleAddToCart = async (product: any, selectedUnit: string, quantity: number) => {
+    const token = await getStoredToken();
+    if (!token) return;
+
     try {
       const res = await client.post('/cart/add', {
         productId: product._id,
         selectedUnit,
         quantity,
       });
-      if (res.data.success) {
+      if (res.data?.success) {
         const cartRes = await client.get('/cart');
-        if (cartRes.data.success) {
+        if (cartRes.data?.success) {
           dispatch(
             setCartData({
               items: cartRes.data.cart.items || [],
               subtotal: cartRes.data.subtotal || 0,
               deliveryFee: cartRes.data.deliveryFee || 0,
+              freeDeliveryThreshold: cartRes.data.freeDeliveryThreshold,
+              amountNeededForFreeDelivery: cartRes.data.amountNeededForFreeDelivery,
             })
           );
         }
       }
-    } catch (e: any) {
-      // quiet fallback
-    }
+    } catch (e) {}
   };
-
-  const displayList = products.length > 0 ? products : sampleShopProducts;
 
   if (loading || !shop) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
         <Text style={{ padding: 20, color: Colors.textSecondary }}>Loading shop details...</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.background }}>
+    <View style={{ flex: 1, backgroundColor: Colors.background, paddingTop: Math.max(insets.top + 8, 16) }}>
       <ScrollView contentContainerStyle={{ paddingBottom: 85 }}>
-        {/* Header: back arrow, cart icon */}
         <View style={styles.topHeader}>
           <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
             <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
@@ -114,14 +123,12 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
           </TouchableOpacity>
         </View>
 
-        {/* Shop name bold + StatusBadge ("Open" green / "Closed" red) on same row */}
         <View style={styles.shopInfoBox}>
           <View style={styles.titleRow}>
             <Text style={styles.shopName}>{shop.name || 'Shop name'}</Text>
             <StatusBadge isOpen={shop.isOpen !== false} status={shop.isOpen !== false ? 'Open' : 'Closed'} />
           </View>
 
-          {/* Row: distance + star rating */}
           <View style={styles.metaRow}>
             <MapPin size={12} color={Colors.textSecondary} strokeWidth={1.75} />
             <Text style={styles.metaText}>Distance - {shop.distance || '4.8'} km</Text>
@@ -129,28 +136,27 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
             <Text style={styles.metaText}>{shop.rating || 4.8}</Text>
           </View>
 
-          {/* Delivery estimate with clock icon */}
           <View style={styles.deliveryEstRow}>
             <Clock size={12} color={Colors.primary} strokeWidth={1.75} />
-            <Text style={styles.deliveryEstText}>Delivery estimates</Text>
+            <Text style={styles.deliveryEstText}>
+              Delivery in 15-20 mins • {shop.openingTime || '07:00 AM'} - {shop.closingTime || '10:00 PM'}
+            </Text>
           </View>
         </View>
 
-        {/* Wide rounded banner image (carousel — show dot indicators) */}
-        <View style={styles.bannerContainer}>
-          <Image source={{ uri: shop.coverImage }} style={styles.bannerImage} resizeMode="cover" />
-          <View style={styles.dotRow}>
-            <View style={[styles.dot, styles.dotActive]} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
+        {shop.banners && shop.banners.length > 0 && (
+          <View style={styles.bannerContainer}>
+            <Image source={{ uri: shop.banners[0] }} style={styles.bannerImage} resizeMode="cover" />
+            <View style={styles.dotRow}>
+              <View style={[styles.dot, styles.dotActive]} />
+              <View style={styles.dot} />
+              <View style={styles.dot} />
+            </View>
           </View>
-        </View>
+        )}
 
-        {/* "Shop categories" section, horizontal IconChip row (Vegetables, Fruits, Groceries) */}
         <View style={styles.categoriesBox}>
           <Text style={styles.sectionTitle}>Shop categories</Text>
-          <Text style={styles.sectionSub}>Delivery 1 108 items</Text>
-
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipsRow}>
             {shopCategories.map((cat) => (
               <IconChip
@@ -163,16 +169,12 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
           </ScrollView>
         </View>
 
-        {/* "Products" section title + "See all", horizontal list of small product cards */}
         <View style={styles.productsHeaderRow}>
           <Text style={styles.sectionTitle}>Products</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('ShopScreen')}>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.productsGrid}>
-          {displayList.map((prod: any) => (
+          {products.map((prod) => (
             <View key={prod._id} style={{ width: '48%' }}>
               <ProductCard
                 product={prod}
@@ -180,12 +182,7 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
                 onPressProduct={(p) => navigation.navigate('ProductDetail', { productId: p._id })}
                 onBuyNow={(p, unit) => {
                   handleAddToCart(p, unit, 1);
-                  navigation.navigate('AddAddress', {
-                    intendedProduct: p,
-                    intendedUnit: unit,
-                    quantity: 1,
-                    source: 'buy_now',
-                  });
+                  navigation.navigate('Cart');
                 }}
               />
             </View>
@@ -193,8 +190,7 @@ export const ShopDetailScreen: React.FC<{ navigation: any; route: any }> = ({ na
         </View>
       </ScrollView>
 
-      {/* Bottom: full-width green "Order from this shop" button */}
-      <View style={styles.bottomFixedBar}>
+      <View style={[styles.bottomFixedBar, { paddingBottom: Math.max(insets.bottom, Spacing.lg) }]}>
         <PrimaryButton
           title="Order from this shop"
           onPress={() => navigation.navigate('Cart')}

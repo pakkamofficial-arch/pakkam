@@ -27,7 +27,9 @@ export const getProducts = async (req: Request, res: Response) => {
     if (category) {
       let catStr = String(category).trim();
       if (catStr.toLowerCase() === 'grocery') catStr = 'Groceries';
-      if (mongoose.Types.ObjectId.isValid(catStr)) {
+      if (catStr.toLowerCase() === 'all' || catStr.toLowerCase() === 'showall') {
+        // 'all' / 'showall' means fetch all products, skip category filtering
+      } else if (mongoose.Types.ObjectId.isValid(catStr)) {
         query.category = catStr;
       } else {
         const slug = catStr.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');

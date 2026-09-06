@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Home, Grid, Package, ShoppingCart, User } from 'lucide-react-native';
 
 import { tokens } from '../theme/tokens';
@@ -40,6 +41,10 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainTabNavigator = () => {
+  const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, 0);
+  const tabBarHeight = 56 + bottomInset;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -47,8 +52,8 @@ const MainTabNavigator = () => {
         tabBarActiveTintColor: tokens.colors.primary,
         tabBarInactiveTintColor: tokens.colors.textMuted,
         tabBarStyle: {
-          height: 64,
-          paddingBottom: 8,
+          height: tabBarHeight,
+          paddingBottom: bottomInset > 0 ? bottomInset : 6,
           paddingTop: 6,
           backgroundColor: tokens.colors.white,
           borderTopWidth: 1,

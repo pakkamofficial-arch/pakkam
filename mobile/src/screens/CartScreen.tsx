@@ -15,7 +15,7 @@ import { QuantityStepper } from '../components/QuantityStepper';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { getProductName } from '../utils/languageHelper';
 
-export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+export const CartScreen: React.FC<{ navigation: any; route?: any }> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -231,7 +231,7 @@ export const CartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       </ScrollView>
 
       {/* Bottom Pinned Proceed Button */}
-      <View style={styles.footerBar}>
+      <View style={[styles.footerBar, { paddingBottom: route?.name === 'CartTab' ? 12 : Math.max(insets.bottom, Spacing.lg) }]}>
         <PrimaryButton
           title={subtotal < 199 ? `Min. Order ₹199 Needed` : `Proceed to Checkout • ₹${grandTotal}`}
           onPress={() => {

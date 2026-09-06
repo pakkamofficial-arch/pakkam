@@ -47,7 +47,7 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
       setLoading(true);
       setFetchError(null);
       let url = '/products?limit=100';
-      if (selectedSubFilter && selectedSubFilter !== 'All') {
+      if (selectedSubFilter && selectedSubFilter !== 'All' && selectedSubFilter.toLowerCase() !== 'all') {
         url = `/products?category=${encodeURIComponent(selectedSubFilter)}&limit=100`;
       }
       const res = await client.get(url);
@@ -98,11 +98,15 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
 
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top + 8, 16) }]}>
-      {/* Header: back arrow, centered category title */}
+      {/* Header: back arrow (if stack navigated), centered category title */}
       <View style={styles.headerBar}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
-        </TouchableOpacity>
+        {navigation.canGoBack() ? (
+          <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
+            <ChevronLeft size={22} color={Colors.textPrimary} strokeWidth={2} />
+          </TouchableOpacity>
+        ) : (
+          <View style={{ width: 22 }} />
+        )}
         <Text style={styles.headerTitle}>{selectedSubFilter !== 'All' ? selectedSubFilter : 'Categories'}</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Search size={20} color={Colors.textPrimary} strokeWidth={1.75} />
@@ -114,7 +118,8 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
         keyExtractor={(item) => item._id}
         numColumns={2}
         columnWrapperStyle={{ justifyContent: 'space-between', paddingHorizontal: Spacing.lg }}
-        contentContainerStyle={{ paddingBottom: 90 }}
+        contentContainerStyle={{ paddingBottom: Spacing.md }}
+        style={{ flex: 1 }}
         initialNumToRender={8}
         maxToRenderPerBatch={10}
         windowSize={5}
@@ -186,7 +191,10 @@ export const CategoriesScreen: React.FC<{ navigation: any; route: any }> = ({ na
       />
 
       {/* Sticky bottom bar: quantity stepper on left ("Price per unit" label + stepper) and green ADD button on right */}
-      <View style={styles.stickyBottomBar}>
+      <View style={[
+        styles.stickyBottomBar,
+        { paddingBottom: route.name === 'CategoriesTab' ? 10 : Math.max(insets.bottom, 10) }
+      ]}>
         <View style={styles.stickyLeft}>
           <Text style={styles.pneLabel}>Price per unit</Text>
           <QuantityStepper
@@ -281,15 +289,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
   },
   stickyBottomBar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor: Colors.surface,
     borderTopWidth: 1,
     borderTopColor: Colors.border,
     paddingHorizontal: Spacing.lg,
-    paddingVertical: 12,
+    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -475,7 +475,7 @@ export const CheckoutScreen: React.FC<{ navigation: any; route?: any }> = ({ nav
       </ScrollView>
 
       {/* Bottom Pinned Proceed Button */}
-      <View style={styles.footerBar}>
+      <View style={[styles.footerBar, { paddingBottom: Math.max(insets.bottom, Spacing.lg) }]}>
         <PrimaryButton
           title={loading ? 'Placing Order...' : `Place Order • ₹${computedGrandTotal}`}
           onPress={handlePlaceOrderClick}

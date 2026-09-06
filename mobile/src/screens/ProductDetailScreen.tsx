@@ -378,7 +378,7 @@ export const ProductDetailScreen: React.FC<{ navigation: any; route: any }> = ({
       </ScrollView>
 
       {/* Bottom sticky footer: Add to Cart and Buy Now */}
-      <View style={styles.stickyFooter}>
+      <View style={[styles.stickyFooter, { paddingBottom: Math.max(insets.bottom, Spacing.lg) }]}>
         <SecondaryButton
           title="Add to Cart"
           onPress={() => handleAddToCart(false)}
